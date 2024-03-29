@@ -1,22 +1,6 @@
-import symbol.base.blank.Blank;
-import symbol.function.FunctionDefinition;
-import symbol.statement.compound.BlockItemList;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Warning;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Scanner;
-
-public class Compiler {
+public class Linter {
     public static void main(String[] args) throws Exception {
 
     }
