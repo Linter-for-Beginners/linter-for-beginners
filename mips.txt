@@ -1,0 +1,53 @@
+.data
+saisyc_stack: .space 65536
+saisyc_string_0: .asciiz "abcdefghijklmnopqrstuvwxyz"
+saisyc_string_1: .asciiz "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+saisyc_string_2: .asciiz "1234567890"
+saisyc_string_3: .asciiz "    !()+,-./@[]^_`{}|~"
+saisyc_string_4: .asciiz "hahahaha2333\n\n\n"
+
+.text
+la   $gp, saisyc_stack
+jal  main
+nop
+subi $gp, $gp, 4
+li   $v0, 10
+syscall
+
+main:
+	li   $v0, 4
+	la   $a0, saisyc_string_0
+	syscall
+	subi $gp, $gp, 0
+
+	li   $v0, 4
+	la   $a0, saisyc_string_1
+	syscall
+	subi $gp, $gp, 0
+
+	li   $v0, 4
+	la   $a0, saisyc_string_2
+	syscall
+	subi $gp, $gp, 0
+
+	li   $v0, 4
+	la   $a0, saisyc_string_3
+	syscall
+	subi $gp, $gp, 0
+
+	li   $v0, 4
+	la   $a0, saisyc_string_4
+	syscall
+	subi $gp, $gp, 0
+
+	li   $t0, 0
+	sw   $t0, 0($gp)
+	addi $gp, $gp, 4
+
+	jr   $ra
+	nop
+
+	addi $gp, $gp, 4
+	jr   $ra
+	nop
+

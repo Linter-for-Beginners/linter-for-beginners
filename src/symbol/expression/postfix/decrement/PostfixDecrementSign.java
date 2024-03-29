@@ -1,0 +1,26 @@
+package symbol.expression.postfix.decrement;
+
+import symbol.symbol.invalidity.InvalidityException;
+import symbol.symbol.sentence.Sentence;
+import symbol.symbol.type.Table;
+import symbol.symbol.Terminal;
+
+public class PostfixDecrementSign extends Terminal {
+    private static final String[] strings = {"--"};
+
+    public PostfixDecrementSign(Integer row, Integer column, String string) {
+        super(row, column, null, string);
+    }
+
+    public static PostfixDecrementSign parse(Sentence sentence, Table table) throws InvalidityException {
+        Integer row = sentence.getRow();
+        Integer column = sentence.getColumn();
+        for (String string : strings) {
+            if (sentence.startsWith(string)) {
+                sentence.remove(string.length());
+                return new PostfixDecrementSign(row, column, string);
+            }
+        }
+        throw new InvalidityException();
+    }
+}
