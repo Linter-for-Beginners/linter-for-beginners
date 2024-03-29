@@ -1,0 +1,228 @@
+# SSC23
+
+Saisyc, 2023
+
+### Keyword
+
+**Syntax**
+
+$$
+\begin{aligned}
+    & \begin{aligned}
+        & Keyword : \text{one of} \\
+        & \qquad \qquad \color{grey} \texttt{auto} & & \color{grey} \texttt{enum} & & \color{grey} \texttt{restrict} & & \texttt{unsigned} \\
+        & \qquad \qquad \texttt{break} & & \color{grey} \texttt{extern} & & \texttt{return} & & \texttt{void} \\
+        & \qquad \qquad \texttt{case} & & \color{grey} \texttt{float} & & \color{grey} \texttt{short} & & \color{grey} \texttt{volatile} \\
+        & \qquad \qquad \texttt{char} & & \texttt{for} & & \texttt{signed} & & \texttt{while} \\
+        & \qquad \qquad \color{grey} \texttt{const} & & \color{grey} \texttt{goto} & & \texttt{sizeof} & & \color{grey} \texttt{\_Bool} \\
+        & \qquad \qquad \texttt{continue} & & \texttt{if} & & \color{grey} \texttt{static} & & \color{grey} \texttt{\_Complex} \\
+        & \qquad \qquad \texttt{default} & & \color{grey} \texttt{inline} & & \color{grey} \texttt{struct} & & \color{grey} \texttt{\_Imaginary} \\
+        & \qquad \qquad \texttt{do} & & \texttt{int} & & \texttt{switch} & & \texttt{} \\
+        & \qquad \qquad \texttt{double} & & \texttt{long} & & \color{grey} \texttt{typedef} & & \texttt{} \\
+        & \qquad \qquad \texttt{else} & & \color{grey} \texttt{register} & & \color{grey} \texttt{union} & & \texttt{} \\
+    \end{aligned} \\
+\end{aligned}
+$$
+
+**Semantics**
+
+The above tokens (case sensitive) are reserved for use as keywords, and shall not be used otherwise.
+
+**Motivation**
+
+### Identifier
+
+**Syntax**
+
+$$
+\begin{aligned}
+    & \begin{aligned}
+        & Identifier : \\
+        & \qquad \qquad IdentifierNondigit \\
+        & \qquad \qquad Identifier IdentifierNondigit \\
+        & \qquad \qquad Identifier Digit
+    \end{aligned} \\
+    & \begin{aligned}
+        & IdentifierNondigit : \\
+        & \qquad \qquad Nondigit \\
+        & \qquad \qquad \color{grey} UniversalCharacterNam \\
+        & \qquad \qquad \color{grey} \text{other implementation-defined \\characters}
+    \end{aligned} \\
+    & \begin{aligned}
+        & Nondigit : \text{one of} \\ 
+        & \qquad \qquad \texttt{\_} \\
+        & \qquad \qquad \texttt{a} \quad \texttt{b} \quad \texttt{c} \quad \texttt{d} \quad \texttt{e} \quad \texttt{f} \quad \texttt{g} \quad \texttt{h} \quad \texttt{i} \quad \texttt{j} \quad \texttt{k} \quad \texttt{l} \quad \texttt{m} \\
+        & \qquad \qquad \texttt{n} \quad \texttt{o} \quad \texttt{p} \quad \texttt{q} \quad \texttt{r} \quad \texttt{s} \quad \texttt{t} \quad \texttt{u} \quad \texttt{v} \quad \texttt{w} \quad \texttt{x} \quad \texttt{y} \quad \texttt{z} \\
+        & \qquad \qquad \texttt{A} \quad \texttt{B} \quad \texttt{C} \quad \texttt{D} \quad \texttt{E} \quad \texttt{F} \quad \texttt{G} \quad \texttt{H} \quad \texttt{I} \quad \texttt{J} \quad \texttt{K} \quad \texttt{L} \quad \texttt{M} \\
+        & \qquad \qquad \texttt{N} \quad \texttt{O} \quad \texttt{P} \quad \texttt{Q} \quad \texttt{R} \quad \texttt{S} \quad \texttt{T} \quad \texttt{U} \quad \texttt{V} \quad \texttt{W} \quad \texttt{X} \quad \texttt{Y} \quad \texttt{Z} \\
+    \end{aligned} \\
+    & \begin{aligned}
+        & Digit : \text{one of} \\
+        & \qquad \qquad \texttt{0} \quad \texttt{1} \quad \texttt{2} \quad \texttt{3} \quad \texttt{4} \quad \texttt{5} \quad \texttt{6} \quad \texttt{7} \quad \texttt{8} \quad \texttt{9} \\
+    \end{aligned} \\
+\end{aligned}
+$$
+
+**Semantics**
+
+An identifier is a sequence of nondigit characters (including the  underscore $\texttt{\_}$, the lowercase and uppercase Latin letters) and digits, which designates one or more entities as described in 6.2.1.Lowercase and uppercase letters are distinct. There is no specific limit on the maximum length of an identifier.
+
+When preprocessing tokens are converted to tokens during translation, if  a preprocessing token could be converted to either a keyword or an identifier, it is convertedto a keyword.
+
+**Motivation**
+
+alphabet
+
+### Constant
+
+**Syntax**
+
+$$
+\begin{aligned}
+    & Constant : \\
+        & \qquad \qquad IntegerConstant \\
+        & \qquad \qquad FloatingConstant \\
+        & \qquad \qquad \color{grey} EnumerationConstant \\
+        & \qquad \qquad CharacterConstant \\
+\end{aligned}
+$$
+
+**Constraints**
+
+Each constant shall have a type and the value of a constant shall be in the range ofrepresentable values for its type.
+
+**Semantics**
+
+Each constant has a type, determined by its form and value, as detailed later.
+
+**Motivation**
+
+enumeration
+
+#### Integer constant
+
+**Syntax**
+
+$$
+\begin{aligned}
+    & \begin{aligned}
+        & IntegerConstant : \\
+        & \qquad \qquad DecimalConstant     & & IntegerSuffix_{\text{optional}} \\
+        & \qquad \qquad OctalConstant       & & IntegerSuffix_{\text{optional}} \\
+        & \qquad \qquad HexadecimalConstant & & IntegerSuffix_{\text{optional}} \\
+    \end{aligned} \\
+    & \begin{aligned}
+        & DecimalConstant : \\
+        & \qquad \qquad \color{grey} NonzeroDigit \\
+        & \qquad \qquad DecimalConstant \quad Digit \\
+        & \qquad \qquad \color{silver} Digit \\
+    \end{aligned} \\
+    & \begin{aligned}
+        & HexadecimalConstant : \\
+        & \qquad \qquad HexadecimalPrefix   & & HexadecimalDigit \\
+        & \qquad \qquad HexadecimalConstant & & HexadecimalDigit \\
+    \end{aligned} \\
+    & \begin{aligned}
+        & HexadecimalPrefix : \text{one of} \\
+        & \qquad \qquad \texttt{0x} \quad \texttt{0X} \\
+    \end{aligned} \\
+    & \begin{aligned}
+        & HexadecimalDigit : \text{one of} \\
+        & \qquad \qquad \texttt{0} \quad \texttt{1} \quad \texttt{2} \quad \texttt{3} \quad \texttt{4} \quad \texttt{5} \quad \texttt{6} \quad \texttt{7} \quad \texttt{8} \quad \texttt{9} \\
+        & \qquad \qquad \texttt{a} \quad \texttt{b} \quad \texttt{c} \quad \texttt{d} \quad \texttt{e} \quad \texttt{f} \\
+        & \qquad \qquad \texttt{A} \quad \texttt{B} \quad \texttt{C} \quad \texttt{D} \quad \texttt{E} \quad \texttt{F} \\
+    \end{aligned} \\
+\end{aligned}
+$$
+
+**Description**
+
+An integer constant begins with a digit, but has no period or exponent part. It may have a prefix that specifies its base and a suffix that specifies its type.
+
+A decimal constant begins with a nonzero digit and consists of a sequence of digits. A hexadecimal constant consists of the prefix $\texttt{0x}$ or $\texttt{0X}$ followed by a sequence of the digits and the letters $\texttt{a}$ (or $\texttt{A}$) through $\texttt{f}$ (or $\texttt{F}$) with values
+10 through 15 respectively.
+
+**Semantics**
+
+The value of a decimal constant is computed base 10; that of a hexadecimal constant, base 16. The lexically first digit is the most significant.
+
+The type of an integer constant is the first of the corresponding list in which its value can be represented. Each integer constant shall be represented by some type in its list.
+
+| Suffix | Decimal Constant | Hexadecimal Constant |
+| :- | :- | :- |
+| none | $\begin{aligned} & \texttt{int} \\ & \texttt{long long int} \\ \end{aligned}$ | $\begin{aligned} & \texttt{int} \\ & \texttt{unsigned int} \\ & \texttt{long long int} \\ & \texttt{unsigned long long int} \\ \end{aligned}$ |
+| $\texttt{u}$ or $\texttt{U}$ | $\begin{aligned} & \texttt{unsigned int} \\ & \texttt{unsigned long long int} \\ \end{aligned}$ | $\begin{aligned} & \texttt{unsigned int} \\ & \texttt{unsigned long long int} \\ \end{aligned}$ |
+| $\texttt{ll}$ or $\texttt{LL}$ | $\begin{aligned} & \texttt{long long int} \\ \end{aligned}$ | $\begin{aligned} & \texttt{long long int} \\ & \texttt{unsigned long long int} \\ \end{aligned}$ |
+| both $\texttt{u}$ or $\texttt{U}$ and $\texttt{ll}$ or $\texttt{LL}$ | $\begin{aligned} & \texttt{unsigned long long int} \\ \end{aligned}$ | $\begin{aligned} & \texttt{unsigned long long int} \\ \end{aligned}$ |
+
+**Motivation**
+
+octal
+
+$\texttt{long int}$ and $\texttt{unsigned long int}$
+
+#### Floating constants
+
+**Syntax**
+
+$$
+\begin{aligned}
+    & \begin{aligned}
+        & FloatingConstant : \\
+        & \qquad \qquad DecimalFloatingConstant \\
+        & \qquad \qquad \color{grey} HexadecimalFloatingConstant \\
+    \end{aligned} \\
+    & \begin{aligned}
+        & DecimalFloatingConstant : \\
+        & \qquad \qquad FractionalConstant & & ExponentialPart_{\text{optional}} & & FloatingSuffix_{\text{optional}} \\
+        & \qquad \qquad DigitSequence & & ExponentialPart & & FloatingSuffix_{\text{optional}} \\
+    \end{aligned} \\
+    & \begin{aligned}
+        & FractionalConstant : \\
+        & \qquad \qquad DigitSequence_{\color{grey} \text{optional}} & & \texttt{.} & & DigitSequence \\
+        & \qquad \qquad \color{grey} DigitSequence & & \color{grey} . \\
+    \end{aligned} \\
+    & \begin{aligned}
+        & ExponentialPart : \\
+        & \qquad \qquad \texttt{e} \quad Sign_{\text{optional}} & & DigitSequence \\
+        & \qquad \qquad \texttt{E} \quad Sign_{\text{optional}} & & DigitSequence \\
+    \end{aligned} \\
+    & \begin{aligned}
+        & Sign : \text{one of} \\
+        & \qquad \qquad \texttt{+} \quad \texttt{-}
+    \end{aligned} \\
+    & \begin{aligned}
+        & DigitSequence : \\
+        & \qquad \qquad Digit \\
+        & \qquad \qquad DigitSequence & & Digit \\
+    \end{aligned} \\
+    & \begin{aligned}
+        & FloatingSuffix : \text{one of} \\
+        & \qquad \qquad \texttt{f} \quad \texttt{F} \quad {\color{grey} \texttt{l}} \quad {\color{grey} \texttt{L}}
+    \end{aligned} \\
+\end{aligned}
+$$
+
+**Description**
+
+A floating constant has a significand part that may be followed by an exponent part and a suffix that specifies its type. The components of the significand part may include a digit sequence representing the whole-number part, followed by a period ($\texttt{.}$), followed by a digit sequence representing the fraction part. The components of the exponent part are an $\texttt{e}$ or $\texttt{E}$ followed by an exponent consisting of an optionally signed digit sequence. Both the whole-number part and the fraction part have to be present.
+
+**Semantics**
+
+The significand part is interpreted as a rational number; the digit sequence in the exponent part is interpreted as a decimal integer. The exponent indicates the power of 10 by which the significand part is to be scaled. When $\texttt{FLT\_RADIX}$ is not a power of 2, the result is either the nearest representable value, or the larger or smaller representable value immediately adjacent to the nearest representable value, chosen in an implementation-defined manner.
+
+An unsuffixed floating constant has type $\texttt{double}$. If suffixed by the letter $\texttt{f}$ or $\texttt{F}$, it has type float.
+
+Floating constants are converted to internal format as if at translation-time. The conversion of a floating constant shall not raise an exceptional condition or a floating-point exception at execution time.
+
+**Recommended practice**
+
+The translation-time conversion of floating constants should match the execution-time conversion of character strings by library functions, such as $\texttt{strtod}$, given matching inputs suitable for both conversions, the same result format, and default execution-time rounding.
+
+**Motivation**
+
+Both the whole-number part and the fraction part have to be present
+
+hexadecimal floating constant
+
+#### Character constant
