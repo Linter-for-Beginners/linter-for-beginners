@@ -1,8 +1,18 @@
 # Linter for Beginners
 
-Designed for beginners in C programming, SSC is a simplification of C. Therefore, each version of SSC has to be a subset of some version of C.
+## Warnings for beginners
 
-To design a linter for beginners, assume that $\mathcal{L}$ is a programming language and $\mathcal{L}_{x}$ is a version of $\mathcal{L}$, then $\mathrm{SS} \mathcal{L}_{x}$ is a programming language for beginners based on $\mathcal{L}_{x}$ and $\mathrm{SS}_{y} \mathcal{L}_{x}$ is a version of $\mathrm{SS} \mathcal{L}_{x}$. As a simplified $\mathcal{L}_{x}$ for beginners, $\mathrm{SS} \mathcal{L}_{x}$ should be a subset of $\mathcal{L}_{x}$. Thus $\mathcal{L}_{x}$ is called the foundation of $\mathrm{SS} \mathcal{L}_{x}$, and each code of $\mathrm{SS} \mathcal{L}_{x}$ is a code of $\mathcal{L}_{x}$.
+Warnings for beginners are as follows:
+
+- Warnings for beginners about danger indicate behaviors which are dangerous for beginners, such as implementation-defined behaviors, locale-specific behaviors, undefined behaviors and unspecified behaviors.
+
+- Warnings for beginners about discouragement indicate behaviors which are discouraged for beginners, such as operations about error-prone operator precedence without parentheses.
+
+- Warnings for beginners about strangeness indicate behaviors which are strange for beginners, such as empty statements.
+
+## How
+
+To design a linter for beginners, assume that $\mathcal{L}$ is a programming language and $\mathcal{L}_{x}$ is a version of $\mathcal{L}$, then $\mathrm{SS} \mathcal{L}_{x}$ is a programming language for beginners based on $\mathcal{L}_{x}$ and $\mathrm{SS}_{y} \mathcal{L}_{x}$ is a version of $\mathrm{SS} \mathcal{L}_{x}$. As a simplified $\mathcal{L}_{x}$ for beginners, $\mathrm{SS} \mathcal{L}_{x}$ should be a subset of $\mathcal{L}_{x}$, thus each code of $\mathrm{SS} \mathcal{L}_{x}$ is a code of $\mathcal{L}_{x}$ and $\mathcal{L}_{x}$ is called the foundation of $\mathrm{SS} \mathcal{L}_{x}$.
 
 Furthermore, a linter is an $\mathrm{SS}_{y} \mathcal{L}_{x}$ LFB if and only if it satisfies:
 
