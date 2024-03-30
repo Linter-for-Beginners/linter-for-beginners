@@ -4,7 +4,7 @@ Linters have been widely used in programming, especially in industrial programmi
 
 Fundamental programming courses of universities and colleges has invariably concentrated on important and functional programming languages, such as programming language C. However, for beginners in programming, only a portion of the programming language C is important and functional, while other portions do not deserve much attention and some of them even need to be avoided to be used.
 
-Therefore, in order to help beginners in programming, especially students in fundamental programming courses of universities and colleges, we design LFBs to provide WFBs.
+Therefore, in order to help beginners in programming, especially students in fundamental programming courses of universities and colleges, we design LFBs to provide WFBs. For example, an SS23C99 LFB is used in a fundamental programming course of Beihang University in 2023.
 
 Notice that some concepts mentioned above are defined as follows.
 
