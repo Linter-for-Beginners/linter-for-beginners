@@ -1,11 +1,41 @@
+import symbol.base.blank.Blank;
+import symbol.statement.compound.BlockItemList;
+import symbol.symbol.Symbol;
 import symbol.symbol.sentence.Sentence;
+import symbol.symbol.type.Table;
+import symbol.symbol.warning.Warning;
 
-public class LinBee {
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+
+public class LinBee23 {
+
     public static void main(String[] args) throws Exception {
-
+        Sentence sentence = preprocess(new String(Files.readAllBytes(Paths.get(args.length > 0 ? args[0] : "source.c"))));
+        Table table = new Table();
+        Blank.parse(sentence, table);
+        BlockItemList blockItemList = BlockItemList.parse(sentence, table);
+        Blank.parse(sentence, table);
+        if (sentence.toString().length() > 0) {
+            throw new RuntimeException(sentence.toString().replaceAll("\\s+", " ").trim());
+        }
+        ArrayList<Symbol> symbols = blockItemList.traversal(new ArrayList<Symbol>());
+        HashSet<Symbol> visited = new HashSet<Symbol>();
+        for (Symbol symbol : symbols) {
+            if (visited.contains(symbol)) {
+                visited.remove(symbol);
+            } else {
+                visited.add(symbol);
+                for (Warning warning : symbol.warnings) {
+                    System.out.println(warning.toString());
+                }
+            }
+        }
     }
 
     public static Sentence preprocess(String string) {
+        string = "\n" + string;
         string = string.replaceAll("\\\\\\s*?\n", "");
         string = string.replaceAll("\r\n", "\n");
         enum State {

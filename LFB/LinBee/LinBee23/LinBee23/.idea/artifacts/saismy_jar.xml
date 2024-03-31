@@ -2,7 +2,7 @@
   <artifact type="jar" name="saismy:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/saismy_jar</output-path>
     <root id="archive" name="saismy.jar">
-      <element id="module-output" name="LinBee" />
+      <element id="module-output" name="LinBee23" />
     </root>
   </artifact>
 </component>
