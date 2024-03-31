@@ -11,26 +11,30 @@ import java.util.*;
 
 public class LinBee23 {
 
-    public static void main(String[] args) throws Exception {
-        Sentence sentence = preprocess(new String(Files.readAllBytes(Paths.get(args.length > 0 ? args[0] : "source.c"))));
-        Table table = new Table();
-        Blank.parse(sentence, table);
-        BlockItemList blockItemList = BlockItemList.parse(sentence, table);
-        Blank.parse(sentence, table);
-        if (sentence.toString().length() > 0) {
-            throw new RuntimeException(sentence.toString().replaceAll("\\s+", " ").trim());
-        }
-        ArrayList<Symbol> symbols = blockItemList.traversal(new ArrayList<Symbol>());
-        HashSet<Symbol> visited = new HashSet<Symbol>();
-        for (Symbol symbol : symbols) {
-            if (visited.contains(symbol)) {
-                visited.remove(symbol);
-            } else {
-                visited.add(symbol);
-                for (Warning warning : symbol.warnings) {
-                    System.out.println(warning.toString());
+    public static void main(String[] args) {
+        try {
+            Sentence sentence = preprocess(new String(Files.readAllBytes(Paths.get(args.length > 0 ? args[0] : "source.c"))));
+            Table table = new Table();
+            Blank.parse(sentence, table);
+            BlockItemList blockItemList = BlockItemList.parse(sentence, table);
+            Blank.parse(sentence, table);
+            if (sentence.toString().length() > 0) {
+                throw new RuntimeException(sentence.toString().replaceAll("\\s+", " ").trim());
+            }
+            ArrayList<Symbol> symbols = blockItemList.traversal(new ArrayList<Symbol>());
+            HashSet<Symbol> visited = new HashSet<Symbol>();
+            for (Symbol symbol : symbols) {
+                if (visited.contains(symbol)) {
+                    visited.remove(symbol);
+                } else {
+                    visited.add(symbol);
+                    for (Warning warning : symbol.warnings) {
+                        System.out.println(warning.toString());
+                    }
                 }
             }
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 
