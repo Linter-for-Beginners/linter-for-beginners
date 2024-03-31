@@ -24,7 +24,7 @@ For example, SS23C99 is a subset of C99.
 
 ## WFB
 
-A warning is a $\mathrm{SS}_ {y} \mathcal{L}_ {x}$ WFB if and only if it is contained by one of the following:
+A warning is an $\mathrm{SS}_ {y} \mathcal{L}_ {x}$ WFB if and only if it is contained by one of the following:
 
 - Warnings for beginners about danger defined in $\mathrm{SS}_ {y} \mathcal{L}_ {x}$ indicate behaviors which are dangerous for beginners, such as implementation-defined behaviors, locale-specific behaviors, undefined behaviors and unspecified behaviors. For beginners, these behaviors need to be avoided, because they are too intractable to be completely mastered and can simply lead to a lot of troubles.
 
