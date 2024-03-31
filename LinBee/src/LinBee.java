@@ -1,6 +1,6 @@
 import symbol.symbol.sentence.Sentence;
 
-public class Linter {
+public class LinBee {
     public static void main(String[] args) throws Exception {
 
     }
