@@ -4,7 +4,7 @@ Linters have been widely used in programming, especially in industrial programmi
 
 Fundamental programming courses of universities and colleges has invariably concentrated on important and useful programming languages, such as the programming language C. However, because these programming languages are not designed for beginners, some grammars of them are too intractable to be completely mastered and can simply lead to a lot of troubles.
 
-Therefore, in order to help beginners in programming, especially students in fundamental programming courses of universities and colleges, we design LFBs to provide WFBs. For example, [LinBee23](LFB/LinBee/LinBee23) is an [SS23C99](SSL/SSC/SS23C99) LFB used in fundamental programming courses of Beihang University in 2023.
+Therefore, in order to help beginners in programming, especially students in fundamental programming courses of universities and colleges, we design LFBs to provide WFBs. For example, [LinBee23](LFB/LinBee/LinBee23) is almost an [SS23C99](SSL/SSC/SS23C99) LFB used in fundamental programming courses of Beihang University in 2023.
 
 Notice that some pivotal concepts mentioned above are defined as follows.
 
