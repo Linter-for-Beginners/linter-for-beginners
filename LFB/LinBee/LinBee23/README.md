@@ -1,4 +1,4 @@
-Why not download `LinBee23.jar` and `source.c` to attempt LinBee23.
+Why not try LinBee23? Just download `LinBee23.jar` and `source.c`!
 
 ```c
 #include <stdio.h>
