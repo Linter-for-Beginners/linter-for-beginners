@@ -39,7 +39,7 @@ public class AdditiveOperation extends AdditiveExpression {
             warnings.add(new Discouragement(this, additiveExpression));
         }
         if (CommaExpression.controlling(multiplicativeExpression)) {
-            warnings.add(new Discouragement(this, multiplicativeExpression, "Addictive operation of boolean objects is discouraged."));
+            warnings.add(new Discouragement(this, multiplicativeExpression, "Addictive operation of boolean forms is discouraged."));
         }
         if (CommaExpression.effective(additiveExpression)) {
             warnings.add(new Danger(this, additiveExpression));
