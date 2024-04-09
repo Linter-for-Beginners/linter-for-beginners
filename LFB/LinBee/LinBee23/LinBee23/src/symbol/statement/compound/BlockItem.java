@@ -9,7 +9,7 @@ import symbol.symbol.type.Table;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strange;
+import symbol.symbol.warning.Strangeness;
 
 public class BlockItem extends Nonterminal {
     public BlockItem(SymbolTypeName type, Symbol[] symbols) {
@@ -28,7 +28,7 @@ public class BlockItem extends Nonterminal {
         try {
             FunctionDefinition functionDefinition = FunctionDefinition.parse(sentence, table);
             if (table.string != null) {
-                functionDefinition.warnings.add(new Strange(functionDefinition));
+                functionDefinition.warnings.add(new Strangeness(functionDefinition));
             }
             return functionDefinition;
         } catch (InvalidityException invalidityException) {

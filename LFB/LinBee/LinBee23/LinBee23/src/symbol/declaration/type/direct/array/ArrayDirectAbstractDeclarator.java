@@ -11,9 +11,9 @@ import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Strange;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Strangeness;
 
 public class ArrayDirectAbstractDeclarator extends DirectAbstractDeclarator {
     public final DirectAbstractDeclarator directAbstractDeclarator;
@@ -56,14 +56,14 @@ public class ArrayDirectAbstractDeclarator extends DirectAbstractDeclarator {
         this.blankAfterAssignmentExpression = blankAfterAssignmentExpression;
         this.rightBracket = rightBracket;
         if (assignmentExpression == null) {
-            warnings.add(new Strange(this));
+            warnings.add(new Strangeness(this));
         }
         if (assignmentExpression != null) {
             if (CommaExpression.controlling(assignmentExpression)) {
-                warnings.add(new Discouraged(this, assignmentExpression));
+                warnings.add(new Discouragement(this, assignmentExpression));
             }
             if (CommaExpression.effective(assignmentExpression)) {
-                warnings.add(new Dangerous(this, assignmentExpression));
+                warnings.add(new Danger(this, assignmentExpression));
             }
         }
     }

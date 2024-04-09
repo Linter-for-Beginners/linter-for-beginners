@@ -8,9 +8,9 @@ import symbol.expression.logical.and.LogicalAndExpression;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Danger;
 
 public class LogicalOrOperation extends LogicalOrExpression {
     public final LogicalOrExpression logicalOrExpression;
@@ -36,22 +36,22 @@ public class LogicalOrOperation extends LogicalOrExpression {
         this.blankAfterLogicalOrSign = blankAfterLogicalOrSign;
         this.logicalAndExpression = logicalAndExpression;
         if (!CommaExpression.controlling(logicalOrExpression)) {
-            warnings.add(new Discouraged(this, logicalOrExpression));
+            warnings.add(new Discouragement(this, logicalOrExpression));
         }
         if (!CommaExpression.controlling(logicalAndExpression)) {
-            warnings.add(new Discouraged(this, logicalAndExpression));
+            warnings.add(new Discouragement(this, logicalAndExpression));
         }
         if (CommaExpression.effective(logicalOrExpression)) {
-            warnings.add(new Dangerous(this, logicalOrExpression));
+            warnings.add(new Danger(this, logicalOrExpression));
         }
         if (CommaExpression.effective(logicalAndExpression)) {
-            warnings.add(new Dangerous(this, logicalAndExpression));
+            warnings.add(new Danger(this, logicalAndExpression));
         }
         if (!type.equals(logicalOrExpression.type.evaluation())) {
-            warnings.add(new Hazard(this, logicalOrExpression));
+            warnings.add(new Danger(this, logicalOrExpression));
         }
         if (!type.equals(logicalAndExpression.type.evaluation())) {
-            warnings.add(new Hazard(this, logicalAndExpression));
+            warnings.add(new Danger(this, logicalAndExpression));
         }
     }
 

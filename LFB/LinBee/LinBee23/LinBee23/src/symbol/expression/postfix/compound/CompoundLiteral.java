@@ -14,7 +14,7 @@ import symbol.symbol.*;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strange;
+import symbol.symbol.warning.Strangeness;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -66,7 +66,7 @@ public class CompoundLiteral extends PostfixExpression {
         this.initializerList = initializerList;
         this.blankAfterInitializerList = blankAfterInitializerList;
         this.rightBrace = rightBrace;
-        warnings.add(new Strange(this));
+        warnings.add(new Strangeness(this));
     }
 
     private static SymbolTypeName type(TypeName typeName) {

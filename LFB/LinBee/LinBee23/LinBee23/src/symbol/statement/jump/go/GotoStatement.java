@@ -9,7 +9,7 @@ import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strange;
+import symbol.symbol.warning.Strangeness;
 
 public class GotoStatement extends JumpStatement {
     public final Keyword keywordGoto;
@@ -34,7 +34,7 @@ public class GotoStatement extends JumpStatement {
         this.identifier = identifier;
         this.blankBeforeSemicolon = blankBeforeSemicolon;
         this.semicolon = semicolon;
-        warnings.add(new Strange(this));
+        warnings.add(new Strangeness(this));
     }
 
     public static GotoStatement parse(Sentence sentence, Table table) throws InvalidityException {

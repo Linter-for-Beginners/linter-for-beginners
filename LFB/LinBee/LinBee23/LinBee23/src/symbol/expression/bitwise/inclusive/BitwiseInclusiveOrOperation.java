@@ -9,9 +9,9 @@ import symbol.expression.bitwise.exclusive.BitwiseExclusiveOrExpression;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Danger;
 
 public class BitwiseInclusiveOrOperation extends BitwiseInclusiveOrExpression {
     public final BitwiseInclusiveOrExpression bitwiseInclusiveOrExpression;
@@ -37,28 +37,28 @@ public class BitwiseInclusiveOrOperation extends BitwiseInclusiveOrExpression {
         this.blankAfterBitwiseInclusiveOrSign = blankAfterBitwiseInclusiveOrSign;
         this.bitwiseExclusiveOrExpression = bitwiseExclusiveOrExpression;
         if (CommaExpression.controlling(bitwiseInclusiveOrExpression)) {
-            warnings.add(new Discouraged(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression));
         }
         if (CommaExpression.controlling(bitwiseExclusiveOrExpression)) {
-            warnings.add(new Discouraged(this, bitwiseExclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression));
         }
         if (!(bitwiseInclusiveOrExpression instanceof BitwiseInclusiveOrOperation) && !(bitwiseInclusiveOrExpression instanceof CastExpression)) {
-            warnings.add(new Discouraged(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression));
         }
         if (!(bitwiseExclusiveOrExpression instanceof CastExpression)) {
-            warnings.add(new Discouraged(this, bitwiseExclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression));
         }
         if (CommaExpression.effective(bitwiseInclusiveOrExpression)) {
-            warnings.add(new Dangerous(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Danger(this, bitwiseInclusiveOrExpression));
         }
         if (CommaExpression.effective(bitwiseExclusiveOrExpression)) {
-            warnings.add(new Dangerous(this, bitwiseExclusiveOrExpression));
+            warnings.add(new Danger(this, bitwiseExclusiveOrExpression));
         }
         if (!type.equals(bitwiseInclusiveOrExpression.type.evaluation())) {
-            warnings.add(new Hazard(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Danger(this, bitwiseInclusiveOrExpression));
         }
         if (!type.equals(bitwiseExclusiveOrExpression.type.evaluation())) {
-            warnings.add(new Hazard(this, bitwiseExclusiveOrExpression));
+            warnings.add(new Danger(this, bitwiseExclusiveOrExpression));
         }
     }
 

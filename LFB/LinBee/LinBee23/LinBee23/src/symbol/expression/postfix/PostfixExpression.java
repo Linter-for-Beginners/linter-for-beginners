@@ -24,7 +24,7 @@ import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
 import symbol.symbol.type.unknown.SymbolUnknownTypeName;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Danger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -280,11 +280,11 @@ public abstract class PostfixExpression extends UnaryExpression {
                         parameterType = types.toArray(new SymbolTypeName[0]);
                     }
                     if (parameterType.length != argumentType.length) {
-                        postfixExpression.warnings.add(new Hazard(postfixExpression, postfixExpression));
+                        postfixExpression.warnings.add(new Danger(postfixExpression, postfixExpression));
                     } else {
                         for (int i = 0; i < parameterType.length; i++) {
                             if (!parameterType[i].equals(argumentType[i])) {
-                                postfixExpression.warnings.add(new Hazard(postfixExpression, argumentExpressionList.assignmentExpression[i]));
+                                postfixExpression.warnings.add(new Danger(postfixExpression, argumentExpressionList.assignmentExpression[i], "Inconsistent value type is dangerous."));
                             }
                         }
                     }

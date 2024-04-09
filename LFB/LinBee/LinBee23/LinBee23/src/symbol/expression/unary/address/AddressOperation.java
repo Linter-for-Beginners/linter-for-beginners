@@ -8,7 +8,7 @@ import symbol.base.blank.Blank;
 import symbol.symbol.*;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Dangerous;
+import symbol.symbol.warning.Danger;
 
 public class AddressOperation extends UnaryExpression {
     public final AddressSign addressSign;
@@ -26,7 +26,7 @@ public class AddressOperation extends UnaryExpression {
         this.blankAfterAddressSign = blankAfterAddressSign;
         this.castExpression = castExpression;
         if (CommaExpression.effective(castExpression)) {
-            warnings.add(new Dangerous(this, castExpression));
+            warnings.add(new Danger(this, castExpression));
         }
     }
 

@@ -8,7 +8,7 @@ import symbol.statement.Statement;
 import symbol.symbol.*;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
+import symbol.symbol.warning.Discouragement;
 
 public class ExpressionStatement extends Statement {
     public final CommaExpression commaExpression;
@@ -26,7 +26,7 @@ public class ExpressionStatement extends Statement {
         this.blankBeforeSemicolon = blankBeforeSemicolon;
         this.semicolon = semicolon;
         if (!CommaExpression.effective(commaExpression)) {
-            warnings.add(new Discouraged(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression));
         }
     }
 

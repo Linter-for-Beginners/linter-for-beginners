@@ -9,7 +9,7 @@ import symbol.statement.label.LabeledStatement;
 import symbol.symbol.*;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strange;
+import symbol.symbol.warning.Strangeness;
 
 public class IdentifierStatement extends LabeledStatement {
     public final Identifier identifier;
@@ -34,7 +34,7 @@ public class IdentifierStatement extends LabeledStatement {
         this.colonPunctuator = colonPunctuator;
         this.blankAfterColonPunctuator = blankAfterColonPunctuator;
         this.statement = statement;
-        warnings.add(new Strange(this));
+        warnings.add(new Strangeness(this));
     }
 
     public static IdentifierStatement parse(Sentence sentence, Table table) throws InvalidityException {

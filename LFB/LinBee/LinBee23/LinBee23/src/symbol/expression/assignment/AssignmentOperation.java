@@ -9,9 +9,9 @@ import symbol.symbol.sentence.Sentence;
 import symbol.expression.unary.UnaryExpression;
 import symbol.symbol.type.Table;
 import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Danger;
 
 public class AssignmentOperation extends AssignmentExpression {
     public final UnaryExpression unaryExpression;
@@ -37,14 +37,14 @@ public class AssignmentOperation extends AssignmentExpression {
         this.blankAfterAssignmentSign = blankAfterAssignmentSign;
         this.assignmentExpression = assignmentExpression;
         if (CommaExpression.controlling(assignmentExpression)) {
-            warnings.add(new Discouraged(this, assignmentExpression));
+            warnings.add(new Discouragement(this, assignmentExpression));
         }
         if (CommaExpression.effective(assignmentExpression) && !(CommaExpression.innermost(assignmentExpression) instanceof FunctionCall)) {
-            warnings.add(new Dangerous(this, assignmentExpression));
+            warnings.add(new Danger(this, assignmentExpression));
         }
         if (!type.equals(assignmentExpression.type.evaluation())) {
             if (!assignmentSign.toString().equals("<<=") && !assignmentSign.toString().equals(">>=")) {
-                warnings.add(new Hazard(this, assignmentExpression));
+                warnings.add(new Danger(this, assignmentExpression));
             }
         }
     }

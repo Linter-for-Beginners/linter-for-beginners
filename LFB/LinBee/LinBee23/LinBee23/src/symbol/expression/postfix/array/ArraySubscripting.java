@@ -11,9 +11,9 @@ import symbol.base.punctuator.bracket.RightBracket;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Danger;
 
 public class ArraySubscripting extends PostfixExpression {
     public final PostfixExpression postfixExpression;
@@ -47,22 +47,22 @@ public class ArraySubscripting extends PostfixExpression {
         this.blankAfterCommaExpression = blankAfterCommaExpression;
         this.rightBracket = rightBracket;
         if (CommaExpression.controlling(commaExpression)) {
-            warnings.add(new Discouraged(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression));
         }
         if (!(CommaExpression.innermost(commaExpression) instanceof ShiftExpression)) {
-            warnings.add(new Discouraged(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression));
         }
         if (CommaExpression.effective(postfixExpression)) {
-            warnings.add(new Dangerous(this, postfixExpression));
+            warnings.add(new Danger(this, postfixExpression));
         }
         if (CommaExpression.effective(commaExpression)) {
-            warnings.add(new Dangerous(this, commaExpression));
+            warnings.add(new Danger(this, commaExpression));
         }
         if (!postfixExpression.type.evaluation().isPointer()) {
-            warnings.add(new Hazard(this, postfixExpression));
+            warnings.add(new Danger(this, postfixExpression));
         }
         if (commaExpression.type.evaluation().isPointer()) {
-            warnings.add(new Hazard(this, commaExpression));
+            warnings.add(new Danger(this, commaExpression));
         }
     }
 

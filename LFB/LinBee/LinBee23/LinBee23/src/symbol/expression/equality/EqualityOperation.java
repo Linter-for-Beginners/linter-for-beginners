@@ -9,9 +9,9 @@ import symbol.expression.relation.RelationalExpression;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Danger;
 
 public class EqualityOperation extends EqualityExpression {
     public final EqualityExpression equalityExpression;
@@ -37,25 +37,25 @@ public class EqualityOperation extends EqualityExpression {
         this.blankAfterEqualitySign = blankAfterEqualitySign;
         this.relationalExpression = relationalExpression;
         if (CommaExpression.controlling(equalityExpression)) {
-            warnings.add(new Discouraged(this, equalityExpression));
+            warnings.add(new Discouragement(this, equalityExpression));
         }
         if (CommaExpression.controlling(relationalExpression)) {
-            warnings.add(new Discouraged(this, relationalExpression));
+            warnings.add(new Discouragement(this, relationalExpression));
         }
         if (!(equalityExpression instanceof AdditiveExpression)) {
-            warnings.add(new Discouraged(this, equalityExpression));
+            warnings.add(new Discouragement(this, equalityExpression));
         }
         if (!(relationalExpression instanceof AdditiveExpression)) {
-            warnings.add(new Discouraged(this, relationalExpression));
+            warnings.add(new Discouragement(this, relationalExpression));
         }
         if (CommaExpression.effective(equalityExpression)) {
-            warnings.add(new Dangerous(this, equalityExpression));
+            warnings.add(new Danger(this, equalityExpression));
         }
         if (CommaExpression.effective(relationalExpression)) {
-            warnings.add(new Dangerous(this, relationalExpression));
+            warnings.add(new Danger(this, relationalExpression));
         }
         if (!equalityExpression.type.evaluation().equals(relationalExpression.type.evaluation())) {
-            warnings.add(new Hazard(this, relationalExpression));
+            warnings.add(new Danger(this, relationalExpression));
         }
     }
 

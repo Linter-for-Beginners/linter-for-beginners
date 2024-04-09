@@ -8,7 +8,7 @@ import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Dangerous;
+import symbol.symbol.warning.Danger;
 
 public class ReturnNoneStatement extends JumpStatement {
     public final Keyword keywordReturn;
@@ -38,7 +38,7 @@ public class ReturnNoneStatement extends JumpStatement {
                     blankBeforeSemicolon,
                     semicolon);
             if (!table.returnType(table.string).isVoid()) {
-                returnNoneStatement.warnings.add(new Dangerous(returnNoneStatement, blankBeforeSemicolon));
+                returnNoneStatement.warnings.add(new Danger(returnNoneStatement, blankBeforeSemicolon));
             }
             return returnNoneStatement;
         } catch (InvalidityException invalidityException) {

@@ -11,7 +11,7 @@ import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Dangerous;
+import symbol.symbol.warning.Danger;
 
 public class FunctionCall extends PostfixExpression {
     public final PostfixExpression postfixExpression;
@@ -46,11 +46,11 @@ public class FunctionCall extends PostfixExpression {
         this.blankAfterArgumentExpressionList = blankAfterArgumentExpressionList;
         this.rightParenthesis = rightParenthesis;
         if (CommaExpression.effective(postfixExpression)) {
-            warnings.add(new Dangerous(this, postfixExpression));
+            warnings.add(new Danger(this, postfixExpression));
         }
         for (AssignmentExpression assignmentExpression : argumentExpressionList.assignmentExpression) {
             if (CommaExpression.effective(assignmentExpression)) {
-                warnings.add(new Dangerous(this, assignmentExpression));
+                warnings.add(new Danger(this, assignmentExpression));
             }
         }
     }

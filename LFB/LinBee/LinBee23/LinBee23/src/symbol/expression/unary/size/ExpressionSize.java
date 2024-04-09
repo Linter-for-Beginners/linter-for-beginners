@@ -9,7 +9,7 @@ import symbol.symbol.type.Table;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Dangerous;
+import symbol.symbol.warning.Danger;
 
 public class ExpressionSize extends UnaryExpression {
     public final Keyword keywordSizeof;
@@ -27,7 +27,7 @@ public class ExpressionSize extends UnaryExpression {
         this.blankAfterKeywordSizeof = blankAfterKeywordSizeof;
         this.unaryExpression = unaryExpression;
         if (CommaExpression.effective(unaryExpression)) {
-            warnings.add(new Dangerous(this, unaryExpression));
+            warnings.add(new Danger(this, unaryExpression));
         }
     }
 

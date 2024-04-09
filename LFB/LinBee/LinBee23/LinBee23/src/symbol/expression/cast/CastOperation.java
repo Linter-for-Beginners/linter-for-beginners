@@ -11,8 +11,8 @@ import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Dangerous;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Danger;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -49,10 +49,10 @@ public class CastOperation extends CastExpression {
         this.blankBeforeCastExpression = blankBeforeCastExpression;
         this.castExpression = castExpression;
         if (CommaExpression.controlling(castExpression)) {
-            warnings.add(new Discouraged(this, castExpression));
+            warnings.add(new Discouragement(this, castExpression));
         }
         if (CommaExpression.effective(castExpression)) {
-            warnings.add(new Dangerous(this, castExpression));
+            warnings.add(new Danger(this, castExpression));
         }
     }
 

@@ -9,8 +9,8 @@ import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Danger;
 
 public class ReturnValueStatement extends JumpStatement {
     public final Keyword keywordReturn;
@@ -52,10 +52,10 @@ public class ReturnValueStatement extends JumpStatement {
                     blankBeforeSemicolon,
                     semicolon);
             if (table.returnType(table.string).isVoid()) {
-                returnValueStatement.warnings.add(new Dangerous(returnValueStatement, commaExpression));
+                returnValueStatement.warnings.add(new Danger(returnValueStatement, commaExpression));
             } else {
                 if (!table.returnType(table.string).equals(commaExpression.type)) {
-                    returnValueStatement.warnings.add(new Hazard(returnValueStatement, commaExpression));
+                    returnValueStatement.warnings.add(new Danger(returnValueStatement, commaExpression));
                 }
             }
             return returnValueStatement;

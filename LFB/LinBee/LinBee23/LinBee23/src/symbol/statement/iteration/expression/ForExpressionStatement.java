@@ -13,7 +13,7 @@ import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
+import symbol.symbol.warning.Discouragement;
 
 public class ForExpressionStatement extends IterationStatement {
     public final Keyword keywordFor;
@@ -87,10 +87,10 @@ public class ForExpressionStatement extends IterationStatement {
         this.blankBeforeStatement = blankBeforeStatement;
         this.statement = statement;
         if (!(statement instanceof CompoundStatement)) {
-            warnings.add(new Discouraged(this, statement));
+            warnings.add(new Discouragement(this, statement));
         }
         if (!CommaExpression.controlling(controllingCommaExpression)) {
-            warnings.add(new Discouraged(this, controllingCommaExpression));
+            warnings.add(new Discouragement(this, controllingCommaExpression));
         }
     }
 

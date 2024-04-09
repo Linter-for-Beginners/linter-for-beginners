@@ -6,7 +6,7 @@ import symbol.base.blank.Blank;
 import symbol.expression.assignment.AssignmentExpression;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strange;
+import symbol.symbol.warning.Strangeness;
 
 public class CommaOperation extends CommaExpression {
     public final CommaExpression commaExpression;
@@ -31,7 +31,7 @@ public class CommaOperation extends CommaExpression {
         this.commaSign = commaSign;
         this.blankAfterCommaSign = blankAfterCommaSign;
         this.assignmentExpression = assignmentExpression;
-        warnings.add(new Strange(this));
+        warnings.add(new Strangeness(this, "Comma expression is strange."));
     }
 
     public static CommaOperation parse(Sentence sentence, Table table) throws InvalidityException {

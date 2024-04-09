@@ -8,9 +8,9 @@ import symbol.expression.comma.CommaExpression;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Danger;
 
 public class ConditionalOperation extends ConditionalExpression {
     public final LogicalOrExpression logicalOrExpression;
@@ -52,22 +52,22 @@ public class ConditionalOperation extends ConditionalExpression {
         this.blankAfterRightConditionalSign = blankAfterRightConditionalSign;
         this.conditionalExpression = conditionalExpression;
         if (!CommaExpression.controlling(logicalOrExpression)) {
-            warnings.add(new Discouraged(this, logicalOrExpression));
+            warnings.add(new Discouragement(this, logicalOrExpression));
         }
         if (CommaExpression.effective(logicalOrExpression)) {
-            warnings.add(new Dangerous(this, logicalOrExpression));
+            warnings.add(new Danger(this, logicalOrExpression));
         }
         if (CommaExpression.effective(commaExpression)) {
-            warnings.add(new Dangerous(this, commaExpression));
+            warnings.add(new Danger(this, commaExpression));
         }
         if (CommaExpression.effective(conditionalExpression)) {
-            warnings.add(new Dangerous(this, conditionalExpression));
+            warnings.add(new Danger(this, conditionalExpression));
         }
         if (!type.equals(commaExpression.type.evaluation())) {
-            warnings.add(new Hazard(this, commaExpression));
+            warnings.add(new Danger(this, commaExpression));
         }
         if (!type.equals(conditionalExpression.type.evaluation())) {
-            warnings.add(new Hazard(this, conditionalExpression));
+            warnings.add(new Danger(this, conditionalExpression));
         }
     }
 

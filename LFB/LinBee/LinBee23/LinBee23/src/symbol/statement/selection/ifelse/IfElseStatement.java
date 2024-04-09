@@ -12,7 +12,7 @@ import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
+import symbol.symbol.warning.Discouragement;
 
 public class IfElseStatement extends SelectionStatement {
     public final Keyword keywordIf;
@@ -70,13 +70,13 @@ public class IfElseStatement extends SelectionStatement {
         this.blankAfterKeywordElse = blankAfterKeywordElse;
         this.falseStatement = falseStatement;
         if (!(trueStatement instanceof CompoundStatement)) {
-            warnings.add(new Discouraged(this, trueStatement));
+            warnings.add(new Discouragement(this, trueStatement));
         }
         if (!(falseStatement instanceof CompoundStatement)) {
-            warnings.add(new Discouraged(this, falseStatement));
+            warnings.add(new Discouragement(this, falseStatement));
         }
         if (!CommaExpression.controlling(commaExpression)) {
-            warnings.add(new Discouraged(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression));
         }
     }
 

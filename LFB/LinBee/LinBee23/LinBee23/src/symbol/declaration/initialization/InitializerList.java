@@ -9,7 +9,7 @@ import symbol.symbol.type.Table;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
 import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.warning.Dangerous;
+import symbol.symbol.warning.Danger;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class InitializerList extends Nonterminal {
         for (Initializer element : initializer) {
             if (element instanceof AssignmentExpressionInitializer assignmentExpressionInitializer) {
                 if (CommaExpression.effective(assignmentExpressionInitializer.assignmentExpression)) {
-                    warnings.add(new Dangerous(this, assignmentExpressionInitializer));
+                    warnings.add(new Danger(this, assignmentExpressionInitializer));
                 }
             }
         }

@@ -8,7 +8,7 @@ import symbol.base.blank.Blank;
 import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
 import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.warning.Dangerous;
+import symbol.symbol.warning.Danger;
 
 public class PostfixDecrementOperation extends PostfixExpression {
     public final PostfixExpression postfixExpression;
@@ -26,7 +26,7 @@ public class PostfixDecrementOperation extends PostfixExpression {
         this.blankAfterPostfixExpression = blankAfterPostfixExpression;
         this.postfixDecrementSign = postfixDecrementSign;
         if (CommaExpression.effective(postfixExpression)) {
-            warnings.add(new Dangerous(this, postfixExpression));
+            warnings.add(new Danger(this, postfixExpression));
         }
     }
 

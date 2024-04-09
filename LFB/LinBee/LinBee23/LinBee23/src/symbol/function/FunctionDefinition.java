@@ -19,7 +19,7 @@ import symbol.symbol.type.Table;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strange;
+import symbol.symbol.warning.Strangeness;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -63,7 +63,7 @@ public class FunctionDefinition extends BlockItem {
         this.compoundStatement = compoundStatement;
         if (declaration.length > 0) {
             for (Declaration element : declaration) {
-                warnings.add(new Strange(element));
+                warnings.add(new Strangeness(element));
             }
         }
     }

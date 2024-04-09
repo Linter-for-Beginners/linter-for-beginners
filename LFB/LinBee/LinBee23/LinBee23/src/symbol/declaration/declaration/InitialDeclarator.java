@@ -15,7 +15,7 @@ import symbol.symbol.type.Table;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Danger;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,7 +47,7 @@ public abstract class InitialDeclarator extends Nonterminal {
         }
         if (initialDeclarator instanceof Initialization initialization) {
             if (!table.type(string).equals(initialization.initializer.type.evaluation())) {
-                initialization.warnings.add(new Hazard(initialization, initialization.initializer));
+                initialization.warnings.add(new Danger(initialization, initialization.initializer));
             }
         }
         return initialDeclarator;

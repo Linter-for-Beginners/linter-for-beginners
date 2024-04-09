@@ -7,7 +7,7 @@ import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
 import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
-import symbol.symbol.warning.Strange;
+import symbol.symbol.warning.Strangeness;
 
 public class EmptyStatement extends Statement {
     public final Semicolon semicolon;
@@ -16,7 +16,7 @@ public class EmptyStatement extends Statement {
         super(null, new Symbol[] {
                 semicolon});
         this.semicolon = semicolon;
-        warnings.add(new Strange(this));
+        warnings.add(new Strangeness(this));
     }
 
     public static EmptyStatement parse(Sentence sentence, Table table) throws InvalidityException {

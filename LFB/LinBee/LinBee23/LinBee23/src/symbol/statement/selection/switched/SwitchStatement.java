@@ -12,7 +12,7 @@ import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
+import symbol.symbol.warning.Discouragement;
 
 public class SwitchStatement extends SelectionStatement {
     public final Keyword keywordSwitch;
@@ -54,10 +54,10 @@ public class SwitchStatement extends SelectionStatement {
         this.blankBeforeStatement = blankBeforeStatement;
         this.statement = statement;
         if (!(statement instanceof CompoundStatement)) {
-            warnings.add(new Discouraged(this, statement));
+            warnings.add(new Discouragement(this, statement));
         }
         if (!CommaExpression.controlling(commaExpression)) {
-            warnings.add(new Discouraged(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression));
         }
     }
 

@@ -8,9 +8,9 @@ import symbol.expression.bitwise.inclusive.BitwiseInclusiveOrExpression;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Danger;
 
 public class LogicalAndOperation extends LogicalAndExpression {
     public final LogicalAndExpression logicalAndExpression;
@@ -36,22 +36,22 @@ public class LogicalAndOperation extends LogicalAndExpression {
         this.blankAfterLogicalAndSign = blankAfterLogicalAndSign;
         this.bitwiseInclusiveOrExpression = bitwiseInclusiveOrExpression;
         if (!CommaExpression.controlling(logicalAndExpression)) {
-            warnings.add(new Discouraged(this, logicalAndExpression));
+            warnings.add(new Discouragement(this, logicalAndExpression));
         }
         if (!CommaExpression.controlling(bitwiseInclusiveOrExpression)) {
-            warnings.add(new Discouraged(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression));
         }
         if (CommaExpression.effective(logicalAndExpression)) {
-            warnings.add(new Dangerous(this, logicalAndExpression));
+            warnings.add(new Danger(this, logicalAndExpression));
         }
         if (CommaExpression.effective(bitwiseInclusiveOrExpression)) {
-            warnings.add(new Dangerous(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Danger(this, bitwiseInclusiveOrExpression));
         }
         if (!type.equals(logicalAndExpression.type.evaluation())) {
-            warnings.add(new Hazard(this, logicalAndExpression));
+            warnings.add(new Danger(this, logicalAndExpression));
         }
         if (!type.equals(bitwiseInclusiveOrExpression.type.evaluation())) {
-            warnings.add(new Hazard(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Danger(this, bitwiseInclusiveOrExpression));
         }
     }
 

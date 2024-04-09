@@ -8,8 +8,8 @@ import symbol.symbol.*;
 import symbol.expression.additive.AdditiveExpression;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Dangerous;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Danger;
 
 public class ShiftOperation extends ShiftExpression {
     public final ShiftExpression shiftExpression;
@@ -35,22 +35,22 @@ public class ShiftOperation extends ShiftExpression {
         this.blankAfterShiftSign = blankAfterShiftSign;
         this.additiveExpression = additiveExpression;
         if (CommaExpression.controlling(shiftExpression)) {
-            warnings.add(new Discouraged(this, shiftExpression));
+            warnings.add(new Discouragement(this, shiftExpression));
         }
         if (CommaExpression.controlling(additiveExpression)) {
-            warnings.add(new Discouraged(this, additiveExpression));
+            warnings.add(new Discouragement(this, additiveExpression));
         }
         if (!(shiftExpression instanceof CastExpression)) {
-            warnings.add(new Discouraged(this, shiftExpression));
+            warnings.add(new Discouragement(this, shiftExpression));
         }
         if (!(additiveExpression instanceof CastExpression)) {
-            warnings.add(new Discouraged(this, additiveExpression));
+            warnings.add(new Discouragement(this, additiveExpression));
         }
         if (CommaExpression.effective(shiftExpression)) {
-            warnings.add(new Dangerous(this, shiftExpression));
+            warnings.add(new Danger(this, shiftExpression));
         }
         if (CommaExpression.effective(additiveExpression)) {
-            warnings.add(new Dangerous(this, additiveExpression));
+            warnings.add(new Danger(this, additiveExpression));
         }
     }
 

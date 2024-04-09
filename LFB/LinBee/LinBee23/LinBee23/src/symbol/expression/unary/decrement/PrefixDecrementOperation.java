@@ -8,7 +8,7 @@ import symbol.base.blank.Blank;
 import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
 import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.warning.Dangerous;
+import symbol.symbol.warning.Danger;
 
 public class PrefixDecrementOperation extends UnaryExpression {
     public final PrefixDecrementSign prefixDecrementSign;
@@ -26,7 +26,7 @@ public class PrefixDecrementOperation extends UnaryExpression {
         this.blankAfterPrefixDecrementSign = blankAfterPrefixDecrementSign;
         this.unaryExpression = unaryExpression;
         if (CommaExpression.effective(unaryExpression)) {
-            warnings.add(new Dangerous(this, unaryExpression));
+            warnings.add(new Danger(this, unaryExpression));
         }
     }
 

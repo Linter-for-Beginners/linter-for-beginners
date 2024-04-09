@@ -8,9 +8,9 @@ import symbol.expression.multiplicative.MultiplicativeExpression;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Danger;
 
 public class AdditiveOperation extends AdditiveExpression {
     public final AdditiveExpression additiveExpression;
@@ -36,23 +36,23 @@ public class AdditiveOperation extends AdditiveExpression {
         this.blankAfterAdditiveSign = blankAfterAdditiveSign;
         this.multiplicativeExpression = multiplicativeExpression;
         if (CommaExpression.controlling(additiveExpression)) {
-            warnings.add(new Discouraged(this, additiveExpression));
+            warnings.add(new Discouragement(this, additiveExpression));
         }
         if (CommaExpression.controlling(multiplicativeExpression)) {
-            warnings.add(new Discouraged(this, multiplicativeExpression));
+            warnings.add(new Discouragement(this, multiplicativeExpression, "Addictive operation of boolean objects is discouraged."));
         }
         if (CommaExpression.effective(additiveExpression)) {
-            warnings.add(new Dangerous(this, additiveExpression));
+            warnings.add(new Danger(this, additiveExpression));
         }
         if (CommaExpression.effective(multiplicativeExpression)) {
-            warnings.add(new Dangerous(this, multiplicativeExpression));
+            warnings.add(new Danger(this, multiplicativeExpression));
         }
         if (!additiveExpression.type.evaluation().isPointer() && !multiplicativeExpression.type.evaluation().isPointer()) {
             if (!type.equals(additiveExpression.type.evaluation())) {
-                warnings.add(new Hazard(this, additiveExpression));
+                warnings.add(new Danger(this, additiveExpression));
             }
             if (!type.equals(multiplicativeExpression.type.evaluation())) {
-                warnings.add(new Hazard(this, multiplicativeExpression));
+                warnings.add(new Danger(this, multiplicativeExpression));
             }
         }
     }

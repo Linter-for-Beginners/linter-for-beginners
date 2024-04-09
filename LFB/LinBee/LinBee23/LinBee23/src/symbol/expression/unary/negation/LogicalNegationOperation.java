@@ -9,8 +9,8 @@ import symbol.symbol.*;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Discouraged;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Discouragement;
 
 public class LogicalNegationOperation extends UnaryExpression {
     public final LogicalNegationSign logicalNegationSign;
@@ -28,13 +28,13 @@ public class LogicalNegationOperation extends UnaryExpression {
         this.blankAfterLogicalNegationSign = blankAfterLogicalNegationSign;
         this.castExpression = castExpression;
         if (!CommaExpression.controlling(castExpression)) {
-            warnings.add(new Discouraged(this, castExpression));
+            warnings.add(new Discouragement(this, castExpression));
         }
         if (!CommaExpression.controlling(castExpression)) {
-            warnings.add(new Discouraged(this, castExpression));
+            warnings.add(new Discouragement(this, castExpression));
         }
         if (CommaExpression.effective(castExpression)) {
-            warnings.add(new Dangerous(this, castExpression));
+            warnings.add(new Danger(this, castExpression));
         }
     }
 

@@ -9,7 +9,7 @@ import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strange;
+import symbol.symbol.warning.Strangeness;
 
 public class ParenthesizedCompoundStatement extends PrimaryExpression {
     public final LeftParenthesis leftParenthesis;
@@ -34,7 +34,7 @@ public class ParenthesizedCompoundStatement extends PrimaryExpression {
         this.compoundStatement = compoundStatement;
         this.blankAfterCompoundStatement = blankAfterCompoundStatement;
         this.rightParenthesis = rightParenthesis;
-        warnings.add(new Strange(this));
+        warnings.add(new Strangeness(this));
     }
 
     public static ParenthesizedCompoundStatement parse(Sentence sentence, Table table) throws InvalidityException {

@@ -9,9 +9,9 @@ import symbol.expression.equality.EqualityExpression;
 import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouraged;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Hazard;
+import symbol.symbol.warning.Discouragement;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Danger;
 
 public class BitwiseAndOperation extends BitwiseAndExpression {
     public final BitwiseAndExpression bitwiseAndExpression;
@@ -37,28 +37,28 @@ public class BitwiseAndOperation extends BitwiseAndExpression {
         this.blankAfterBitwiseAndSign = blankAfterBitwiseAndSign;
         this.equalityExpression = equalityExpression;
         if (CommaExpression.controlling(bitwiseAndExpression)) {
-            warnings.add(new Discouraged(this, bitwiseAndExpression));
+            warnings.add(new Discouragement(this, bitwiseAndExpression));
         }
         if (CommaExpression.controlling(equalityExpression)) {
-            warnings.add(new Discouraged(this, equalityExpression));
+            warnings.add(new Discouragement(this, equalityExpression));
         }
         if (!(bitwiseAndExpression instanceof BitwiseAndOperation) && !(bitwiseAndExpression instanceof CastExpression)) {
-            warnings.add(new Discouraged(this, bitwiseAndExpression));
+            warnings.add(new Discouragement(this, bitwiseAndExpression));
         }
         if (!(equalityExpression instanceof CastExpression)) {
-            warnings.add(new Discouraged(this, equalityExpression));
+            warnings.add(new Discouragement(this, equalityExpression));
         }
         if (CommaExpression.effective(bitwiseAndExpression)) {
-            warnings.add(new Dangerous(this, bitwiseAndExpression));
+            warnings.add(new Danger(this, bitwiseAndExpression));
         }
         if (CommaExpression.effective(equalityExpression)) {
-            warnings.add(new Dangerous(this, equalityExpression));
+            warnings.add(new Danger(this, equalityExpression));
         }
         if (!type.equals(bitwiseAndExpression.type.evaluation())) {
-            warnings.add(new Hazard(this, bitwiseAndExpression));
+            warnings.add(new Danger(this, bitwiseAndExpression));
         }
         if (!type.equals(equalityExpression.type.evaluation())) {
-            warnings.add(new Hazard(this, equalityExpression));
+            warnings.add(new Danger(this, equalityExpression));
         }
     }
 

@@ -8,8 +8,8 @@ import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
 import symbol.symbol.Symbol;
 import symbol.symbol.type.Table;
-import symbol.symbol.warning.Dangerous;
-import symbol.symbol.warning.Discouraged;
+import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Discouragement;
 
 public class UnaryPlusOperation extends UnaryExpression {
     public final UnaryPlusSign unaryPlusSign;
@@ -27,10 +27,10 @@ public class UnaryPlusOperation extends UnaryExpression {
         this.blankAfterUnaryPlusSign = blankAfterUnaryPlusSign;
         this.castExpression = castExpression;
         if (CommaExpression.controlling(castExpression)) {
-            warnings.add(new Discouraged(this, castExpression));
+            warnings.add(new Discouragement(this, castExpression));
         }
         if (CommaExpression.effective(castExpression)) {
-            warnings.add(new Dangerous(this, castExpression));
+            warnings.add(new Danger(this, castExpression));
         }
     }
 

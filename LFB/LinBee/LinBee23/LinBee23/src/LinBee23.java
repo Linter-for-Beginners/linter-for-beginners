@@ -23,16 +23,18 @@ public class LinBee23 {
             }
             ArrayList<Symbol> symbols = blockItemList.traversal(new ArrayList<Symbol>());
             HashSet<Symbol> visited = new HashSet<Symbol>();
+            System.out.print("\n\n\n");
             for (Symbol symbol : symbols) {
                 if (visited.contains(symbol)) {
                     visited.remove(symbol);
                 } else {
                     visited.add(symbol);
                     for (Warning warning : symbol.warnings) {
-                        System.out.println(warning.toString());
+                        System.out.println("\t" + warning.toString());
                     }
                 }
             }
+            System.out.print("\n\n\n");
         } catch (Exception exception) {
             exception.printStackTrace();
         }
