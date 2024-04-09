@@ -49,13 +49,13 @@ public class RelationalOperation extends RelationalExpression {
             warnings.add(new Discouragement(this, relationalExpression));
         }
         if (CommaExpression.effective(relationalExpression)) {
-            warnings.add(new Danger(this, relationalExpression));
+            warnings.add(new Danger(this, relationalExpression, "Relational operation with side effects is dangerous for beginners."));
         }
         if (CommaExpression.effective(shiftExpression)) {
-            warnings.add(new Danger(this, shiftExpression));
+            warnings.add(new Danger(this, shiftExpression, "Relational operation with side effects is dangerous for beginners."));
         }
         if (!relationalExpression.type.evaluation().equals(shiftExpression.type.evaluation())) {
-            warnings.add(new Danger(this, shiftExpression));
+            warnings.add(new Discouragement(this, shiftExpression, "Relational operation of expressions whose types are different is discouraged for beginners."));
         }
     }
 

@@ -38,10 +38,6 @@ public class StringLiteral extends Terminal {
             i += "\"".length();
             String string = sentenceString.substring(0, i);
             sentence.remove(string.length());
-            string = string.replace("\n", "");
-            string = string.replace("\\\"", "\n");
-            string = string.replaceAll("\"\\s+\"", "");
-            string = string.replace("\n", "\\\"");
             return new StringLiteral(row, column, string);
         }
     }
