@@ -42,7 +42,7 @@ public abstract class Warning {
         parentName = parentName.contains(".") ? parentName.substring(parentName.lastIndexOf(".") + ".".length()) : parentName;
         String childName = child.getClass().getName();
         childName = childName.contains(".") ? childName.substring(childName.lastIndexOf(".") + ".".length()) : childName;
-        String prefix = String.format("row %03d column %03d    %-24s    ", row, column, warningName) + (message != null ? String.format("%-64s", message) : String.format("%-32s%-32s", parentName, childName));
+        String prefix = String.format("row %03d column %03d    %-24s    %-96s", row, column, warningName, message);
         StringBuilder stringBuilder = new StringBuilder();
         ArrayList<Symbol> symbols = parent.traversal(new ArrayList<>());
         HashSet<Symbol> visited = new HashSet<>();

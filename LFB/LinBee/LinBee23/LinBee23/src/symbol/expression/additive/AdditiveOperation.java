@@ -39,20 +39,20 @@ public class AdditiveOperation extends AdditiveExpression {
             warnings.add(new Discouragement(this, additiveExpression));
         }
         if (CommaExpression.controlling(multiplicativeExpression)) {
-            warnings.add(new Discouragement(this, multiplicativeExpression, "Addictive operation of boolean forms is discouraged."));
+            warnings.add(new Discouragement(this, multiplicativeExpression, "Additive operation of a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.effective(additiveExpression)) {
-            warnings.add(new Danger(this, additiveExpression));
+            warnings.add(new Danger(this, additiveExpression, "Additive operation with side effects is dangerous for beginners."));
         }
         if (CommaExpression.effective(multiplicativeExpression)) {
-            warnings.add(new Danger(this, multiplicativeExpression));
+            warnings.add(new Danger(this, multiplicativeExpression, "Additive operation with side effects is dangerous for beginners."));
         }
         if (!additiveExpression.type.evaluation().isPointer() && !multiplicativeExpression.type.evaluation().isPointer()) {
             if (!type.equals(additiveExpression.type.evaluation())) {
-                warnings.add(new Danger(this, additiveExpression));
+                warnings.add(new Discouragement(this, additiveExpression, "Additive operation of expressions whose types are different is discouraged for beginners."));
             }
             if (!type.equals(multiplicativeExpression.type.evaluation())) {
-                warnings.add(new Danger(this, multiplicativeExpression));
+                warnings.add(new Discouragement(this, multiplicativeExpression, "Additive operation of expressions whose types are different is discouraged for beginners."));
             }
         }
     }

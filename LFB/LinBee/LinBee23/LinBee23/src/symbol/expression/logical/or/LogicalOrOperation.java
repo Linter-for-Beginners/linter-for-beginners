@@ -42,16 +42,16 @@ public class LogicalOrOperation extends LogicalOrExpression {
             warnings.add(new Discouragement(this, logicalAndExpression));
         }
         if (CommaExpression.effective(logicalOrExpression)) {
-            warnings.add(new Danger(this, logicalOrExpression));
+            warnings.add(new Danger(this, logicalOrExpression, "Logical inclusive OR operation with side effects is dangerous for beginners."));
         }
         if (CommaExpression.effective(logicalAndExpression)) {
-            warnings.add(new Danger(this, logicalAndExpression));
+            warnings.add(new Danger(this, logicalAndExpression, "Logical inclusive OR operation with side effects is dangerous for beginners."));
         }
         if (!type.equals(logicalOrExpression.type.evaluation())) {
-            warnings.add(new Danger(this, logicalOrExpression));
+            warnings.add(new Discouragement(this, logicalOrExpression, "Logical inclusive OR operation of expressions whose types are different is discouraged for beginners."));
         }
         if (!type.equals(logicalAndExpression.type.evaluation())) {
-            warnings.add(new Danger(this, logicalAndExpression));
+            warnings.add(new Discouragement(this, logicalAndExpression, "Logical inclusive OR operation of expressions whose types are different is discouraged for beginners."));
         }
     }
 

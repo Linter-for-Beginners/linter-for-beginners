@@ -53,16 +53,16 @@ public class ArraySubscripting extends PostfixExpression {
             warnings.add(new Discouragement(this, commaExpression));
         }
         if (CommaExpression.effective(postfixExpression)) {
-            warnings.add(new Danger(this, postfixExpression));
+            warnings.add(new Danger(this, postfixExpression, "Array subscripting with side effects is dangerous for beginners."));
         }
         if (CommaExpression.effective(commaExpression)) {
-            warnings.add(new Danger(this, commaExpression));
+            warnings.add(new Danger(this, commaExpression, "Array subscripting with side effects is dangerous for beginners."));
         }
         if (!postfixExpression.type.evaluation().isPointer()) {
-            warnings.add(new Danger(this, postfixExpression));
+            warnings.add(new Discouragement(this, postfixExpression));
         }
         if (commaExpression.type.evaluation().isPointer()) {
-            warnings.add(new Danger(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression));
         }
     }
 

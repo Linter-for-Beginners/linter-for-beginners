@@ -46,11 +46,11 @@ public class FunctionCall extends PostfixExpression {
         this.blankAfterArgumentExpressionList = blankAfterArgumentExpressionList;
         this.rightParenthesis = rightParenthesis;
         if (CommaExpression.effective(postfixExpression)) {
-            warnings.add(new Danger(this, postfixExpression));
+            warnings.add(new Danger(this, postfixExpression, "Function calling with side effects is dangerous for beginners."));
         }
         for (AssignmentExpression assignmentExpression : argumentExpressionList.assignmentExpression) {
             if (CommaExpression.effective(assignmentExpression)) {
-                warnings.add(new Danger(this, assignmentExpression));
+                warnings.add(new Danger(this, assignmentExpression, "Function argument expression with side effects is dangerous for beginners."));
             }
         }
     }

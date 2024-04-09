@@ -284,7 +284,7 @@ public abstract class PostfixExpression extends UnaryExpression {
                     } else {
                         for (int i = 0; i < parameterType.length; i++) {
                             if (!parameterType[i].equals(argumentType[i])) {
-                                postfixExpression.warnings.add(new Danger(postfixExpression, argumentExpressionList.assignmentExpression[i], "Inconsistent value type is dangerous."));
+                                postfixExpression.warnings.add(new Danger(postfixExpression, argumentExpressionList.assignmentExpression[i]));
                             }
                         }
                     }

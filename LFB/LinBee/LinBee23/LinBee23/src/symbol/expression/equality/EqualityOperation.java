@@ -49,13 +49,13 @@ public class EqualityOperation extends EqualityExpression {
             warnings.add(new Discouragement(this, relationalExpression));
         }
         if (CommaExpression.effective(equalityExpression)) {
-            warnings.add(new Danger(this, equalityExpression));
+            warnings.add(new Danger(this, equalityExpression, "Equality operation with side effects is dangerous for beginners."));
         }
         if (CommaExpression.effective(relationalExpression)) {
-            warnings.add(new Danger(this, relationalExpression));
+            warnings.add(new Danger(this, relationalExpression, "Equality operation with side effects is dangerous for beginners."));
         }
         if (!equalityExpression.type.evaluation().equals(relationalExpression.type.evaluation())) {
-            warnings.add(new Danger(this, relationalExpression));
+            warnings.add(new Discouragement(this, relationalExpression, "Equality operation of expressions whose types are different is discouraged for beginners."));
         }
     }
 

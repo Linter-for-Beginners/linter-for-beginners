@@ -55,19 +55,19 @@ public class ConditionalOperation extends ConditionalExpression {
             warnings.add(new Discouragement(this, logicalOrExpression));
         }
         if (CommaExpression.effective(logicalOrExpression)) {
-            warnings.add(new Danger(this, logicalOrExpression));
+            warnings.add(new Danger(this, logicalOrExpression, "Conditional operation with side effects is dangerous for beginners."));
         }
         if (CommaExpression.effective(commaExpression)) {
-            warnings.add(new Danger(this, commaExpression));
+            warnings.add(new Danger(this, commaExpression, "Conditional operation with side effects is dangerous for beginners."));
         }
         if (CommaExpression.effective(conditionalExpression)) {
-            warnings.add(new Danger(this, conditionalExpression));
+            warnings.add(new Danger(this, conditionalExpression, "Conditional operation with side effects is dangerous for beginners."));
         }
         if (!type.equals(commaExpression.type.evaluation())) {
-            warnings.add(new Danger(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression, "Conditional operation of expressions whose types are different is discouraged for beginners."));
         }
         if (!type.equals(conditionalExpression.type.evaluation())) {
-            warnings.add(new Danger(this, conditionalExpression));
+            warnings.add(new Discouragement(this, conditionalExpression, "Conditional operation of expressions whose types are different is discouraged for beginners."));
         }
     }
 

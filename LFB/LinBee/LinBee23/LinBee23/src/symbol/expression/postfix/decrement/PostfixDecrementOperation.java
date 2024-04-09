@@ -26,7 +26,7 @@ public class PostfixDecrementOperation extends PostfixExpression {
         this.blankAfterPostfixExpression = blankAfterPostfixExpression;
         this.postfixDecrementSign = postfixDecrementSign;
         if (CommaExpression.effective(postfixExpression)) {
-            warnings.add(new Danger(this, postfixExpression));
+            warnings.add(new Danger(this, postfixExpression, "Postfix decrement operation with side effects is dangerous for beginners."));
         }
     }
 

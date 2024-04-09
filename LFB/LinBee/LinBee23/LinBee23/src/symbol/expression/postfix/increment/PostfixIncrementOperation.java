@@ -26,7 +26,7 @@ public class PostfixIncrementOperation extends PostfixExpression {
         this.blankAfterPostfixExpression = blankAfterPostfixExpression;
         this.postfixIncrementSign = postfixIncrementSign;
         if (CommaExpression.effective(postfixExpression)) {
-            warnings.add(new Danger(this, postfixExpression));
+            warnings.add(new Danger(this, postfixExpression, "Postfix increment operation with side effects is dangerous for beginners."));
         }
     }
 

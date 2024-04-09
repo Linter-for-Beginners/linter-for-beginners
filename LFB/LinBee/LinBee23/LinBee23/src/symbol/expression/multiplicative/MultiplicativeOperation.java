@@ -42,16 +42,16 @@ public class MultiplicativeOperation extends MultiplicativeExpression {
             warnings.add(new Discouragement(this, castExpression));
         }
         if (CommaExpression.effective(multiplicativeExpression)) {
-            warnings.add(new Danger(this, multiplicativeExpression));
+            warnings.add(new Danger(this, multiplicativeExpression, "Multiplicative operation with side effects is dangerous for beginners."));
         }
         if (CommaExpression.effective(castExpression)) {
-            warnings.add(new Danger(this, castExpression));
+            warnings.add(new Danger(this, castExpression, "Multiplicative operation with side effects is dangerous for beginners."));
         }
         if (!type.equals(multiplicativeExpression.type.evaluation())) {
-            warnings.add(new Danger(this, multiplicativeExpression));
+            warnings.add(new Discouragement(this, multiplicativeExpression, "Multiplicative operation of expressions whose types are different is discouraged for beginners."));
         }
         if (!type.equals(castExpression.type.evaluation())) {
-            warnings.add(new Danger(this, castExpression));
+            warnings.add(new Discouragement(this, castExpression, "Multiplicative operation of expressions whose types are different is discouraged for beginners."));
         }
     }
 

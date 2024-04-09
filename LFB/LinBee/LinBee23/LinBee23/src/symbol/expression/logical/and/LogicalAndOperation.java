@@ -42,16 +42,16 @@ public class LogicalAndOperation extends LogicalAndExpression {
             warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression));
         }
         if (CommaExpression.effective(logicalAndExpression)) {
-            warnings.add(new Danger(this, logicalAndExpression));
+            warnings.add(new Danger(this, logicalAndExpression, "Logical AND operation with side effects is dangerous for beginners."));
         }
         if (CommaExpression.effective(bitwiseInclusiveOrExpression)) {
-            warnings.add(new Danger(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Danger(this, bitwiseInclusiveOrExpression, "Logical AND operation with side effects is dangerous for beginners."));
         }
         if (!type.equals(logicalAndExpression.type.evaluation())) {
-            warnings.add(new Danger(this, logicalAndExpression));
+            warnings.add(new Discouragement(this, logicalAndExpression, "Logical AND operation of expressions whose types are different is discouraged for beginners."));
         }
         if (!type.equals(bitwiseInclusiveOrExpression.type.evaluation())) {
-            warnings.add(new Danger(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression, "Logical AND operation of expressions whose types are different is discouraged for beginners."));
         }
     }
 

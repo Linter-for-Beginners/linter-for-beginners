@@ -40,11 +40,11 @@ public class AssignmentOperation extends AssignmentExpression {
             warnings.add(new Discouragement(this, assignmentExpression));
         }
         if (CommaExpression.effective(assignmentExpression) && !(CommaExpression.innermost(assignmentExpression) instanceof FunctionCall)) {
-            warnings.add(new Danger(this, assignmentExpression));
+            warnings.add(new Danger(this, assignmentExpression, "Assignment operation with other side effects is dangerous for beginners."));
         }
         if (!type.equals(assignmentExpression.type.evaluation())) {
             if (!assignmentSign.toString().equals("<<=") && !assignmentSign.toString().equals(">>=")) {
-                warnings.add(new Danger(this, assignmentExpression));
+                warnings.add(new Discouragement(this, assignmentExpression, "Assignment operation of expressions whose types are different is discouraged for beginners."));
             }
         }
     }

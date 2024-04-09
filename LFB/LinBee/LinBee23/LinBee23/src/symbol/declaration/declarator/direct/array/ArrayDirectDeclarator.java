@@ -57,13 +57,12 @@ public class ArrayDirectDeclarator extends DirectDeclarator {
         this.rightBracket = rightBracket;
         if (assignmentExpression == null) {
             warnings.add(new Strangeness(this));
-        }
-        if (assignmentExpression != null) {
+        } else {
             if (CommaExpression.controlling(assignmentExpression)) {
                 warnings.add(new Discouragement(this, assignmentExpression));
             }
             if (CommaExpression.effective(assignmentExpression)) {
-                warnings.add(new Danger(this, assignmentExpression));
+                warnings.add(new Danger(this, assignmentExpression, "It is dangerous for beginners to declare an array with side effects."));
             }
         }
     }

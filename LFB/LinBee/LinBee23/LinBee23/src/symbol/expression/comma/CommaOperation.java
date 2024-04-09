@@ -31,7 +31,7 @@ public class CommaOperation extends CommaExpression {
         this.commaSign = commaSign;
         this.blankAfterCommaSign = blankAfterCommaSign;
         this.assignmentExpression = assignmentExpression;
-        warnings.add(new Strangeness(this, "Comma expression is strange."));
+        warnings.add(new Strangeness(this, "Comma operation is strange for beginners."));
     }
 
     public static CommaOperation parse(Sentence sentence, Table table) throws InvalidityException {
