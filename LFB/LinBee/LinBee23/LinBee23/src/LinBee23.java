@@ -36,7 +36,7 @@ public class LinBee23 {
             }
             System.out.print("\n\n\n");
         } catch (Exception exception) {
-            exception.printStackTrace();
+            System.out.println(exception.toString());
         }
     }
 
