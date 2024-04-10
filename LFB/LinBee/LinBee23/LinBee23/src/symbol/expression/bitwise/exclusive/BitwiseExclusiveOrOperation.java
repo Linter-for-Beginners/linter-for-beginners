@@ -55,10 +55,10 @@ public class BitwiseExclusiveOrOperation extends BitwiseExclusiveOrExpression {
             warnings.add(new Danger(this, bitwiseAndExpression, "Bitwise exclusive OR operation with side effects is dangerous for beginners."));
         }
         if (!type.equals(bitwiseExclusiveOrExpression.type.evaluation())) {
-            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression, "Bitwise exclusive OR operation of expressions whose types are different is discouraged for beginners."));
+            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression, "Bitwise exclusive OR operation of expressions whose types are incompatible is discouraged for beginners."));
         }
         if (!type.equals(bitwiseAndExpression.type.evaluation())) {
-            warnings.add(new Discouragement(this, bitwiseAndExpression, "Bitwise exclusive OR operation of expressions whose types are different is discouraged for beginners."));
+            warnings.add(new Discouragement(this, bitwiseAndExpression, "Bitwise exclusive OR operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 

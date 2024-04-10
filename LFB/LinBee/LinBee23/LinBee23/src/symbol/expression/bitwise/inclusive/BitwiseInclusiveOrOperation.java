@@ -55,10 +55,10 @@ public class BitwiseInclusiveOrOperation extends BitwiseInclusiveOrExpression {
             warnings.add(new Danger(this, bitwiseExclusiveOrExpression, "Bitwise inclusive OR operation with side effects is dangerous for beginners."));
         }
         if (!type.equals(bitwiseInclusiveOrExpression.type.evaluation())) {
-            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression, "Bitwise inclusive OR operation of expressions whose types are different is discouraged for beginners."));
+            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression, "Bitwise inclusive OR operation of expressions whose types are incompatible is discouraged for beginners."));
         }
         if (!type.equals(bitwiseExclusiveOrExpression.type.evaluation())) {
-            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression, "Bitwise inclusive OR operation of expressions whose types are different is discouraged for beginners."));
+            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression, "Bitwise inclusive OR operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 

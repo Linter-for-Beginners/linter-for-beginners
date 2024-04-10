@@ -1,12 +1,9 @@
 #include <stdio.h>
-int counter = 0;
-int f(int a, int b) {
-	counter++;
-	return a * b - a - b;
+void f(double x) {
 }
 int main() {
-	int (*p)(int,int) = &f;
-	int t;
-	t = (*p)(3, 5.0);
+	f();
+	f(1);
+	f(1,2);
 	return 0;
 }

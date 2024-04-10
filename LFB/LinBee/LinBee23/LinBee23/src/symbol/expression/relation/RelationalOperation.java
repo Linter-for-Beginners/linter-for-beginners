@@ -55,7 +55,7 @@ public class RelationalOperation extends RelationalExpression {
             warnings.add(new Danger(this, shiftExpression, "Relational operation with side effects is dangerous for beginners."));
         }
         if (!relationalExpression.type.evaluation().equals(shiftExpression.type.evaluation())) {
-            warnings.add(new Discouragement(this, shiftExpression, "Relational operation of expressions whose types are different is discouraged for beginners."));
+            warnings.add(new Discouragement(this, shiftExpression, "Relational operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 

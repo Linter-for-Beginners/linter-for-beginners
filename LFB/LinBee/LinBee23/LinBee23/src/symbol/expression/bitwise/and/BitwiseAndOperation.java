@@ -55,10 +55,10 @@ public class BitwiseAndOperation extends BitwiseAndExpression {
             warnings.add(new Danger(this, equalityExpression, "Bitwise AND operation with side effects is dangerous for beginners."));
         }
         if (!type.equals(bitwiseAndExpression.type.evaluation())) {
-            warnings.add(new Discouragement(this, bitwiseAndExpression, "Bitwise AND operation of expressions whose types are different is discouraged for beginners."));
+            warnings.add(new Discouragement(this, bitwiseAndExpression, "Bitwise AND operation of expressions whose types are incompatible is discouraged for beginners."));
         }
         if (!type.equals(equalityExpression.type.evaluation())) {
-            warnings.add(new Discouragement(this, equalityExpression, "Bitwise AND operation of expressions whose types are different is discouraged for beginners."));
+            warnings.add(new Discouragement(this, equalityExpression, "Bitwise AND operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 

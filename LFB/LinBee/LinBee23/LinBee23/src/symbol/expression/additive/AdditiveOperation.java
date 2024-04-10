@@ -49,10 +49,10 @@ public class AdditiveOperation extends AdditiveExpression {
         }
         if (!additiveExpression.type.evaluation().isPointer() && !multiplicativeExpression.type.evaluation().isPointer()) {
             if (!type.equals(additiveExpression.type.evaluation())) {
-                warnings.add(new Discouragement(this, additiveExpression, "Additive operation of expressions whose types are different is discouraged for beginners."));
+                warnings.add(new Discouragement(this, additiveExpression, "Additive operation of expressions whose types are incompatible is discouraged for beginners."));
             }
             if (!type.equals(multiplicativeExpression.type.evaluation())) {
-                warnings.add(new Discouragement(this, multiplicativeExpression, "Additive operation of expressions whose types are different is discouraged for beginners."));
+                warnings.add(new Discouragement(this, multiplicativeExpression, "Additive operation of expressions whose types are incompatible is discouraged for beginners."));
             }
         }
     }

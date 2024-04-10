@@ -281,14 +281,19 @@ public abstract class PostfixExpression extends UnaryExpression {
                         parameterType = types.toArray(new SymbolTypeName[0]);
                     }
                     if (parameterType.length != argumentType.length) {
-                        postfixExpression.warnings.add(new Danger(postfixExpression, postfixExpression, "Function arguments whose number is not consistent with the format is dangerous for beginners."));
+                        if (argumentType.length > parameterType.length) {
+                            postfixExpression.warnings.add(new Discouragement(postfixExpression, postfixExpression, "Excess of function arguments is discouraged for beginners."));
+                        }
+                        if (argumentType.length < parameterType.length) {
+                            postfixExpression.warnings.add(new Danger(postfixExpression, postfixExpression, "Lack of function arguments is dangerous for beginners."));
+                        }
                     } else {
                         for (int i = 0; i < parameterType.length; i++) {
                             if (!parameterType[i].equals(argumentType[i])) {
                                 if (number != null) {
-                                    postfixExpression.warnings.add(new Danger(postfixExpression, argumentExpressionList.assignmentExpression[i], "Function argument whose type is not consistent with the format is dangerous for beginners."));
+                                    postfixExpression.warnings.add(new Danger(postfixExpression, argumentExpressionList.assignmentExpression[i], "Function argument whose type is incompatible is dangerous for beginners."));
                                 } else {
-                                    postfixExpression.warnings.add(new Discouragement(postfixExpression, argumentExpressionList.assignmentExpression[i], "Function argument whose type is not consistent with the corresponding function parameter is discouraged for beginners."));
+                                    postfixExpression.warnings.add(new Discouragement(postfixExpression, argumentExpressionList.assignmentExpression[i], "Function argument whose type is incompatible is discouraged for beginners."));
                                 }
                             }
                         }

@@ -44,7 +44,7 @@ public class AssignmentOperation extends AssignmentExpression {
         }
         if (!type.equals(assignmentExpression.type.evaluation())) {
             if (!assignmentSign.toString().equals("<<=") && !assignmentSign.toString().equals(">>=")) {
-                warnings.add(new Discouragement(this, assignmentExpression, "Assignment operation of expressions whose types are different is discouraged for beginners."));
+                warnings.add(new Discouragement(this, assignmentExpression, "Assignment operation of expressions whose types are incompatible is discouraged for beginners."));
             }
         }
     }

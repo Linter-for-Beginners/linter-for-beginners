@@ -48,10 +48,10 @@ public class MultiplicativeOperation extends MultiplicativeExpression {
             warnings.add(new Danger(this, castExpression, "Multiplicative operation with side effects is dangerous for beginners."));
         }
         if (!type.equals(multiplicativeExpression.type.evaluation())) {
-            warnings.add(new Discouragement(this, multiplicativeExpression, "Multiplicative operation of expressions whose types are different is discouraged for beginners."));
+            warnings.add(new Discouragement(this, multiplicativeExpression, "Multiplicative operation of expressions whose types are incompatible is discouraged for beginners."));
         }
         if (!type.equals(castExpression.type.evaluation())) {
-            warnings.add(new Discouragement(this, castExpression, "Multiplicative operation of expressions whose types are different is discouraged for beginners."));
+            warnings.add(new Discouragement(this, castExpression, "Multiplicative operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 

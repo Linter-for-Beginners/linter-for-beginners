@@ -55,7 +55,7 @@ public class EqualityOperation extends EqualityExpression {
             warnings.add(new Danger(this, relationalExpression, "Equality operation with side effects is dangerous for beginners."));
         }
         if (!equalityExpression.type.evaluation().equals(relationalExpression.type.evaluation())) {
-            warnings.add(new Discouragement(this, relationalExpression, "Equality operation of expressions whose types are different is discouraged for beginners."));
+            warnings.add(new Discouragement(this, relationalExpression, "Equality operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 
