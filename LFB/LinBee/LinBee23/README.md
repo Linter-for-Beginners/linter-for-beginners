@@ -11,7 +11,7 @@ int main() {
 }
 ```
 
-![](terminal.png)
+![](example.png)
 
 LinBee23 is an [SS23C99](../../../SSL/SSC/SS23C99) LFB used in fundamental programming courses of Beihang University in 2023 for beginners in C99 programming.
 
