@@ -63,7 +63,7 @@ public class ArrayDirectAbstractDeclarator extends DirectAbstractDeclarator {
                 warnings.add(new Discouragement(this, assignmentExpression));
             }
             if (CommaExpression.effective(assignmentExpression)) {
-                warnings.add(new Danger(this, assignmentExpression));
+                warnings.add(new Danger(this, assignmentExpression, "Declarator of an array with side effects is dangerous for beginners."));
             }
         }
     }

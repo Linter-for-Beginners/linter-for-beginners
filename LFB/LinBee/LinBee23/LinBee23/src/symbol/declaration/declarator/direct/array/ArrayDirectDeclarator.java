@@ -62,7 +62,7 @@ public class ArrayDirectDeclarator extends DirectDeclarator {
                 warnings.add(new Discouragement(this, assignmentExpression));
             }
             if (CommaExpression.effective(assignmentExpression)) {
-                warnings.add(new Danger(this, assignmentExpression, "It is dangerous for beginners to declare an array with side effects."));
+                warnings.add(new Danger(this, assignmentExpression, "Declaration of an array with side effects is dangerous for beginners."));
             }
         }
     }

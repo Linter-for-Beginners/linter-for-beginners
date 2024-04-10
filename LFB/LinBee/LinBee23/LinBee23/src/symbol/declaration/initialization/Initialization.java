@@ -37,7 +37,7 @@ public class Initialization extends InitialDeclarator {
         this.initializer = initializer;
         if (initializer instanceof AssignmentExpressionInitializer assignmentExpressionInitializer) {
             if (CommaExpression.effective(assignmentExpressionInitializer.assignmentExpression)) {
-                warnings.add(new Danger(this, assignmentExpressionInitializer, "It is dangerous for beginners to initialize an object with other side effects."));
+                warnings.add(new Danger(this, assignmentExpressionInitializer, "Initialization with other side effects is dangerous for beginners."));
             }
         }
     }
