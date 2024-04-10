@@ -1,4 +1,6 @@
-***Why not try LinBee23? Just download `LinBee23.jar` and `source.c`!***
+***Why not try LinBee23 ?***
+
+***Just download `LinBee23.jar` and `source.c` !***
 
 ```c
 #include <stdio.h>
