@@ -51,10 +51,10 @@ public class ReturnValueStatement extends JumpStatement {
                     commaExpression,
                     blankBeforeSemicolon,
                     semicolon);
-            if (table.returnType(table.string).isVoid()) {
+            if (table.type(table.string).returnType().isVoid()) {
                 returnValueStatement.warnings.add(new Danger(returnValueStatement, commaExpression));
             } else {
-                if (!table.returnType(table.string).equals(commaExpression.type)) {
+                if (!table.type(table.string).returnType().equals(commaExpression.type)) {
                     returnValueStatement.warnings.add(new Danger(returnValueStatement, commaExpression));
                 }
             }

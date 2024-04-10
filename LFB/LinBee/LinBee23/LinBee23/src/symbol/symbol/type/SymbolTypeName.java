@@ -198,6 +198,94 @@ public class SymbolTypeName {
         }
     }
 
+    public SymbolTypeName[] parameterType() {
+        StringBuilder left = new StringBuilder();
+        StringBuilder right = new StringBuilder();
+        left.append(this.specifier);
+        SymbolAbstractDeclarator abstractDeclarator = this.abstractDeclarator;
+        if (abstractDeclarator == null) {
+            return new SymbolTypeName[0];
+        }
+        while (true) {
+            left.append(abstractDeclarator.pointer);
+            SymbolDirectAbstractDeclarator directAbstractDeclarator = abstractDeclarator.directAbstractDeclarator;
+            while (true) {
+                if (directAbstractDeclarator == null) {
+                    return new SymbolTypeName[0];
+                }
+                if (directAbstractDeclarator instanceof SymbolParenthesizedAbstractDeclarator parenthesizedAbstractDeclarator) {
+                    left.append("(");
+                    right.insert(0, ")");
+                    abstractDeclarator = parenthesizedAbstractDeclarator.abstractDeclarator;
+                    break;
+                }
+                if (directAbstractDeclarator instanceof SymbolArrayDirectAbstractDeclarator arrayDirectAbstractDeclarator) {
+                    if (arrayDirectAbstractDeclarator.directAbstractDeclarator == null) {
+                        return new SymbolTypeName[0];
+                    }
+                    right.insert(0, "[" + arrayDirectAbstractDeclarator.quantity + "]");
+                    directAbstractDeclarator = arrayDirectAbstractDeclarator.directAbstractDeclarator;
+                    continue;
+                }
+                if (directAbstractDeclarator instanceof SymbolFunctionDirectAbstractDeclarator functionDirectAbstractDeclarator) {
+                    if (functionDirectAbstractDeclarator.directAbstractDeclarator == null) {
+                        return functionDirectAbstractDeclarator.typeNameList.typeName;
+                    }
+                    right.insert(0, "(" + functionDirectAbstractDeclarator.typeNameList + ")");
+                    directAbstractDeclarator = functionDirectAbstractDeclarator.directAbstractDeclarator;
+                    continue;
+                }
+                return new SymbolTypeName[0];
+            }
+        }
+    }
+
+    public SymbolTypeName returnType() {
+        StringBuilder left = new StringBuilder();
+        StringBuilder right = new StringBuilder();
+        left.append(this.specifier);
+        SymbolAbstractDeclarator abstractDeclarator = this.abstractDeclarator;
+        if (abstractDeclarator == null) {
+            return SymbolTypeName.unknown();
+        }
+        while (true) {
+            left.append(abstractDeclarator.pointer);
+            SymbolDirectAbstractDeclarator directAbstractDeclarator = abstractDeclarator.directAbstractDeclarator;
+            while (true) {
+                if (directAbstractDeclarator == null) {
+                    return SymbolTypeName.unknown();
+                }
+                if (directAbstractDeclarator instanceof SymbolParenthesizedAbstractDeclarator parenthesizedAbstractDeclarator) {
+                    left.append("(");
+                    right.insert(0, ")");
+                    abstractDeclarator = parenthesizedAbstractDeclarator.abstractDeclarator;
+                    break;
+                }
+                if (directAbstractDeclarator instanceof SymbolArrayDirectAbstractDeclarator arrayDirectAbstractDeclarator) {
+                    if (arrayDirectAbstractDeclarator.directAbstractDeclarator == null) {
+                        return SymbolTypeName.unknown();
+                    }
+                    right.insert(0, "[" + arrayDirectAbstractDeclarator.quantity + "]");
+                    directAbstractDeclarator = arrayDirectAbstractDeclarator.directAbstractDeclarator;
+                    continue;
+                }
+                if (directAbstractDeclarator instanceof SymbolFunctionDirectAbstractDeclarator functionDirectAbstractDeclarator) {
+                    if (functionDirectAbstractDeclarator.directAbstractDeclarator == null) {
+                        if (left.toString().endsWith("(") && right.toString().startsWith(")")) {
+                            return SymbolTypeName.parse(left.substring(0, left.length() - "(".length()) + right.substring(")".length()));
+                        } else {
+                            return SymbolTypeName.parse(left.toString() + right.toString());
+                        }
+                    }
+                    right.insert(0, "(" + functionDirectAbstractDeclarator.typeNameList + ")");
+                    directAbstractDeclarator = functionDirectAbstractDeclarator.directAbstractDeclarator;
+                    continue;
+                }
+                return SymbolTypeName.unknown();
+            }
+        }
+    }
+
     public static SymbolTypeName promotion(SymbolTypeName left, SymbolTypeName right) {
         if (left instanceof SymbolUnknownTypeName) {
             return new SymbolUnknownTypeName();

@@ -2,6 +2,7 @@ import symbol.base.blank.Blank;
 import symbol.statement.compound.BlockItemList;
 import symbol.symbol.Symbol;
 import symbol.symbol.sentence.Sentence;
+import symbol.symbol.type.SymbolTypeName;
 import symbol.symbol.type.Table;
 import symbol.symbol.warning.Warning;
 

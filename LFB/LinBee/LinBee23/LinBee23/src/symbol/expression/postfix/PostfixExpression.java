@@ -71,7 +71,8 @@ public abstract class PostfixExpression extends UnaryExpression {
                     Blank blankAfterArgumentExpressionList = Blank.parse(sentence, table);
                     RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
                     CommaExpression innermostPostfixExpression = CommaExpression.innermost(postfixExpression);
-                    SymbolTypeName returnType = table.returnType(innermostPostfixExpression.toString());
+                    SymbolTypeName[] parameterType = postfixExpression.type.parameterType();
+                    SymbolTypeName returnType = postfixExpression.type.returnType();
                     postfixExpression = new FunctionCall(returnType,
                             postfixExpression,
                             blankAfterPostfixExpression,
@@ -80,7 +81,6 @@ public abstract class PostfixExpression extends UnaryExpression {
                             argumentExpressionList,
                             blankAfterArgumentExpressionList,
                             rightParenthesis);
-                    SymbolTypeName[] parameterType = table.parameterType(innermostPostfixExpression.toString());
                     SymbolTypeName[] argumentType = new SymbolTypeName[argumentExpressionList.assignmentExpression.length];
                     for (int i = 0; i < argumentType.length; i++) {
                         argumentType[i] = argumentExpressionList.assignmentExpression[i].type;

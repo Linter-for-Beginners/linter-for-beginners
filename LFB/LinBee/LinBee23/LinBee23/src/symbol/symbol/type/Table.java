@@ -132,104 +132,10 @@ public class Table implements Cloneable {
         return type.get(string);
     }
 
-    public SymbolTypeName returnType(String string) {
-        if (!type.containsKey(string)) {
-            return SymbolTypeName.unknown();
-        }
-        SymbolTypeName type = this.type.get(string);
-        StringBuilder left = new StringBuilder();
-        StringBuilder right = new StringBuilder();
-        left.append(type.specifier);
-        SymbolAbstractDeclarator abstractDeclarator = type.abstractDeclarator;
-        if (abstractDeclarator == null) {
-            return SymbolTypeName.unknown();
-        }
-        while (true) {
-            left.append(abstractDeclarator.pointer);
-            SymbolDirectAbstractDeclarator directAbstractDeclarator = abstractDeclarator.directAbstractDeclarator;
-            while (true) {
-                if (directAbstractDeclarator == null) {
-                    return SymbolTypeName.unknown();
-                }
-                if (directAbstractDeclarator instanceof SymbolParenthesizedAbstractDeclarator parenthesizedAbstractDeclarator) {
-                    left.append("(");
-                    right.insert(0, ")");
-                    abstractDeclarator = parenthesizedAbstractDeclarator.abstractDeclarator;
-                    break;
-                }
-                if (directAbstractDeclarator instanceof SymbolArrayDirectAbstractDeclarator arrayDirectAbstractDeclarator) {
-                    if (arrayDirectAbstractDeclarator.directAbstractDeclarator == null) {
-                        return SymbolTypeName.unknown();
-                    }
-                    right.insert(0, "[" + arrayDirectAbstractDeclarator.quantity + "]");
-                    directAbstractDeclarator = arrayDirectAbstractDeclarator.directAbstractDeclarator;
-                    continue;
-                }
-                if (directAbstractDeclarator instanceof SymbolFunctionDirectAbstractDeclarator functionDirectAbstractDeclarator) {
-                    if (functionDirectAbstractDeclarator.directAbstractDeclarator == null) {
-                        if (left.toString().endsWith("(") && right.toString().startsWith(")")) {
-                            return SymbolTypeName.parse(left.substring(0, left.length() - "(".length()) + right.substring(")".length()));
-                        } else {
-                            return SymbolTypeName.parse(left.toString() + right.toString());
-                        }
-                    }
-                    right.insert(0, "(" + functionDirectAbstractDeclarator.typeNameList + ")");
-                    directAbstractDeclarator = functionDirectAbstractDeclarator.directAbstractDeclarator;
-                    continue;
-                }
-                return SymbolTypeName.unknown();
-            }
-        }
-    }
-
-    public SymbolTypeName[] parameterType(String string) {
-        if (!type.containsKey(string)) {
-            return new SymbolTypeName[0];
-        }
-        SymbolTypeName type = this.type.get(string);
-        StringBuilder left = new StringBuilder();
-        StringBuilder right = new StringBuilder();
-        left.append(type.specifier);
-        SymbolAbstractDeclarator abstractDeclarator = type.abstractDeclarator;
-        if (abstractDeclarator == null) {
-            return new SymbolTypeName[0];
-        }
-        while (true) {
-            left.append(abstractDeclarator.pointer);
-            SymbolDirectAbstractDeclarator directAbstractDeclarator = abstractDeclarator.directAbstractDeclarator;
-            while (true) {
-                if (directAbstractDeclarator == null) {
-                    return new SymbolTypeName[0];
-                }
-                if (directAbstractDeclarator instanceof SymbolParenthesizedAbstractDeclarator parenthesizedAbstractDeclarator) {
-                    left.append("(");
-                    right.insert(0, ")");
-                    abstractDeclarator = parenthesizedAbstractDeclarator.abstractDeclarator;
-                    break;
-                }
-                if (directAbstractDeclarator instanceof SymbolArrayDirectAbstractDeclarator arrayDirectAbstractDeclarator) {
-                    if (arrayDirectAbstractDeclarator.directAbstractDeclarator == null) {
-                        return new SymbolTypeName[0];
-                    }
-                    right.insert(0, "[" + arrayDirectAbstractDeclarator.quantity + "]");
-                    directAbstractDeclarator = arrayDirectAbstractDeclarator.directAbstractDeclarator;
-                    continue;
-                }
-                if (directAbstractDeclarator instanceof SymbolFunctionDirectAbstractDeclarator functionDirectAbstractDeclarator) {
-                    if (functionDirectAbstractDeclarator.directAbstractDeclarator == null) {
-                        return functionDirectAbstractDeclarator.typeNameList.typeName;
-                    }
-                    right.insert(0, "(" + functionDirectAbstractDeclarator.typeNameList + ")");
-                    directAbstractDeclarator = functionDirectAbstractDeclarator.directAbstractDeclarator;
-                    continue;
-                }
-                return new SymbolTypeName[0];
-            }
-        }
-    }
-
     public void declare(String string, SymbolTypeName type) {
         declared.add(string);
         this.type.put(string, type);
     }
+
+
 }

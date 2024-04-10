@@ -39,7 +39,7 @@ public class AssignmentOperation extends AssignmentExpression {
         if (CommaExpression.controlling(assignmentExpression)) {
             warnings.add(new Discouragement(this, assignmentExpression));
         }
-        if (CommaExpression.effective(assignmentExpression) && !(CommaExpression.innermost(assignmentExpression) instanceof FunctionCall)) {
+        if (CommaExpression.effective(assignmentExpression)) {
             warnings.add(new Danger(this, assignmentExpression, "Assignment operation with other side effects is dangerous for beginners."));
         }
         if (!type.equals(assignmentExpression.type.evaluation())) {
