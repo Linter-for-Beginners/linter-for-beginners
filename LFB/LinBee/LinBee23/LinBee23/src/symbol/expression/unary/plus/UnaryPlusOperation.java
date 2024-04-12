@@ -30,7 +30,7 @@ public class UnaryPlusOperation extends UnaryExpression {
             warnings.add(new Discouragement(this, castExpression));
         }
         if (CommaExpression.effective(castExpression)) {
-            warnings.add(new Danger(this, castExpression));
+            warnings.add(new Danger(this, castExpression, "Unary plus operation with side effects is dangerous for beginners."));
         }
     }
 

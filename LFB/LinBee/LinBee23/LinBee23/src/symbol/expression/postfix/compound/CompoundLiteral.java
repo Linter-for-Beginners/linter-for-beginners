@@ -66,7 +66,7 @@ public class CompoundLiteral extends PostfixExpression {
         this.initializerList = initializerList;
         this.blankAfterInitializerList = blankAfterInitializerList;
         this.rightBrace = rightBrace;
-        warnings.add(new Strangeness(this));
+        warnings.add(new Strangeness(this, this, "Compound literal is strange for beginners."));
     }
 
     private static SymbolTypeName type(TypeName typeName) {

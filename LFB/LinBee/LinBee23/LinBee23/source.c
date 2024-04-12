@@ -1,6 +1,6 @@
 #include <stdio.h>
+
 int main() {
-	int * p;
-	&*p;
-	return 0; 
+	int a[1 == 2];
+	return 0,0; 
 }

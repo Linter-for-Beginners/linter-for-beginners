@@ -34,7 +34,7 @@ public class IdentifierStatement extends LabeledStatement {
         this.colonPunctuator = colonPunctuator;
         this.blankAfterColonPunctuator = blankAfterColonPunctuator;
         this.statement = statement;
-        warnings.add(new Strangeness(this));
+        warnings.add(new Strangeness(this, identifier, "Labeled statement is strange for beginners."));
     }
 
     public static IdentifierStatement parse(Sentence sentence, Table table) throws InvalidityException {

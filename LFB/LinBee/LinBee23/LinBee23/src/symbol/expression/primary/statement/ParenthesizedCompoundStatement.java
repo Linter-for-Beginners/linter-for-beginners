@@ -34,7 +34,7 @@ public class ParenthesizedCompoundStatement extends PrimaryExpression {
         this.compoundStatement = compoundStatement;
         this.blankAfterCompoundStatement = blankAfterCompoundStatement;
         this.rightParenthesis = rightParenthesis;
-        warnings.add(new Strangeness(this));
+        warnings.add(new Strangeness(this, compoundStatement, "Parenthesized compound statement is strange for beginners."));
     }
 
     public static ParenthesizedCompoundStatement parse(Sentence sentence, Table table) throws InvalidityException {

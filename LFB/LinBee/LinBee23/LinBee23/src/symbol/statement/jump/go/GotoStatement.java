@@ -34,7 +34,7 @@ public class GotoStatement extends JumpStatement {
         this.identifier = identifier;
         this.blankBeforeSemicolon = blankBeforeSemicolon;
         this.semicolon = semicolon;
-        warnings.add(new Strangeness(this));
+        warnings.add(new Strangeness(this, keywordGoto, "Jump statement containing a label is strange for beginners."));
     }
 
     public static GotoStatement parse(Sentence sentence, Table table) throws InvalidityException {

@@ -16,7 +16,7 @@ public class EmptyStatement extends Statement {
         super(null, new Symbol[] {
                 semicolon});
         this.semicolon = semicolon;
-        warnings.add(new Strangeness(this));
+        warnings.add(new Strangeness(this, this, "Empty statement is strange for beginners."));
     }
 
     public static EmptyStatement parse(Sentence sentence, Table table) throws InvalidityException {

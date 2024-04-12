@@ -26,7 +26,7 @@ public class PrefixIncrementOperation extends UnaryExpression {
         this.blankAfterPrefixIncrementSign = blankAfterPrefixIncrementSign;
         this.unaryExpression = unaryExpression;
         if (CommaExpression.effective(unaryExpression)) {
-            warnings.add(new Danger(this, unaryExpression));
+            warnings.add(new Danger(this, unaryExpression, "Prefix increment operation with side effects is dangerous for beginners."));
         }
     }
 

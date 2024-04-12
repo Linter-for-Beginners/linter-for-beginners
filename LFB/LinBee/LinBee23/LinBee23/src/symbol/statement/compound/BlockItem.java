@@ -28,7 +28,7 @@ public class BlockItem extends Nonterminal {
         try {
             FunctionDefinition functionDefinition = FunctionDefinition.parse(sentence, table);
             if (table.string != null) {
-                functionDefinition.warnings.add(new Strangeness(functionDefinition));
+                functionDefinition.warnings.add(new Strangeness(functionDefinition, functionDefinition, "Function definition in a function is strange for beginners."));
             }
             return functionDefinition;
         } catch (InvalidityException invalidityException) {

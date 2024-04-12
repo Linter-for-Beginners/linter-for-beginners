@@ -47,7 +47,7 @@ public abstract class InitialDeclarator extends Nonterminal {
         }
         if (initialDeclarator instanceof Initialization initialization) {
             if (!table.type(string).equals(initialization.initializer.type.evaluation())) {
-                initialization.warnings.add(new Danger(initialization, initialization.initializer, "Initialization with an expression whose type is incompatible is dangerous for beginners."));
+                initialization.warnings.add(new Danger(initialization, initialization.initializer, "Initialization containing an expression whose type is incompatible is dangerous for beginners."));
             }
         }
         return initialDeclarator;

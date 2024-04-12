@@ -38,7 +38,7 @@ public class ReturnNoneStatement extends JumpStatement {
                     blankBeforeSemicolon,
                     semicolon);
             if (!table.type(table.string).returnType().isVoid()) {
-                returnNoneStatement.warnings.add(new Danger(returnNoneStatement, blankBeforeSemicolon));
+                returnNoneStatement.warnings.add(new Danger(returnNoneStatement, returnNoneStatement, "Lack of expressions in a return statement is dangerous for beginners."));
             }
             return returnNoneStatement;
         } catch (InvalidityException invalidityException) {

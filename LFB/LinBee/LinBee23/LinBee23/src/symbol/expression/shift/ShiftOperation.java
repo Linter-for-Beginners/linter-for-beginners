@@ -47,10 +47,10 @@ public class ShiftOperation extends ShiftExpression {
             warnings.add(new Discouragement(this, additiveExpression));
         }
         if (CommaExpression.effective(shiftExpression)) {
-            warnings.add(new Danger(this, shiftExpression));
+            warnings.add(new Danger(this, shiftExpression, "Bitwise shift operation with side effects is dangerous for beginners."));
         }
         if (CommaExpression.effective(additiveExpression)) {
-            warnings.add(new Danger(this, additiveExpression));
+            warnings.add(new Danger(this, additiveExpression, "Bitwise shift operation with side effects is dangerous for beginners."));
         }
     }
 

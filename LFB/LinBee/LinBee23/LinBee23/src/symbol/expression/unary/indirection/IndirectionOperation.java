@@ -26,7 +26,7 @@ public class IndirectionOperation extends UnaryExpression {
         this.blankAfterIndirectionSign = blankAfterIndirectionSign;
         this.castExpression = castExpression;
         if (CommaExpression.effective(castExpression)) {
-            warnings.add(new Danger(this, castExpression));
+            warnings.add(new Danger(this, castExpression, "Indirection operation with side effects is dangerous for beginners."));
         }
     }
 

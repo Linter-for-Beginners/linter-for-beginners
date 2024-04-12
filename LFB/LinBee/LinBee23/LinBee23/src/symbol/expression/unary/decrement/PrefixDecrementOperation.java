@@ -26,7 +26,7 @@ public class PrefixDecrementOperation extends UnaryExpression {
         this.blankAfterPrefixDecrementSign = blankAfterPrefixDecrementSign;
         this.unaryExpression = unaryExpression;
         if (CommaExpression.effective(unaryExpression)) {
-            warnings.add(new Danger(this, unaryExpression));
+            warnings.add(new Danger(this, unaryExpression, "Prefix decrement operation with side effects is dangerous for beginners."));
         }
     }
 

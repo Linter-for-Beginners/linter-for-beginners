@@ -11,6 +11,7 @@ import symbol.symbol.invalidity.InvalidityException;
 import symbol.symbol.sentence.Sentence;
 import symbol.symbol.warning.Danger;
 import symbol.symbol.warning.Danger;
+import symbol.symbol.warning.Discouragement;
 
 public class ReturnValueStatement extends JumpStatement {
     public final Keyword keywordReturn;
@@ -52,10 +53,10 @@ public class ReturnValueStatement extends JumpStatement {
                     blankBeforeSemicolon,
                     semicolon);
             if (table.type(table.string).returnType().isVoid()) {
-                returnValueStatement.warnings.add(new Danger(returnValueStatement, commaExpression));
+                returnValueStatement.warnings.add(new Danger(returnValueStatement, commaExpression, "Excess of expressions in a return statement is dangerous for beginners."));
             } else {
                 if (!table.type(table.string).returnType().equals(commaExpression.type)) {
-                    returnValueStatement.warnings.add(new Danger(returnValueStatement, commaExpression));
+                    returnValueStatement.warnings.add(new Discouragement(returnValueStatement, commaExpression));
                 }
             }
             return returnValueStatement;

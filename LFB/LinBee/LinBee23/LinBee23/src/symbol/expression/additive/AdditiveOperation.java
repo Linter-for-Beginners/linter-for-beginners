@@ -36,7 +36,7 @@ public class AdditiveOperation extends AdditiveExpression {
         this.blankAfterAdditiveSign = blankAfterAdditiveSign;
         this.multiplicativeExpression = multiplicativeExpression;
         if (CommaExpression.controlling(additiveExpression)) {
-            warnings.add(new Discouragement(this, additiveExpression));
+            warnings.add(new Discouragement(this, additiveExpression, "Additive operation of a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.controlling(multiplicativeExpression)) {
             warnings.add(new Discouragement(this, multiplicativeExpression, "Additive operation of a boolean form is discouraged for beginners."));

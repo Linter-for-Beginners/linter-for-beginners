@@ -63,7 +63,7 @@ public class FunctionDefinition extends BlockItem {
         this.compoundStatement = compoundStatement;
         if (declaration.length > 0) {
             for (Declaration element : declaration) {
-                warnings.add(new Strangeness(element));
+                warnings.add(new Strangeness(this, element, "Function definition containing a declaration list is strange for beginners."));
             }
         }
     }

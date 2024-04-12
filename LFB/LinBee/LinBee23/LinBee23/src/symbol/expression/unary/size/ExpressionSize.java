@@ -27,7 +27,7 @@ public class ExpressionSize extends UnaryExpression {
         this.blankAfterKeywordSizeof = blankAfterKeywordSizeof;
         this.unaryExpression = unaryExpression;
         if (CommaExpression.effective(unaryExpression)) {
-            warnings.add(new Danger(this, unaryExpression));
+            warnings.add(new Danger(this, unaryExpression, "Size measurement operation with side effects is dangerous for beginners."));
         }
     }
 

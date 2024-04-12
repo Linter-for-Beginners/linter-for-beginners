@@ -37,7 +37,7 @@ public class AssignmentOperation extends AssignmentExpression {
         this.blankAfterAssignmentSign = blankAfterAssignmentSign;
         this.assignmentExpression = assignmentExpression;
         if (CommaExpression.controlling(assignmentExpression)) {
-            warnings.add(new Discouragement(this, assignmentExpression));
+            warnings.add(new Discouragement(this, assignmentExpression, "Assignment operation with other side effects is dangerous for beginners."));
         }
         if (CommaExpression.effective(assignmentExpression)) {
             warnings.add(new Danger(this, assignmentExpression, "Assignment operation with other side effects is dangerous for beginners."));

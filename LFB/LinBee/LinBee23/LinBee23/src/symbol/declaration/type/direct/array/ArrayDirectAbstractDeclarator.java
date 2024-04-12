@@ -56,11 +56,11 @@ public class ArrayDirectAbstractDeclarator extends DirectAbstractDeclarator {
         this.blankAfterAssignmentExpression = blankAfterAssignmentExpression;
         this.rightBracket = rightBracket;
         if (assignmentExpression == null) {
-            warnings.add(new Strangeness(this));
+            warnings.add(new Strangeness(this, this, "Declarator of an array whose length is implicit is strange for beginners."));
         }
         if (assignmentExpression != null) {
             if (CommaExpression.controlling(assignmentExpression)) {
-                warnings.add(new Discouragement(this, assignmentExpression));
+                warnings.add(new Discouragement(this, assignmentExpression, "Declarator of an array whose length is a boolean form discouraged for beginners."));
             }
             if (CommaExpression.effective(assignmentExpression)) {
                 warnings.add(new Danger(this, assignmentExpression, "Declarator of an array with side effects is dangerous for beginners."));

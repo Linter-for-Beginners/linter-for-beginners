@@ -34,7 +34,7 @@ public class LogicalNegationOperation extends UnaryExpression {
             warnings.add(new Discouragement(this, castExpression));
         }
         if (CommaExpression.effective(castExpression)) {
-            warnings.add(new Danger(this, castExpression));
+            warnings.add(new Danger(this, castExpression, "Logical negation operation with side effects is dangerous for beginners."));
         }
     }
 
