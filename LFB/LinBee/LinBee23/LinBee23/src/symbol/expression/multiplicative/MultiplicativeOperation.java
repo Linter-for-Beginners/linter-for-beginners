@@ -36,10 +36,10 @@ public class MultiplicativeOperation extends MultiplicativeExpression {
         this.blankAfterMultiplicativeSign = blankAfterMultiplicativeSign;
         this.castExpression = castExpression;
         if (CommaExpression.controlling(multiplicativeExpression)) {
-            warnings.add(new Discouragement(this, multiplicativeExpression));
+            warnings.add(new Discouragement(this, multiplicativeExpression, "Multiplicative operation of a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.controlling(castExpression)) {
-            warnings.add(new Discouragement(this, castExpression));
+            warnings.add(new Discouragement(this, castExpression, "Multiplicative operation of a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.effective(multiplicativeExpression)) {
             warnings.add(new Danger(this, multiplicativeExpression, "Multiplicative operation with side effects is dangerous for beginners."));

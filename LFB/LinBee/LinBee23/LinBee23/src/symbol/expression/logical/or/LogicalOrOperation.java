@@ -36,10 +36,10 @@ public class LogicalOrOperation extends LogicalOrExpression {
         this.blankAfterLogicalOrSign = blankAfterLogicalOrSign;
         this.logicalAndExpression = logicalAndExpression;
         if (!CommaExpression.controlling(logicalOrExpression)) {
-            warnings.add(new Discouragement(this, logicalOrExpression));
+            warnings.add(new Discouragement(this, logicalOrExpression, "Logical inclusive OR operation not of boolean forms is discouraged for beginners."));
         }
         if (!CommaExpression.controlling(logicalAndExpression)) {
-            warnings.add(new Discouragement(this, logicalAndExpression));
+            warnings.add(new Discouragement(this, logicalAndExpression, "Logical inclusive OR operation not of boolean forms is discouraged for beginners."));
         }
         if (CommaExpression.effective(logicalOrExpression)) {
             warnings.add(new Danger(this, logicalOrExpression, "Logical inclusive OR operation with side effects is dangerous for beginners."));

@@ -56,7 +56,7 @@ public class ReturnValueStatement extends JumpStatement {
                 returnValueStatement.warnings.add(new Danger(returnValueStatement, commaExpression, "Excess of expressions in a return statement is dangerous for beginners."));
             } else {
                 if (!table.type(table.string).returnType().equals(commaExpression.type)) {
-                    returnValueStatement.warnings.add(new Discouragement(returnValueStatement, commaExpression));
+                    returnValueStatement.warnings.add(new Discouragement(returnValueStatement, commaExpression, "Return statement with a expression whose type is incompatible is discouraged for beginners."));
                 }
             }
             return returnValueStatement;

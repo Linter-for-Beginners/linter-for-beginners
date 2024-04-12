@@ -47,10 +47,7 @@ public class ArraySubscripting extends PostfixExpression {
         this.blankAfterCommaExpression = blankAfterCommaExpression;
         this.rightBracket = rightBracket;
         if (CommaExpression.controlling(commaExpression)) {
-            warnings.add(new Discouragement(this, commaExpression));
-        }
-        if (!(CommaExpression.innermost(commaExpression) instanceof ShiftExpression)) {
-            warnings.add(new Discouragement(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression, "Array subscripting whose offset is a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.effective(postfixExpression)) {
             warnings.add(new Danger(this, postfixExpression, "Array subscripting with side effects is dangerous for beginners."));
@@ -59,10 +56,10 @@ public class ArraySubscripting extends PostfixExpression {
             warnings.add(new Danger(this, commaExpression, "Array subscripting with side effects is dangerous for beginners."));
         }
         if (!postfixExpression.type.evaluation().isPointer()) {
-            warnings.add(new Discouragement(this, postfixExpression));
+            warnings.add(new Discouragement(this, postfixExpression, "Array subscripting whose base is not a pointer is discouraged for beginners."));
         }
         if (commaExpression.type.evaluation().isPointer()) {
-            warnings.add(new Discouragement(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression, "Array subscripting whose offset is a pointer is discouraged for beginners."));
         }
     }
 

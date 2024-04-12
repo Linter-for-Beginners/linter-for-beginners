@@ -52,7 +52,7 @@ public class ConditionalOperation extends ConditionalExpression {
         this.blankAfterRightConditionalSign = blankAfterRightConditionalSign;
         this.conditionalExpression = conditionalExpression;
         if (!CommaExpression.controlling(logicalOrExpression)) {
-            warnings.add(new Discouragement(this, logicalOrExpression));
+            warnings.add(new Discouragement(this, logicalOrExpression, "Conditional operation whose condition is not a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.effective(logicalOrExpression)) {
             warnings.add(new Danger(this, logicalOrExpression, "Conditional operation with side effects is dangerous for beginners."));

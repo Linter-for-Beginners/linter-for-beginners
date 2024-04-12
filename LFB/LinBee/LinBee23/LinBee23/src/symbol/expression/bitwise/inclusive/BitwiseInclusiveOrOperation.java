@@ -37,16 +37,16 @@ public class BitwiseInclusiveOrOperation extends BitwiseInclusiveOrExpression {
         this.blankAfterBitwiseInclusiveOrSign = blankAfterBitwiseInclusiveOrSign;
         this.bitwiseExclusiveOrExpression = bitwiseExclusiveOrExpression;
         if (CommaExpression.controlling(bitwiseInclusiveOrExpression)) {
-            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression, "Bitwise inclusive OR operation of a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.controlling(bitwiseExclusiveOrExpression)) {
-            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression, "Bitwise inclusive OR operation of a boolean form is discouraged for beginners."));
         }
         if (!(bitwiseInclusiveOrExpression instanceof BitwiseInclusiveOrOperation) && !(bitwiseInclusiveOrExpression instanceof CastExpression)) {
-            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression, "Bitwise inclusive OR operation not of cast expressions is discouraged for beginners."));
         }
         if (!(bitwiseExclusiveOrExpression instanceof CastExpression)) {
-            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression, "Bitwise inclusive OR operation not of cast expressions is discouraged for beginners."));
         }
         if (CommaExpression.effective(bitwiseInclusiveOrExpression)) {
             warnings.add(new Danger(this, bitwiseInclusiveOrExpression, "Bitwise inclusive OR operation with side effects is dangerous for beginners."));

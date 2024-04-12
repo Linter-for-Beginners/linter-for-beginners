@@ -43,10 +43,10 @@ public class BitwiseAndOperation extends BitwiseAndExpression {
             warnings.add(new Discouragement(this, equalityExpression, "Bitwise AND operation of a boolean form is discouraged for beginners."));
         }
         if (!(bitwiseAndExpression instanceof BitwiseAndOperation) && !(bitwiseAndExpression instanceof CastExpression)) {
-            warnings.add(new Discouragement(this, bitwiseAndExpression));
+            warnings.add(new Discouragement(this, bitwiseAndExpression, "Bitwise AND operation not of cast expressions is discouraged for beginners."));
         }
         if (!(equalityExpression instanceof CastExpression)) {
-            warnings.add(new Discouragement(this, equalityExpression));
+            warnings.add(new Discouragement(this, equalityExpression, "Bitwise AND operation not of cast expressions is discouraged for beginners."));
         }
         if (CommaExpression.effective(bitwiseAndExpression)) {
             warnings.add(new Danger(this, bitwiseAndExpression, "Bitwise AND operation with side effects is dangerous for beginners."));

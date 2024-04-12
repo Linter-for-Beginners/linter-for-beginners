@@ -37,16 +37,16 @@ public class RelationalOperation extends RelationalExpression {
         this.blankAfterRelationalSign = blankAfterRelationalSign;
         this.shiftExpression = shiftExpression;
         if (CommaExpression.controlling(relationalExpression)) {
-            warnings.add(new Discouragement(this, relationalExpression));
+            warnings.add(new Discouragement(this, relationalExpression, "Relational operation of a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.controlling(shiftExpression)) {
-            warnings.add(new Discouragement(this, shiftExpression));
+            warnings.add(new Discouragement(this, shiftExpression, "Relational operation of a boolean form is discouraged for beginners."));
         }
         if (!(relationalExpression instanceof AdditiveExpression)) {
-            warnings.add(new Discouragement(this, relationalExpression));
+            warnings.add(new Discouragement(this, relationalExpression, "Relational operation not of additive expressions is discouraged for beginners."));
         }
         if (!(shiftExpression instanceof AdditiveExpression)) {
-            warnings.add(new Discouragement(this, relationalExpression));
+            warnings.add(new Discouragement(this, relationalExpression, "Relational operation not of additive expressions is discouraged for beginners."));
         }
         if (CommaExpression.effective(relationalExpression)) {
             warnings.add(new Danger(this, relationalExpression, "Relational operation with side effects is dangerous for beginners."));

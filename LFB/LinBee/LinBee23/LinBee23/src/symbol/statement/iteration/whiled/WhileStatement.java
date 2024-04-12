@@ -54,10 +54,10 @@ public class WhileStatement extends IterationStatement {
         this.blankBeforeStatement = blankBeforeStatement;
         this.statement = statement;
         if (!(statement instanceof CompoundStatement)) {
-            warnings.add(new Discouragement(this, statement));
+            warnings.add(new Discouragement(this, statement, "While-loop statement whose body is not a compound statement is discouraged for beginners."));
         }
         if (!CommaExpression.controlling(commaExpression)) {
-            warnings.add(new Discouragement(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression, "While-loop statement whose controlling expression is not a boolean form is discouraged for beginners."));
         }
     }
 

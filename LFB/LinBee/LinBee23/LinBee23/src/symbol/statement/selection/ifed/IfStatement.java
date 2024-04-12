@@ -54,10 +54,10 @@ public class IfStatement extends SelectionStatement {
         this.blankBeforeStatement = blankBeforeStatement;
         this.statement = statement;
         if (!(statement instanceof CompoundStatement)) {
-            warnings.add(new Discouragement(this, statement));
+            warnings.add(new Discouragement(this, statement, "If-statement whose body is not a compound statement is discouraged for beginners."));
         }
         if (!CommaExpression.controlling(commaExpression)) {
-            warnings.add(new Discouragement(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression, "If-statement whose controlling expression is not a boolean form is discouraged for beginners."));
         }
     }
 

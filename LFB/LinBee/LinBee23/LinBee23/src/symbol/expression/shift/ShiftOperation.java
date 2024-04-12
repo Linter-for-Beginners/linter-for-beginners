@@ -35,16 +35,16 @@ public class ShiftOperation extends ShiftExpression {
         this.blankAfterShiftSign = blankAfterShiftSign;
         this.additiveExpression = additiveExpression;
         if (CommaExpression.controlling(shiftExpression)) {
-            warnings.add(new Discouragement(this, shiftExpression));
+            warnings.add(new Discouragement(this, shiftExpression, "Bitwise shift operation of a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.controlling(additiveExpression)) {
-            warnings.add(new Discouragement(this, additiveExpression));
+            warnings.add(new Discouragement(this, additiveExpression, "Bitwise shift operation of a boolean form is discouraged for beginners."));
         }
         if (!(shiftExpression instanceof CastExpression)) {
-            warnings.add(new Discouragement(this, shiftExpression));
+            warnings.add(new Discouragement(this, shiftExpression, "Bitwise shift operation not of cast expressions is discouraged for beginners."));
         }
         if (!(additiveExpression instanceof CastExpression)) {
-            warnings.add(new Discouragement(this, additiveExpression));
+            warnings.add(new Discouragement(this, additiveExpression, "Bitwise shift operation not of cast expressions is discouraged for beginners."));
         }
         if (CommaExpression.effective(shiftExpression)) {
             warnings.add(new Danger(this, shiftExpression, "Bitwise shift operation with side effects is dangerous for beginners."));

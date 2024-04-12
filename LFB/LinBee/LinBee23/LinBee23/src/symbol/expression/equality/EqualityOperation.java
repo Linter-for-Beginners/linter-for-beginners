@@ -37,16 +37,16 @@ public class EqualityOperation extends EqualityExpression {
         this.blankAfterEqualitySign = blankAfterEqualitySign;
         this.relationalExpression = relationalExpression;
         if (CommaExpression.controlling(equalityExpression)) {
-            warnings.add(new Discouragement(this, equalityExpression));
+            warnings.add(new Discouragement(this, equalityExpression, "Equality operation of a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.controlling(relationalExpression)) {
-            warnings.add(new Discouragement(this, relationalExpression));
+            warnings.add(new Discouragement(this, relationalExpression, "Equality operation of a boolean form is discouraged for beginners."));
         }
         if (!(equalityExpression instanceof AdditiveExpression)) {
-            warnings.add(new Discouragement(this, equalityExpression));
+            warnings.add(new Discouragement(this, equalityExpression, "Equality operation not of additive expressions is discouraged for beginners."));
         }
         if (!(relationalExpression instanceof AdditiveExpression)) {
-            warnings.add(new Discouragement(this, relationalExpression));
+            warnings.add(new Discouragement(this, relationalExpression, "Equality operation not of additive expressions is discouraged for beginners."));
         }
         if (CommaExpression.effective(equalityExpression)) {
             warnings.add(new Danger(this, equalityExpression, "Equality operation with side effects is dangerous for beginners."));

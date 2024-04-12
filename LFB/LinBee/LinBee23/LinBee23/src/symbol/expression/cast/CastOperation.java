@@ -49,7 +49,7 @@ public class CastOperation extends CastExpression {
         this.blankBeforeCastExpression = blankBeforeCastExpression;
         this.castExpression = castExpression;
         if (CommaExpression.controlling(castExpression)) {
-            warnings.add(new Discouragement(this, castExpression));
+            warnings.add(new Discouragement(this, castExpression, "Cast operation of a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.effective(castExpression)) {
             warnings.add(new Danger(this, castExpression, "Cast operation with side effects is dangerous for beginners."));

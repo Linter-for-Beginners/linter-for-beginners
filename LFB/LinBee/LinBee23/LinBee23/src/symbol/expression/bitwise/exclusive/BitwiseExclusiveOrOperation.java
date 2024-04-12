@@ -37,16 +37,16 @@ public class BitwiseExclusiveOrOperation extends BitwiseExclusiveOrExpression {
         this.blankAfterBitwiseExclusiveOrSign = blankAfterBitwiseExclusiveOrSign;
         this.bitwiseAndExpression = bitwiseAndExpression;
         if (CommaExpression.controlling(bitwiseExclusiveOrExpression)) {
-            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression, "Bitwise exclusive OR operation of a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.controlling(bitwiseAndExpression)) {
-            warnings.add(new Discouragement(this, bitwiseAndExpression));
+            warnings.add(new Discouragement(this, bitwiseAndExpression, "Bitwise exclusive OR operation of a boolean form is discouraged for beginners."));
         }
         if (!(bitwiseExclusiveOrExpression instanceof BitwiseExclusiveOrOperation) && !(bitwiseExclusiveOrExpression instanceof CastExpression)) {
-            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression, "Bitwise exclusive OR operation not of cast expressions is discouraged for beginners."));
         }
         if (!(bitwiseAndExpression instanceof CastExpression)) {
-            warnings.add(new Discouragement(this, bitwiseAndExpression));
+            warnings.add(new Discouragement(this, bitwiseAndExpression, "Bitwise exclusive OR operation not of cast expressions is discouraged for beginners."));
         }
         if (CommaExpression.effective(bitwiseExclusiveOrExpression)) {
             warnings.add(new Danger(this, bitwiseExclusiveOrExpression, "Bitwise exclusive OR operation with side effects is dangerous for beginners."));

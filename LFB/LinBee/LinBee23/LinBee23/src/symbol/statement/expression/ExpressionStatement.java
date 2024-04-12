@@ -26,7 +26,7 @@ public class ExpressionStatement extends Statement {
         this.blankBeforeSemicolon = blankBeforeSemicolon;
         this.semicolon = semicolon;
         if (!CommaExpression.effective(commaExpression)) {
-            warnings.add(new Discouragement(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression, "Expression statement without side effects is discouraged for beginners."));
         }
     }
 

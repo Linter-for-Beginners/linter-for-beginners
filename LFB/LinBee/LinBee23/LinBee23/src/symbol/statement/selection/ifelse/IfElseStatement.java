@@ -70,13 +70,13 @@ public class IfElseStatement extends SelectionStatement {
         this.blankAfterKeywordElse = blankAfterKeywordElse;
         this.falseStatement = falseStatement;
         if (!(trueStatement instanceof CompoundStatement)) {
-            warnings.add(new Discouragement(this, trueStatement));
+            warnings.add(new Discouragement(this, trueStatement, "If-else-statement whose body is not a compound statement is discouraged for beginners."));
         }
         if (!(falseStatement instanceof CompoundStatement)) {
-            warnings.add(new Discouragement(this, falseStatement));
+            warnings.add(new Discouragement(this, falseStatement, "If-else-statement whose body is not a compound statement is discouraged for beginners."));
         }
         if (!CommaExpression.controlling(commaExpression)) {
-            warnings.add(new Discouragement(this, commaExpression));
+            warnings.add(new Discouragement(this, commaExpression, "If-else-statement whose controlling expression is not a boolean form is discouraged for beginners."));
         }
     }
 

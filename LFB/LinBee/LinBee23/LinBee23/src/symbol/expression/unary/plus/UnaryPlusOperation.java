@@ -27,7 +27,7 @@ public class UnaryPlusOperation extends UnaryExpression {
         this.blankAfterUnaryPlusSign = blankAfterUnaryPlusSign;
         this.castExpression = castExpression;
         if (CommaExpression.controlling(castExpression)) {
-            warnings.add(new Discouragement(this, castExpression));
+            warnings.add(new Discouragement(this, castExpression, "Unary plus operation of a boolean form is discouraged for beginners."));
         }
         if (CommaExpression.effective(castExpression)) {
             warnings.add(new Danger(this, castExpression, "Unary plus operation with side effects is dangerous for beginners."));

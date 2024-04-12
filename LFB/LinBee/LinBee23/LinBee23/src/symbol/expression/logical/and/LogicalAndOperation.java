@@ -36,10 +36,10 @@ public class LogicalAndOperation extends LogicalAndExpression {
         this.blankAfterLogicalAndSign = blankAfterLogicalAndSign;
         this.bitwiseInclusiveOrExpression = bitwiseInclusiveOrExpression;
         if (!CommaExpression.controlling(logicalAndExpression)) {
-            warnings.add(new Discouragement(this, logicalAndExpression));
+            warnings.add(new Discouragement(this, logicalAndExpression, "Logical AND operation not of boolean forms is discouraged for beginners."));
         }
         if (!CommaExpression.controlling(bitwiseInclusiveOrExpression)) {
-            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression));
+            warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression, "Logical AND operation not of boolean forms is discouraged for beginners."));
         }
         if (CommaExpression.effective(logicalAndExpression)) {
             warnings.add(new Danger(this, logicalAndExpression, "Logical AND operation with side effects is dangerous for beginners."));

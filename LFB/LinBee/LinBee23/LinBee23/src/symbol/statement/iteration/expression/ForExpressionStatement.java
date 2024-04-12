@@ -87,10 +87,10 @@ public class ForExpressionStatement extends IterationStatement {
         this.blankBeforeStatement = blankBeforeStatement;
         this.statement = statement;
         if (!(statement instanceof CompoundStatement)) {
-            warnings.add(new Discouragement(this, statement));
+            warnings.add(new Discouragement(this, statement, "For-loop statement whose body is not a compound statement is discouraged for beginners."));
         }
         if (!CommaExpression.controlling(controllingCommaExpression)) {
-            warnings.add(new Discouragement(this, controllingCommaExpression));
+            warnings.add(new Discouragement(this, controllingCommaExpression, "For-loop statement whose controlling expression is not a boolean form is discouraged for beginners."));
         }
     }
 
