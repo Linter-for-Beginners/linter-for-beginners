@@ -8,7 +8,7 @@ import basis.type.SymbolTypeName;
 import basis.invalidity.InvalidityException;
 
 public class Identifier extends Token {
-    public Identifier(Integer row, Integer column, SymbolTypeName type, String string) {
+    protected Identifier(Integer row, Integer column, SymbolTypeName type, String string) {
         super(row, column, type, string);
     }
 

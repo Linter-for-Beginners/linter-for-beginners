@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public abstract class Token extends Node {
     private final String string;
 
-    public Token(Integer row, Integer column, SymbolTypeName type, String string) {
+    protected Token(Integer row, Integer column, SymbolTypeName type, String string) {
         super(row, column, type);
         this.string = string;
     }

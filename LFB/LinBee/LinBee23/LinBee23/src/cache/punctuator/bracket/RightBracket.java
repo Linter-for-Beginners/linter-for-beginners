@@ -6,9 +6,9 @@ import basis.type.Table;
 import basis.invalidity.InvalidityException;
 
 public class RightBracket extends Token {
-    public static String[] strings = {"]"};
+    private static final String[] strings = {"]"};
 
-    public RightBracket(Integer row, Integer column, String string) {
+    protected RightBracket(Integer row, Integer column, String string) {
         super(row, column, null, string);
     }
 

@@ -11,7 +11,7 @@ public abstract class Node {
     public final SymbolTypeName type;
     public final ArrayList<Warning> warnings = new ArrayList<>();
 
-    public Node(Integer row, Integer column, SymbolTypeName type) {
+    protected Node(Integer row, Integer column, SymbolTypeName type) {
         this.row = row;
         this.column = column;
         this.type = type;

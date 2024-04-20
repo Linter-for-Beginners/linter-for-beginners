@@ -6,9 +6,9 @@ import basis.type.Table;
 import basis.node.Token;
 
 public class ColonPunctuator extends Token {
-    public static String[] strings = {":"};
+    private static final String[] strings = {":"};
 
-    public ColonPunctuator(Integer row, Integer column, String string) {
+    protected ColonPunctuator(Integer row, Integer column, String string) {
         super(row, column, null, string);
     }
 

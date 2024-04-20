@@ -9,8 +9,7 @@ import basis.invalidity.InvalidityException;
 import java.math.BigInteger;
 
 public class IntegerConstant extends Constant {
-
-    public IntegerConstant(Integer row, Integer column, SymbolTypeName type, String string) {
+    protected IntegerConstant(Integer row, Integer column, SymbolTypeName type, String string) {
         super(row, column, type, string);
     }
 

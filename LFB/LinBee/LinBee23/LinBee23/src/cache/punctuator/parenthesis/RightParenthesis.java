@@ -6,8 +6,9 @@ import basis.type.Table;
 import basis.node.Token;
 
 public class RightParenthesis extends Token {
-    public static String[] strings = {")"};
-    public RightParenthesis(Integer row, Integer column, String string) {
+    private static final String[] strings = {")"};
+
+    protected RightParenthesis(Integer row, Integer column, String string) {
         super(row, column, null, string);
     }
 

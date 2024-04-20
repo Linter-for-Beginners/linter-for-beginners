@@ -6,9 +6,9 @@ import basis.type.Table;
 import basis.invalidity.InvalidityException;
 
 public class Semicolon extends Token {
-    public static String[] strings = {";"};
+    private static final String[] strings = {";"};
 
-    public Semicolon(Integer row, Integer column, String string) {
+    protected Semicolon(Integer row, Integer column, String string) {
         super(row, column, null, string);
     }
 

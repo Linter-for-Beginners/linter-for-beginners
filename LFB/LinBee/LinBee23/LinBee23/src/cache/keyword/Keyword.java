@@ -13,7 +13,7 @@ public class Keyword extends Token {
             "auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern", "float", "for", "goto", "if", "inline", "int", "long", "register", "restrict", "return", "short", "signed", "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while",
             "_Bool", "_Complex", "_Imaginary"};
 
-    public Keyword(Integer row, Integer column, String string) {
+    protected Keyword(Integer row, Integer column, String string) {
         super(row, column, null, string);
     }
 

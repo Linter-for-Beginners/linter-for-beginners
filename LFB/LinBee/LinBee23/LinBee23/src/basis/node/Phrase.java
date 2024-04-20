@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public abstract class Phrase extends Node {
     private final Node[] nodes;
 
-    public Phrase(SymbolTypeName type, Node[] nodes) {
+    protected Phrase(SymbolTypeName type, Node[] nodes) {
         super(row(nodes), column(nodes), type);
         ArrayList<Node> temporary = new ArrayList<>();
         for (Node node : nodes) {

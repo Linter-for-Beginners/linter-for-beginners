@@ -7,8 +7,7 @@ import basis.invalidity.InvalidityException;
 import basis.code.Code;
 
 public class FloatingConstant extends Constant {
-
-    public FloatingConstant(Integer row, Integer column, SymbolTypeName type, String string) {
+    protected FloatingConstant(Integer row, Integer column, SymbolTypeName type, String string) {
         super(row, column, type, string);
     }
 

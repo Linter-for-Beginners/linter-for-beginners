@@ -6,9 +6,9 @@ import basis.type.Table;
 import basis.invalidity.InvalidityException;
 
 public class CommaPunctuator extends Token {
-    public static String[] strings = {","};
+    private static final String[] strings = {","};
 
-    public CommaPunctuator(Integer row, Integer column, String string) {
+    protected CommaPunctuator(Integer row, Integer column, String string) {
         super(row, column, null, string);
     }
 

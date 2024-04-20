@@ -8,7 +8,7 @@ import basis.invalidity.InvalidityException;
 
 public class CharacterConstant extends Constant {
 
-    public CharacterConstant(Integer row, Integer column, String string) {
+    protected CharacterConstant(Integer row, Integer column, String string) {
         super(row, column, new SymbolTypeName("int"), string);
     }
 

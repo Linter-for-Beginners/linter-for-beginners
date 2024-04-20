@@ -10,8 +10,7 @@ import basis.type.SymbolTypeName;
 import basis.invalidity.InvalidityException;
 
 public abstract class Constant extends Token {
-
-    public Constant(Integer row, Integer column, SymbolTypeName type, String string) {
+    protected Constant(Integer row, Integer column, SymbolTypeName type, String string) {
         super(row, column, type, string);
     }
 

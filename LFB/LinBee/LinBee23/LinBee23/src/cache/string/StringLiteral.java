@@ -7,7 +7,7 @@ import basis.invalidity.InvalidityException;
 import basis.code.Code;
 
 public class StringLiteral extends Token {
-    public StringLiteral(Integer row, Integer column, String string) {
+    protected StringLiteral(Integer row, Integer column, String string) {
         super(row, column, new SymbolTypeName("char *"), string);
     }
 

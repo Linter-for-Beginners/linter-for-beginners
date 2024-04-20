@@ -6,9 +6,9 @@ import basis.invalidity.InvalidityException;
 import basis.code.Code;
 
 public class LeftBracket extends Token {
-    public static String[] strings = {"["};
+    private static final String[] strings = {"["};
 
-    public LeftBracket(Integer row, Integer column, String string) {
+    protected LeftBracket(Integer row, Integer column, String string) {
         super(row, column, null, string);
     }
 

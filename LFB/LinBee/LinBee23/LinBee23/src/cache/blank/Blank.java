@@ -6,7 +6,7 @@ import basis.type.Table;
 import basis.node.Token;
 
 public class Blank extends Token {
-    public Blank(Integer row, Integer column, String string) {
+    protected Blank(Integer row, Integer column, String string) {
         super(row, column, null, string);
     }
 

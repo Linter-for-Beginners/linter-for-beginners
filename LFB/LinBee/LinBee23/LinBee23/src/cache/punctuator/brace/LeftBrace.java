@@ -6,9 +6,9 @@ import basis.type.Table;
 import basis.node.Token;
 
 public class LeftBrace extends Token {
-    public static String[] strings = {"{"};
+    private static final String[] strings = {"{"};
 
-    public LeftBrace(Integer row, Integer column, String string) {
+    protected LeftBrace(Integer row, Integer column, String string) {
         super(row, column, null, string);
     }
 

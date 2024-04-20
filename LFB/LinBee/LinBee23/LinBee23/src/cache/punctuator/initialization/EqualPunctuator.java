@@ -6,9 +6,9 @@ import basis.invalidity.InvalidityException;
 import basis.code.Code;
 
 public class EqualPunctuator extends Token {
-    public static String[] strings = {"="};
+    private static final String[] strings = {"="};
 
-    public EqualPunctuator(Integer row, Integer column, String string) {
+    protected EqualPunctuator(Integer row, Integer column, String string) {
         super(row, column, null, string);
     }
 
