@@ -3,9 +3,9 @@ package symbol.expression.unary.address;
 import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class AddressSign extends Terminal {
+public class AddressSign extends Token {
     private static final String[] strings = {"&"};
 
     public AddressSign(Integer row, Integer column, String string) {

@@ -11,17 +11,17 @@ import symbol.declaration.type.direct.array.ArrayDirectAbstractDeclarator;
 import symbol.declaration.type.direct.declarator.ParenthesizedAbstractDeclarator;
 import symbol.declaration.type.direct.function.FunctionDirectAbstractDeclarator;
 import symbol.expression.assignment.AssignmentExpression;
-import symbol.foundation.Nonterminal;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Phrase;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 
-public abstract class DirectAbstractDeclarator extends Nonterminal {
+public abstract class DirectAbstractDeclarator extends Phrase {
 
-    public DirectAbstractDeclarator(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public DirectAbstractDeclarator(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static DirectAbstractDeclarator parse(Code code, Table table) throws InvalidityException {

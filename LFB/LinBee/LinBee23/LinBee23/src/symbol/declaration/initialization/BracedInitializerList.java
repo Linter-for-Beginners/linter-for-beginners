@@ -4,7 +4,7 @@ package symbol.declaration.initialization;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.brace.LeftBrace;
 import symbol.base.punctuator.brace.RightBrace;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.type.Table;
@@ -22,7 +22,7 @@ public class BracedInitializerList extends Initializer {
                                  InitializerList initializerList,
                                  Blank blankAfterInitializerList,
                                  RightBrace rightBrace) {
-        super(new SymbolTypeName(), new Symbol[] {
+        super(new SymbolTypeName(), new Node[] {
                 leftBrace,
                 blankBeforeInitializerList,
                 initializerList,

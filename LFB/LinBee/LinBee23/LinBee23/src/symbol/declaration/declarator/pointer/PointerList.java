@@ -3,15 +3,15 @@ package symbol.declaration.declarator.pointer;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.asterisk.AsteriskPunctuator;
 import symbol.declaration.declaration.DeclarationSpecifierList;
-import symbol.foundation.Nonterminal;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Phrase;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 
 import java.util.ArrayList;
 
-public class PointerList extends Nonterminal {
+public class PointerList extends Phrase {
     public final AsteriskPunctuator[] asteriskPunctuator;
     public final Blank[] blankAfterAsteriskPunctuator;
     public final DeclarationSpecifierList[] declarationSpecifierList;
@@ -32,20 +32,20 @@ public class PointerList extends Nonterminal {
         this.blankAfterDeclarationSpecifierList = blankAfterDeclarationSpecifierList;
     }
 
-    public static Symbol[] symbols(
+    public static Node[] symbols(
             AsteriskPunctuator[] asteriskPunctuator,
             Blank[] blankAfterAsteriskPunctuator,
             DeclarationSpecifierList[] declarationSpecifierList,
             Blank[] blankAfterDeclarationSpecifierList) {
-        ArrayList<Symbol> symbols = new ArrayList<>();
+        ArrayList<Node> nodes = new ArrayList<>();
         int number = asteriskPunctuator.length;
         for (int i = 0; i < number; i++) {
-            symbols.add(asteriskPunctuator[i]);
-            symbols.add(blankAfterAsteriskPunctuator[i]);
-            symbols.add(declarationSpecifierList[i]);
-            symbols.add(blankAfterDeclarationSpecifierList[i]);
+            nodes.add(asteriskPunctuator[i]);
+            nodes.add(blankAfterAsteriskPunctuator[i]);
+            nodes.add(declarationSpecifierList[i]);
+            nodes.add(blankAfterDeclarationSpecifierList[i]);
         }
-        return symbols.toArray(new Symbol[0]);
+        return nodes.toArray(new Node[0]);
     }
 
     public static PointerList parse(Code code, Table table) throws InvalidityException {

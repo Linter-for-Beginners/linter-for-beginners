@@ -1,7 +1,7 @@
 package symbol.expression.equality;
 
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.bitwise.and.BitwiseAndExpression;
 import symbol.expression.relation.RelationalExpression;
@@ -10,8 +10,8 @@ import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 
 public abstract class EqualityExpression extends BitwiseAndExpression {
-    public EqualityExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public EqualityExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static EqualityExpression parse(Code code, Table table) throws InvalidityException {

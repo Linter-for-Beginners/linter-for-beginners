@@ -3,9 +3,9 @@ package symbol.base.blank;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class Blank extends Terminal {
+public class Blank extends Token {
     public Blank(Integer row, Integer column, String string) {
         super(row, column, null, string);
     }

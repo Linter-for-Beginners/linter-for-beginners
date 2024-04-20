@@ -2,9 +2,9 @@ package symbol.expression.postfix;
 
 import symbol.expression.primary.string.StringLiteralPrimaryExpression;
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.expression.postfix.compound.CompoundLiteral;
-import symbol.foundation.*;
 import symbol.expression.comma.CommaExpression;
 import symbol.expression.postfix.array.ArraySubscripting;
 import symbol.expression.postfix.decrement.PostfixDecrementOperation;
@@ -28,8 +28,8 @@ import symbol.foundation.warning.Discouragement;
 import java.util.ArrayList;
 
 public abstract class PostfixExpression extends UnaryExpression {
-    public PostfixExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public PostfixExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static PostfixExpression parse(Code code, Table table) throws InvalidityException {

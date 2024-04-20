@@ -1,23 +1,22 @@
 package symbol.foundation.warning;
 
-import symbol.foundation.Symbol;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Node;
+import symbol.foundation.node.Token;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public abstract class Warning {
-    public final Symbol parent;
-    public final Symbol child;
+    public final Node parent;
+    public final Node child;
     public String message;
 
-    public Warning(Symbol parent, Symbol child) {
+    public Warning(Node parent, Node child) {
         this.parent = parent;
         this.child = child;
         this.message = null;
     }
 
-    public Warning(Symbol parent, Symbol child, String message) {
+    public Warning(Node parent, Node child, String message) {
         this.parent = parent;
         this.child = child;
         this.message = message;
@@ -44,15 +43,15 @@ public abstract class Warning {
         childName = childName.contains(".") ? childName.substring(childName.lastIndexOf(".") + ".".length()) : childName;
         String prefix = String.format("row %03d column %03d %-24s %-100s", row, column, warningName, message);
         StringBuilder stringBuilder = new StringBuilder();
-        Symbol[] symbols = parent.traversal();
-        HashSet<Symbol> visited = new HashSet<>();
-        for (Symbol symbol : symbols) {
-            if (!visited.contains(symbol)) {
-                visited.add(symbol);
-                if ((symbol instanceof Terminal) && !visited.contains(child)) {
-                    stringBuilder.append(symbol.toString());
+        Node[] nodes = parent.traversal();
+        HashSet<Node> visited = new HashSet<>();
+        for (Node node : nodes) {
+            if (!visited.contains(node)) {
+                visited.add(node);
+                if ((node instanceof Token) && !visited.contains(child)) {
+                    stringBuilder.append(node.toString());
                 }
-                if (symbol.equals(child)) {
+                if (node.equals(child)) {
                     String background = "";
                     if (this instanceof Danger) {
                         background = "\u001b[41m";
@@ -66,7 +65,7 @@ public abstract class Warning {
                     stringBuilder.append(background + "\u001b[30m" + child.toString() + "\u001B[0m");
                 }
             } else {
-                visited.remove(symbol);
+                visited.remove(node);
             }
         }
         return prefix + "    " + stringBuilder.toString().replaceAll("\\s+", " ");

@@ -1,8 +1,8 @@
 package symbol.expression.shift;
 
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.additive.AdditiveExpression;
 import symbol.expression.relation.RelationalExpression;
@@ -10,8 +10,8 @@ import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class ShiftExpression extends RelationalExpression {
-    public ShiftExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public ShiftExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static ShiftExpression parse(Code code, Table table) throws InvalidityException {

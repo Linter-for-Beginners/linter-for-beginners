@@ -4,7 +4,7 @@ import symbol.base.blank.Blank;
 import symbol.declaration.declaration.InitialDeclarator;
 import symbol.declaration.declarator.direct.DirectDeclarator;
 import symbol.declaration.declarator.pointer.PointerList;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
@@ -18,7 +18,7 @@ public class Declarator extends InitialDeclarator {
             PointerList pointerList,
             Blank blankAfterPointerList,
             DirectDeclarator directDeclarator) {
-        super(null, new Symbol[] {
+        super(null, new Node[] {
                 pointerList,
                 blankAfterPointerList,
                 directDeclarator});

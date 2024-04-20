@@ -3,11 +3,11 @@ package symbol.statement.label.defaulted;
 import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.colon.ColonPunctuator;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.statement.Statement;
 import symbol.statement.label.LabeledStatement;
 import symbol.foundation.invalidity.InvalidityException;
-import symbol.foundation.Symbol;
 import symbol.foundation.type.Table;
 
 public class DefaultStatement extends LabeledStatement {
@@ -22,7 +22,7 @@ public class DefaultStatement extends LabeledStatement {
                             ColonPunctuator colonPunctuator,
                             Blank blankAfterColonPunctuator,
                             Statement statement) {
-        super(null, new Symbol[]{
+        super(null, new Node[]{
                 keywordDefault,
                 blankBeforeColonPunctuator,
                 colonPunctuator,

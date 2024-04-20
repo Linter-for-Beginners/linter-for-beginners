@@ -3,9 +3,9 @@ package symbol.expression.unary.negation;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class LogicalNegationSign extends Terminal {
+public class LogicalNegationSign extends Token {
     private static final String[] strings = {"!"};
 
     public LogicalNegationSign(Integer row, Integer column, String string) {

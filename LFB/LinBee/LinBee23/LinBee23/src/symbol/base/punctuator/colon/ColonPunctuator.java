@@ -3,9 +3,9 @@ package symbol.base.punctuator.colon;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class ColonPunctuator extends Terminal {
+public class ColonPunctuator extends Token {
     public static String[] strings = {":"};
 
     public ColonPunctuator(Integer row, Integer column, String string) {

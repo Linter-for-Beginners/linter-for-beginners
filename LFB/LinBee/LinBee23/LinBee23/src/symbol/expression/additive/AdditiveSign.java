@@ -3,9 +3,9 @@ package symbol.expression.additive;
 import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class AdditiveSign extends Terminal {
+public class AdditiveSign extends Token {
     private static final String[] strings = {"+", "-"};
 
     public AdditiveSign(Integer row, Integer column, String string) {

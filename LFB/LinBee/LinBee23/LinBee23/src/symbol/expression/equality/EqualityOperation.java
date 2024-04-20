@@ -2,9 +2,9 @@ package symbol.expression.equality;
 
 import symbol.expression.additive.AdditiveExpression;
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
-import symbol.foundation.*;
 import symbol.expression.relation.RelationalExpression;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
@@ -24,7 +24,7 @@ public class EqualityOperation extends EqualityExpression {
                              EqualitySign equalitySign,
                              Blank blankAfterEqualitySign,
                              RelationalExpression relationalExpression) {
-        super(new SymbolTypeName("int"), new Symbol[] {
+        super(new SymbolTypeName("int"), new Node[] {
                 equalityExpression,
                 blankBeforeEqualitySign,
                 equalitySign,

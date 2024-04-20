@@ -1,11 +1,11 @@
 package symbol.base.punctuator.bracket;
 
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 
-public class LeftBracket extends Terminal {
+public class LeftBracket extends Token {
     public static String[] strings = {"["};
 
     public LeftBracket(Integer row, Integer column, String string) {

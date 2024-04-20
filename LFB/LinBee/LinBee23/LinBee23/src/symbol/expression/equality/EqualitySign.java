@@ -3,9 +3,9 @@ package symbol.expression.equality;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class EqualitySign extends Terminal {
+public class EqualitySign extends Token {
     private static final String[] strings = {"==", "!="};
 
     public EqualitySign(Integer row, Integer column, String string) {

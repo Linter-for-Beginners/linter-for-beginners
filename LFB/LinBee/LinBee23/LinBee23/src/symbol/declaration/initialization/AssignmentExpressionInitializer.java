@@ -1,7 +1,7 @@
 package symbol.declaration.initialization;
 
 import symbol.expression.assignment.AssignmentExpression;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
@@ -10,7 +10,7 @@ public class AssignmentExpressionInitializer extends Initializer {
     public final AssignmentExpression assignmentExpression;
 
     public AssignmentExpressionInitializer(AssignmentExpression assignmentExpression) {
-        super(assignmentExpression.type, new Symbol[] {assignmentExpression});
+        super(assignmentExpression.type, new Node[] {assignmentExpression});
         this.assignmentExpression = assignmentExpression;
     }
 

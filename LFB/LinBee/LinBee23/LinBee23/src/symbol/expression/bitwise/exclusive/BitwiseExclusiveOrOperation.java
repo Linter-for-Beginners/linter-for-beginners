@@ -3,8 +3,8 @@ package symbol.expression.bitwise.exclusive;
 import symbol.expression.cast.CastExpression;
 import symbol.expression.comma.CommaExpression;
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.bitwise.and.BitwiseAndExpression;
 import symbol.foundation.type.SymbolTypeName;
@@ -24,7 +24,7 @@ public class BitwiseExclusiveOrOperation extends BitwiseExclusiveOrExpression {
                                        BitwiseExclusiveOrSign bitwiseExclusiveOrSign,
                                        Blank blankAfterBitwiseExclusiveOrSign,
                                        BitwiseAndExpression bitwiseAndExpression) {
-        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(bitwiseExclusiveOrExpression.type), SymbolTypeName.evaluationType(bitwiseAndExpression.type)), new Symbol[] {
+        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(bitwiseExclusiveOrExpression.type), SymbolTypeName.evaluationType(bitwiseAndExpression.type)), new Node[] {
                 bitwiseExclusiveOrExpression,
                 blankBeforeBitwiseExclusiveOrSign,
                 bitwiseExclusiveOrSign,

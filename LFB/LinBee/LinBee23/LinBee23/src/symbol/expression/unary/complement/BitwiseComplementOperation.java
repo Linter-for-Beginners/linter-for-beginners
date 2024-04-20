@@ -4,9 +4,9 @@ import symbol.expression.cast.CastExpression;
 import symbol.expression.comma.CommaExpression;
 import symbol.expression.unary.UnaryExpression;
 import symbol.base.blank.Blank;
+import symbol.foundation.node.Node;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
-import symbol.foundation.Symbol;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.type.Table;
 import symbol.foundation.warning.Danger;
@@ -20,7 +20,7 @@ public class BitwiseComplementOperation extends UnaryExpression {
     public BitwiseComplementOperation(BitwiseComplementSign bitwiseComplementSign,
                                       Blank blankAfterBitwiseComplementSign,
                                       CastExpression castExpression) {
-        super(SymbolTypeName.evaluationType(castExpression.type), new Symbol[] {
+        super(SymbolTypeName.evaluationType(castExpression.type), new Node[] {
                 bitwiseComplementSign,
                 blankAfterBitwiseComplementSign,
                 castExpression});

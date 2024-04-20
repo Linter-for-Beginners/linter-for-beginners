@@ -1,9 +1,9 @@
 package symbol.expression.logical.and;
 
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
-import symbol.foundation.*;
 import symbol.expression.bitwise.inclusive.BitwiseInclusiveOrExpression;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
@@ -23,7 +23,7 @@ public class LogicalAndOperation extends LogicalAndExpression {
                                LogicalAndSign logicalAndSign,
                                Blank blankAfterLogicalAndSign,
                                BitwiseInclusiveOrExpression bitwiseInclusiveOrExpression) {
-        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(logicalAndExpression.type), SymbolTypeName.evaluationType(bitwiseInclusiveOrExpression.type)), new Symbol[] {
+        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(logicalAndExpression.type), SymbolTypeName.evaluationType(bitwiseInclusiveOrExpression.type)), new Node[] {
                 logicalAndExpression,
                 blankBeforeLogicalAndSign,
                 logicalAndSign,

@@ -1,9 +1,9 @@
 package symbol.expression.comma;
 
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.assignment.AssignmentExpression;
 import symbol.foundation.invalidity.InvalidityException;
@@ -21,7 +21,7 @@ public class CommaOperation extends CommaExpression {
                           CommaSign commaSign,
                           Blank blankAfterCommaSign,
                           AssignmentExpression assignmentExpression) {
-        super(SymbolTypeName.evaluationType(assignmentExpression.type), new Symbol[] {
+        super(SymbolTypeName.evaluationType(assignmentExpression.type), new Node[] {
                 commaExpression,
                 blankBeforeCommaSign,
                 commaSign,

@@ -3,9 +3,9 @@ package symbol.expression.unary.minus;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class UnaryMinusSign extends Terminal {
+public class UnaryMinusSign extends Token {
     private static final String[] strings = {"-"};
 
     public UnaryMinusSign(Integer row, Integer column, String string) {

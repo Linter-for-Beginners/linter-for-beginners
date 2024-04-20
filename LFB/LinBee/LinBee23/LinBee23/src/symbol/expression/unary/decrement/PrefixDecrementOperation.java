@@ -5,7 +5,7 @@ import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.expression.unary.UnaryExpression;
 import symbol.base.blank.Blank;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.warning.Danger;
@@ -18,7 +18,7 @@ public class PrefixDecrementOperation extends UnaryExpression {
     public PrefixDecrementOperation(PrefixDecrementSign prefixDecrementSign,
                                     Blank blankAfterPrefixDecrementSign,
                                     UnaryExpression unaryExpression) {
-        super(new SymbolTypeName(unaryExpression.type.toString()), new Symbol[] {
+        super(new SymbolTypeName(unaryExpression.type.toString()), new Node[] {
                 prefixDecrementSign,
                 blankAfterPrefixDecrementSign,
                 unaryExpression});

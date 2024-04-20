@@ -1,13 +1,13 @@
 package symbol.statement.label.identifier;
 
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
 import symbol.base.identifier.Identifier;
 import symbol.base.punctuator.colon.ColonPunctuator;
 import symbol.statement.Statement;
 import symbol.statement.label.LabeledStatement;
-import symbol.foundation.*;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.warning.Strangeness;
 
@@ -23,7 +23,7 @@ public class IdentifierStatement extends LabeledStatement {
                                ColonPunctuator colonPunctuator,
                                Blank blankAfterColonPunctuator,
                                Statement statement) {
-        super(null, new Symbol[]{
+        super(null, new Node[]{
                 identifier,
                 blankBeforeColonPunctuator,
                 colonPunctuator,

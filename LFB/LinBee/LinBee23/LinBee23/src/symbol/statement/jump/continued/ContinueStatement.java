@@ -3,9 +3,9 @@ package symbol.statement.jump.continued;
 import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.semicolon.Semicolon;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.statement.jump.JumpStatement;
-import symbol.foundation.Symbol;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 
@@ -17,7 +17,7 @@ public class ContinueStatement extends JumpStatement {
     public ContinueStatement(Keyword keywordContinue,
                              Blank blankBeforeSemicolon,
                              Semicolon semicolon) {
-        super(null, new Symbol[]{
+        super(null, new Node[]{
                 keywordContinue,
                 blankBeforeSemicolon,
                 semicolon});

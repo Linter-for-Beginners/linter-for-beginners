@@ -3,7 +3,7 @@ package symbol.declaration.parameter;
 import symbol.base.blank.Blank;
 import symbol.declaration.declaration.DeclarationSpecifierList;
 import symbol.declaration.declarator.Declarator;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
@@ -16,7 +16,7 @@ public class SimpleDeclaration extends ParameterDeclaration {
     public SimpleDeclaration(DeclarationSpecifierList declarationSpecifierList,
                              Blank blankAfterDeclarationSpecifierList,
                              Declarator declarator) {
-        super(null, new Symbol[] {
+        super(null, new Node[] {
                 declarationSpecifierList,
                 blankAfterDeclarationSpecifierList,
                 declarator});

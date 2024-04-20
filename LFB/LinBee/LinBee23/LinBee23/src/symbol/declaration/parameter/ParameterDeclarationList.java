@@ -2,15 +2,15 @@ package symbol.declaration.parameter;
 
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.comma.CommaPunctuator;
-import symbol.foundation.Nonterminal;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Phrase;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 
 import java.util.ArrayList;
 
-public class ParameterDeclarationList extends Nonterminal {
+public class ParameterDeclarationList extends Phrase {
     public final ParameterDeclaration[] parameterDeclaration;
     public final Blank[] blankBeforeCommaPunctuator;
     public final CommaPunctuator[] commaPunctuator;
@@ -31,20 +31,20 @@ public class ParameterDeclarationList extends Nonterminal {
         this.blankAfterCommaPunctuator = blankAfterCommaPunctuator;
     }
 
-    public static Symbol[] symbols(
+    public static Node[] symbols(
             ParameterDeclaration[] parameterDeclaration,
             Blank[] blankBeforeCommaPunctuator,
             CommaPunctuator[] commaPunctuator,
             Blank[] blankAfterCommaPunctuator) {
-        ArrayList<Symbol> symbols = new ArrayList<>();
+        ArrayList<Node> nodes = new ArrayList<>();
         int number = parameterDeclaration.length;
         for (int i = 0; i < number; i++) {
-            symbols.add(parameterDeclaration[i]);
-            symbols.add(blankBeforeCommaPunctuator[i]);
-            symbols.add(commaPunctuator[i]);
-            symbols.add(blankAfterCommaPunctuator[i]);
+            nodes.add(parameterDeclaration[i]);
+            nodes.add(blankBeforeCommaPunctuator[i]);
+            nodes.add(commaPunctuator[i]);
+            nodes.add(blankAfterCommaPunctuator[i]);
         }
-        return symbols.toArray(new Symbol[0]);
+        return nodes.toArray(new Node[0]);
     }
 
     public static ParameterDeclarationList parse(Code code, Table table) throws InvalidityException {

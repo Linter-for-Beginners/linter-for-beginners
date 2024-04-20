@@ -1,8 +1,8 @@
 package symbol.expression.logical.or;
 
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.condition.ConditionalExpression;
 import symbol.expression.logical.and.LogicalAndExpression;
@@ -11,8 +11,8 @@ import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class LogicalOrExpression extends ConditionalExpression {
 
-    public LogicalOrExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public LogicalOrExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static LogicalOrExpression parse(Code code, Table table) throws InvalidityException {

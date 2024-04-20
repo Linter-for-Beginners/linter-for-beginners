@@ -3,6 +3,7 @@ package symbol.expression.unary;
 import symbol.expression.unary.size.ExpressionSize;
 import symbol.expression.unary.size.TypeSize;
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.expression.unary.address.AddressOperation;
 import symbol.expression.unary.complement.BitwiseComplementOperation;
@@ -10,7 +11,6 @@ import symbol.expression.unary.indirection.IndirectionOperation;
 import symbol.expression.unary.minus.UnaryMinusOperation;
 import symbol.expression.unary.negation.LogicalNegationOperation;
 import symbol.expression.unary.plus.UnaryPlusOperation;
-import symbol.foundation.*;
 import symbol.expression.cast.CastExpression;
 import symbol.expression.postfix.PostfixExpression;
 import symbol.expression.unary.decrement.PrefixDecrementOperation;
@@ -19,8 +19,8 @@ import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class UnaryExpression extends CastExpression {
-    public UnaryExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public UnaryExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static UnaryExpression parse(Code code, Table table) throws InvalidityException {

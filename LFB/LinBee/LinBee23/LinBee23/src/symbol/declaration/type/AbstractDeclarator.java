@@ -3,13 +3,13 @@ package symbol.declaration.type;
 import symbol.base.blank.Blank;
 import symbol.declaration.declarator.pointer.PointerList;
 import symbol.declaration.type.direct.DirectAbstractDeclarator;
-import symbol.foundation.Nonterminal;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
+import symbol.foundation.node.Phrase;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 
-public class AbstractDeclarator extends Nonterminal {
+public class AbstractDeclarator extends Phrase {
     public final PointerList pointerList;
     public final Blank blankAfterPointerList;
     public final DirectAbstractDeclarator directAbstractDeclarator;
@@ -18,7 +18,7 @@ public class AbstractDeclarator extends Nonterminal {
             PointerList pointerList,
             Blank blankAfterPointerList,
             DirectAbstractDeclarator directAbstractDeclarator) {
-        super(null, new Symbol[] {
+        super(null, new Node[] {
                 pointerList,
                 blankAfterPointerList,
                 directAbstractDeclarator});

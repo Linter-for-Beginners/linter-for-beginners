@@ -2,9 +2,9 @@ package symbol.expression.logical.or;
 
 import symbol.expression.comma.CommaExpression;
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
-import symbol.foundation.*;
 import symbol.expression.logical.and.LogicalAndExpression;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
@@ -23,7 +23,7 @@ public class LogicalOrOperation extends LogicalOrExpression {
                               LogicalOrSign logicalOrSign,
                               Blank blankAfterLogicalOrSign,
                               LogicalAndExpression logicalAndExpression) {
-        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(logicalOrExpression.type), SymbolTypeName.evaluationType(logicalAndExpression.type)), new Symbol[] {
+        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(logicalOrExpression.type), SymbolTypeName.evaluationType(logicalAndExpression.type)), new Node[] {
                 logicalOrExpression,
                 blankBeforeLogicalOrSign,
                 logicalOrSign,

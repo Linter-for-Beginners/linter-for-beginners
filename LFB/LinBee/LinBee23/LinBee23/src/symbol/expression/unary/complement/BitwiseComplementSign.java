@@ -3,9 +3,9 @@ package symbol.expression.unary.complement;
 import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class BitwiseComplementSign extends Terminal {
+public class BitwiseComplementSign extends Token {
     private static final String[] strings = {"~"};
 
     public BitwiseComplementSign(Integer row, Integer column, String string) {

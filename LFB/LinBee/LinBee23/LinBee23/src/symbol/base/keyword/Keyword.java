@@ -3,11 +3,11 @@ package symbol.base.keyword;
 import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
 import java.util.Arrays;
 
-public class Keyword extends Terminal {
+public class Keyword extends Token {
     private static final String[] strings = {
             "size_t", "ptrdiff_t", "FILE",
             "auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern", "float", "for", "goto", "if", "inline", "int", "long", "register", "restrict", "return", "short", "signed", "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while",

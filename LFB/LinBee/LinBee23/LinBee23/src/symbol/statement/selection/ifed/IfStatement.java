@@ -9,7 +9,7 @@ import symbol.foundation.code.Code;
 import symbol.statement.Statement;
 import symbol.statement.compound.CompoundStatement;
 import symbol.statement.selection.SelectionStatement;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.warning.Discouragement;
@@ -34,7 +34,7 @@ public class IfStatement extends SelectionStatement {
                        RightParenthesis rightParenthesis,
                        Blank blankBeforeStatement,
                        Statement statement) {
-        super(null, new Symbol[]{
+        super(null, new Node[]{
                 keywordIf,
                 blankAfterKeywordIf,
                 leftParenthesis,

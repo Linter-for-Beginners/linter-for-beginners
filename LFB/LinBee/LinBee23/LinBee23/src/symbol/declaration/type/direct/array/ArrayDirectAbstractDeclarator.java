@@ -7,7 +7,7 @@ import symbol.declaration.declaration.DeclarationSpecifierList;
 import symbol.declaration.type.direct.DirectAbstractDeclarator;
 import symbol.expression.assignment.AssignmentExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
@@ -36,7 +36,7 @@ public class ArrayDirectAbstractDeclarator extends DirectAbstractDeclarator {
             AssignmentExpression assignmentExpression,
             Blank blankAfterAssignmentExpression,
             RightBracket rightBracket) {
-        super(null, new Symbol[] {
+        super(null, new Node[] {
                 directAbstractDeclarator,
                 blankAfterDirectAbstractDeclarator,
                 leftBracket,

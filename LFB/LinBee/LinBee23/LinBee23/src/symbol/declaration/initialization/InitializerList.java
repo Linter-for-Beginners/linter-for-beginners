@@ -3,8 +3,8 @@ package symbol.declaration.initialization;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.comma.CommaPunctuator;
 import symbol.expression.comma.CommaExpression;
-import symbol.foundation.Nonterminal;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
+import symbol.foundation.node.Phrase;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
@@ -13,7 +13,7 @@ import symbol.foundation.warning.Danger;
 
 import java.util.ArrayList;
 
-public class InitializerList extends Nonterminal {
+public class InitializerList extends Phrase {
     public final Initializer[] initializer;
     public final Blank[] blankBeforeCommaPunctuator;
     public final CommaPunctuator[] commaPunctuator;
@@ -41,20 +41,20 @@ public class InitializerList extends Nonterminal {
         }
     }
 
-    public static Symbol[] symbols(
+    public static Node[] symbols(
             Initializer[] initializer,
             Blank[] blankBeforeCommaPunctuator,
             CommaPunctuator[] commaPunctuator,
             Blank[] blankAfterCommaPunctuator) {
-        ArrayList<Symbol> symbols = new ArrayList<>();
+        ArrayList<Node> nodes = new ArrayList<>();
         int number = initializer.length;
         for (int i = 0; i < number; i++) {
-            symbols.add(initializer[i]);
-            symbols.add(blankBeforeCommaPunctuator[i]);
-            symbols.add(commaPunctuator[i]);
-            symbols.add(blankAfterCommaPunctuator[i]);
+            nodes.add(initializer[i]);
+            nodes.add(blankBeforeCommaPunctuator[i]);
+            nodes.add(commaPunctuator[i]);
+            nodes.add(blankAfterCommaPunctuator[i]);
         }
-        return symbols.toArray(new Symbol[0]);
+        return nodes.toArray(new Node[0]);
     }
 
     public static InitializerList parse(Code code, Table table) throws InvalidityException {

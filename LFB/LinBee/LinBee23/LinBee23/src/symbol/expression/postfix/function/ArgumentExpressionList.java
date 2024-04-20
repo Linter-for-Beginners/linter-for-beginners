@@ -1,16 +1,17 @@
 package symbol.expression.postfix.function;
 
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
+import symbol.foundation.node.Phrase;
 import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.comma.CommaPunctuator;
-import symbol.foundation.*;
 import symbol.expression.assignment.AssignmentExpression;
 import symbol.foundation.invalidity.InvalidityException;
 
 import java.util.ArrayList;
 
-public class ArgumentExpressionList extends Nonterminal {
+public class ArgumentExpressionList extends Phrase {
     public final AssignmentExpression[] assignmentExpression;
     public final Blank[] blankBeforeCommaPunctuator;
     public final CommaPunctuator[] commaPunctuator;
@@ -31,20 +32,20 @@ public class ArgumentExpressionList extends Nonterminal {
         this.blankAfterCommaPunctuator = blankAfterCommaPunctuator;
     }
 
-    public static Symbol[] symbols(
+    public static Node[] symbols(
             AssignmentExpression[] assignmentExpression,
             Blank[] blankBeforeCommaPunctuator,
             CommaPunctuator[] commaPunctuator,
             Blank[] blankAfterCommaPunctuator) {
-        ArrayList<Symbol> symbols = new ArrayList<>();
+        ArrayList<Node> nodes = new ArrayList<>();
         int number = assignmentExpression.length;
         for (int i = 0; i < number; i++) {
-            symbols.add(assignmentExpression[i]);
-            symbols.add(blankBeforeCommaPunctuator[i]);
-            symbols.add(commaPunctuator[i]);
-            symbols.add(blankAfterCommaPunctuator[i]);
+            nodes.add(assignmentExpression[i]);
+            nodes.add(blankBeforeCommaPunctuator[i]);
+            nodes.add(commaPunctuator[i]);
+            nodes.add(blankAfterCommaPunctuator[i]);
         }
-        return symbols.toArray(new Symbol[0]);
+        return nodes.toArray(new Node[0]);
     }
 
     public static ArgumentExpressionList parse(Code code, Table table) throws InvalidityException {

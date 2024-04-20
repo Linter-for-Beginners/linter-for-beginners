@@ -3,7 +3,7 @@ Volume serial number is E8C5-B65E
 C:.
 │   LinBee23.java
 │       
-└───symbol
+└───node
     ├───base
     │   ├───blank
     │   │       Blank.java
@@ -338,7 +338,7 @@ C:.
     │       └───switched
     │               SwitchStatement.java
     │               
-    └───symbol
+    └───node
         │   Nonterminal.java
         │   Symbol.java
         │   Terminal.java

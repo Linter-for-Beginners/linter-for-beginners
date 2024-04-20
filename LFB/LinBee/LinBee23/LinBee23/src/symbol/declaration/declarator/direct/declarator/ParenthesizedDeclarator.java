@@ -5,7 +5,7 @@ import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.declaration.declarator.Declarator;
 import symbol.declaration.declarator.direct.DirectDeclarator;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
@@ -22,7 +22,7 @@ public class ParenthesizedDeclarator extends DirectDeclarator {
                                    Declarator declarator,
                                    Blank blankAfterDeclarator,
                                    RightParenthesis rightParenthesis) {
-        super(declarator.type, new Symbol[] {
+        super(declarator.type, new Node[] {
                 leftParenthesis,
                 blankBeforeDeclarator,
                 declarator,

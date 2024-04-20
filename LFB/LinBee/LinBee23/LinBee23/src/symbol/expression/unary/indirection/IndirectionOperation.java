@@ -1,12 +1,12 @@
 package symbol.expression.unary.indirection;
 
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.type.Table;
 import symbol.expression.cast.CastExpression;
 import symbol.expression.unary.UnaryExpression;
 import symbol.base.blank.Blank;
-import symbol.foundation.*;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.warning.Danger;
@@ -19,7 +19,7 @@ public class IndirectionOperation extends UnaryExpression {
     public IndirectionOperation(IndirectionSign indirectionSign,
                                 Blank blankAfterIndirectionSign,
                                 CastExpression castExpression) {
-        super(SymbolTypeName.indirectionType(SymbolTypeName.evaluationType(castExpression.type)), new Symbol[] {
+        super(SymbolTypeName.indirectionType(SymbolTypeName.evaluationType(castExpression.type)), new Node[] {
                 indirectionSign,
                 blankAfterIndirectionSign,
                 castExpression});

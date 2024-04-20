@@ -3,7 +3,7 @@ package symbol.declaration.type;
 import symbol.base.blank.Blank;
 import symbol.declaration.declaration.DeclarationSpecifierList;
 import symbol.declaration.parameter.ParameterDeclaration;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
@@ -17,7 +17,7 @@ public class TypeName extends ParameterDeclaration {
             DeclarationSpecifierList declarationSpecifierList,
             Blank blankAfterDeclarationSpecifierList,
             AbstractDeclarator abstractDeclarator) {
-        super(null, new Symbol[] {
+        super(null, new Node[] {
                 declarationSpecifierList,
                 blankAfterDeclarationSpecifierList,
                 abstractDeclarator});

@@ -5,7 +5,7 @@ import symbol.base.punctuator.semicolon.Semicolon;
 import symbol.statement.Statement;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.warning.Strangeness;
 
@@ -13,7 +13,7 @@ public class EmptyStatement extends Statement {
     public final Semicolon semicolon;
 
     public EmptyStatement(Semicolon semicolon) {
-        super(null, new Symbol[] {
+        super(null, new Node[] {
                 semicolon});
         this.semicolon = semicolon;
         warnings.add(new Strangeness(this, this, "Empty statement is strange for beginners."));
