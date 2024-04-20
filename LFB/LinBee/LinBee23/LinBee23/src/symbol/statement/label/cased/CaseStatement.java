@@ -8,7 +8,7 @@ import symbol.foundation.code.Code;
 import symbol.statement.Statement;
 import symbol.statement.label.LabeledStatement;
 import symbol.foundation.invalidity.InvalidityException;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 
 public class CaseStatement extends LabeledStatement {
@@ -27,7 +27,7 @@ public class CaseStatement extends LabeledStatement {
                          ColonPunctuator colonPunctuator,
                          Blank blankAfterColonPunctuator,
                          Statement statement) {
-        super(null, new Symbol[]{
+        super(null, new Node[]{
                 keywordCase,
                 blankAfterKeywordCase,
                 conditionalExpression,

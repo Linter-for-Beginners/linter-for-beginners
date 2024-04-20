@@ -3,9 +3,9 @@ package symbol.base.punctuator.parenthesis;
 import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class RightParenthesis extends Terminal {
+public class RightParenthesis extends Token {
     public static String[] strings = {")"};
     public RightParenthesis(Integer row, Integer column, String string) {
         super(row, column, null, string);

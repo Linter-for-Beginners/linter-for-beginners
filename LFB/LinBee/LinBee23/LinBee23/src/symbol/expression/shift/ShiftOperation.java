@@ -2,10 +2,10 @@ package symbol.expression.shift;
 
 import symbol.expression.cast.CastExpression;
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
-import symbol.foundation.*;
 import symbol.expression.additive.AdditiveExpression;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
@@ -24,7 +24,7 @@ public class ShiftOperation extends ShiftExpression {
                           ShiftSign shiftSign,
                           Blank blankAfterShiftSign,
                           AdditiveExpression additiveExpression) {
-        super(SymbolTypeName.evaluationType(shiftExpression.type), new Symbol[] {
+        super(SymbolTypeName.evaluationType(shiftExpression.type), new Node[] {
                 shiftExpression,
                 blankBeforeShiftSign,
                 shiftSign,

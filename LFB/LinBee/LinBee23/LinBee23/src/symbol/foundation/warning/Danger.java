@@ -1,13 +1,13 @@
 package symbol.foundation.warning;
 
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 
 public class Danger extends Warning {
-    public Danger(Symbol parent, Symbol child) {
+    public Danger(Node parent, Node child) {
         super(parent, child);
     }
 
-    public Danger(Symbol parent, Symbol child, String message) {
+    public Danger(Node parent, Node child, String message) {
         super(parent, child, message);
     }
 }

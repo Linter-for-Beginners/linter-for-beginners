@@ -1,11 +1,11 @@
 package symbol.base.punctuator.initialization;
 
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 
-public class EqualPunctuator extends Terminal {
+public class EqualPunctuator extends Token {
     public static String[] strings = {"="};
 
     public EqualPunctuator(Integer row, Integer column, String string) {

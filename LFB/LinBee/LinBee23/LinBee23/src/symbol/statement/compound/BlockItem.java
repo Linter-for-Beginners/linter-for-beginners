@@ -1,19 +1,19 @@
 package symbol.statement.compound;
 
 import symbol.declaration.Declaration;
+import symbol.foundation.node.Node;
 import symbol.function.FunctionDefinition;
 import symbol.statement.Statement;
-import symbol.foundation.Nonterminal;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Phrase;
 import symbol.foundation.type.Table;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.warning.Strangeness;
 
-public class BlockItem extends Nonterminal {
-    public BlockItem(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+public class BlockItem extends Phrase {
+    public BlockItem(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static BlockItem parse(Code code, Table table) throws InvalidityException {

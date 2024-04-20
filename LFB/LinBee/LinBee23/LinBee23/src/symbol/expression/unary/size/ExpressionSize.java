@@ -4,7 +4,7 @@ import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
 import symbol.expression.comma.CommaExpression;
 import symbol.expression.unary.UnaryExpression;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.type.SymbolTypeName;
@@ -19,7 +19,7 @@ public class ExpressionSize extends UnaryExpression {
     public ExpressionSize(Keyword keywordSizeof,
                           Blank blankAfterKeywordSizeof,
                           UnaryExpression unaryExpression) {
-        super(new SymbolTypeName("size_t"), new Symbol[] {
+        super(new SymbolTypeName("size_t"), new Node[] {
                 keywordSizeof,
                 blankAfterKeywordSizeof,
                 unaryExpression});

@@ -3,10 +3,10 @@ package symbol.statement.jump.returned;
 import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.semicolon.Semicolon;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.statement.jump.JumpStatement;
-import symbol.foundation.Symbol;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.warning.Danger;
@@ -19,7 +19,7 @@ public class ReturnNoneStatement extends JumpStatement {
     public ReturnNoneStatement(Keyword keywordReturn,
                                Blank blankBeforeSemicolon,
                                Semicolon semicolon) {
-        super(null, new Symbol[]{
+        super(null, new Node[]{
                 keywordReturn,
                 blankBeforeSemicolon,
                 semicolon});

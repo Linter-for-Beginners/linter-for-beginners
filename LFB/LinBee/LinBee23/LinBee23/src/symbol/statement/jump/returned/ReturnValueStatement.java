@@ -7,7 +7,7 @@ import symbol.expression.comma.CommaExpression;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.statement.jump.JumpStatement;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.warning.Danger;
@@ -25,7 +25,7 @@ public class ReturnValueStatement extends JumpStatement {
                                 CommaExpression commaExpression,
                                 Blank blankBeforeSemicolon,
                                 Semicolon semicolon) {
-        super(null, new Symbol[]{
+        super(null, new Node[]{
                 keywordReturn,
                 blankAfterKeywordReturn,
                 commaExpression,

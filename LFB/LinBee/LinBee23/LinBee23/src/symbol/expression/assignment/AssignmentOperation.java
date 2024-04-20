@@ -1,7 +1,7 @@
 package symbol.expression.assignment;
 
 import symbol.expression.comma.CommaExpression;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.base.blank.Blank;
 import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
@@ -23,7 +23,7 @@ public class AssignmentOperation extends AssignmentExpression {
                                AssignmentSign assignmentSign,
                                Blank blankAfterAssignmentSign,
                                AssignmentExpression assignmentExpression) {
-        super(new SymbolTypeName(unaryExpression.type.toString()), new Symbol[] {
+        super(new SymbolTypeName(unaryExpression.type.toString()), new Node[] {
                 unaryExpression,
                 blankBeforeAssignmentSign,
                 assignmentSign,

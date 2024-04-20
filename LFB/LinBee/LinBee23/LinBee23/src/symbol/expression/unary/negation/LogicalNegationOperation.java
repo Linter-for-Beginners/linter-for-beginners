@@ -2,11 +2,11 @@ package symbol.expression.unary.negation;
 
 import symbol.expression.comma.CommaExpression;
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.expression.cast.CastExpression;
 import symbol.expression.unary.UnaryExpression;
 import symbol.base.blank.Blank;
-import symbol.foundation.*;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.warning.Danger;
@@ -20,7 +20,7 @@ public class LogicalNegationOperation extends UnaryExpression {
     public LogicalNegationOperation(LogicalNegationSign logicalNegationSign,
                                     Blank blankAfterLogicalNegationSign,
                                     CastExpression castExpression) {
-        super(new SymbolTypeName("int"), new Symbol[] {
+        super(new SymbolTypeName("int"), new Node[] {
                 logicalNegationSign,
                 blankAfterLogicalNegationSign,
                 castExpression});

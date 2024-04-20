@@ -1,7 +1,7 @@
 package symbol.expression.relation;
 
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.equality.EqualityExpression;
 import symbol.expression.shift.ShiftExpression;
@@ -10,8 +10,8 @@ import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 
 public abstract class RelationalExpression extends EqualityExpression {
-    public RelationalExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public RelationalExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static RelationalExpression parse(Code code, Table table) throws InvalidityException {

@@ -3,9 +3,9 @@ package symbol.expression.bitwise.exclusive;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class BitwiseExclusiveOrSign extends Terminal {
+public class BitwiseExclusiveOrSign extends Token {
     private static final String[] strings = {"^"};
 
     public BitwiseExclusiveOrSign(Integer row, Integer column, String string) {

@@ -5,11 +5,11 @@ import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.statement.Statement;
 import symbol.statement.compound.CompoundStatement;
 import symbol.statement.iteration.IterationStatement;
-import symbol.foundation.Symbol;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.warning.Discouragement;
@@ -34,7 +34,7 @@ public class WhileStatement extends IterationStatement {
                           RightParenthesis rightParenthesis,
                           Blank blankBeforeStatement,
                           Statement statement) {
-        super(null, new Symbol[]{
+        super(null, new Node[]{
                 keywordWhile,
                 blankAfterKeywordWhile,
                 leftParenthesis,

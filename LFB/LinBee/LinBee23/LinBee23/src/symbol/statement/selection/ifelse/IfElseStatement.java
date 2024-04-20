@@ -5,11 +5,11 @@ import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.statement.Statement;
 import symbol.statement.compound.CompoundStatement;
 import symbol.statement.selection.SelectionStatement;
-import symbol.foundation.Symbol;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.warning.Discouragement;
@@ -42,7 +42,7 @@ public class IfElseStatement extends SelectionStatement {
                            Keyword keywordElse,
                            Blank blankAfterKeywordElse,
                            Statement falseStatement) {
-        super(null, new Symbol[]{
+        super(null, new Node[]{
                 keywordIf,
                 blankAfterKeywordIf,
                 leftParenthesis,

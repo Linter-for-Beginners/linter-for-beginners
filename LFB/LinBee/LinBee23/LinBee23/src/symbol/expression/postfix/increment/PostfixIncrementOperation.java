@@ -5,7 +5,7 @@ import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.expression.postfix.PostfixExpression;
 import symbol.base.blank.Blank;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.warning.Danger;
@@ -18,7 +18,7 @@ public class PostfixIncrementOperation extends PostfixExpression {
     public PostfixIncrementOperation(PostfixExpression postfixExpression,
                                      Blank blankAfterPostfixExpression,
                                      PostfixIncrementSign postfixIncrementSign) {
-        super(new SymbolTypeName(postfixExpression.type.toString()), new Symbol[] {
+        super(new SymbolTypeName(postfixExpression.type.toString()), new Node[] {
                 postfixExpression,
                 blankAfterPostfixExpression,
                 postfixIncrementSign});

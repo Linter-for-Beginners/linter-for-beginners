@@ -3,8 +3,8 @@ package symbol.expression.bitwise.and;
 import symbol.expression.cast.CastExpression;
 import symbol.expression.comma.CommaExpression;
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.equality.EqualityExpression;
 import symbol.foundation.type.SymbolTypeName;
@@ -24,7 +24,7 @@ public class BitwiseAndOperation extends BitwiseAndExpression {
                                BitwiseAndSign bitwiseAndSign,
                                Blank blankAfterBitwiseAndSign,
                                EqualityExpression equalityExpression) {
-        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(bitwiseAndExpression.type), SymbolTypeName.evaluationType(equalityExpression.type)), new Symbol[] {
+        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(bitwiseAndExpression.type), SymbolTypeName.evaluationType(equalityExpression.type)), new Node[] {
                 bitwiseAndExpression,
                 blankBeforeBitwiseAndSign,
                 bitwiseAndSign,

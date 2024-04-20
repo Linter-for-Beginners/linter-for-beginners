@@ -3,9 +3,9 @@ package symbol.expression.relation;
 import symbol.expression.additive.AdditiveExpression;
 import symbol.expression.comma.CommaExpression;
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
-import symbol.foundation.*;
 import symbol.expression.shift.ShiftExpression;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
@@ -24,7 +24,7 @@ public class RelationalOperation extends RelationalExpression {
                                RelationalSign relationalSign,
                                Blank blankAfterRelationalSign,
                                ShiftExpression shiftExpression) {
-        super(new SymbolTypeName("int"), new Symbol[] {
+        super(new SymbolTypeName("int"), new Node[] {
                 relationalExpression,
                 blankBeforeRelationalSign,
                 relationalSign,

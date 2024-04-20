@@ -5,7 +5,7 @@ import symbol.base.punctuator.initialization.EqualPunctuator;
 import symbol.declaration.declaration.InitialDeclarator;
 import symbol.declaration.declarator.Declarator;
 import symbol.expression.comma.CommaExpression;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
@@ -24,7 +24,7 @@ public class Initialization extends InitialDeclarator {
             EqualPunctuator equalPunctuator,
             Blank blankAfterEqualPunctuator,
             Initializer initializer) {
-        super(null, new Symbol[] {
+        super(null, new Node[] {
                 declarator,
                 blankBeforeEqualPunctuator,
                 equalPunctuator,

@@ -1,11 +1,11 @@
 package symbol.expression.postfix.decrement;
 
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.expression.postfix.PostfixExpression;
 import symbol.base.blank.Blank;
-import symbol.foundation.Symbol;
 import symbol.foundation.type.Table;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.warning.Danger;
@@ -18,7 +18,7 @@ public class PostfixDecrementOperation extends PostfixExpression {
     public PostfixDecrementOperation(PostfixExpression postfixExpression,
                                      Blank blankAfterPostfixExpression,
                                      PostfixDecrementSign postfixDecrementSign) {
-        super(new SymbolTypeName(postfixExpression.type.toString()), new Symbol[] {
+        super(new SymbolTypeName(postfixExpression.type.toString()), new Node[] {
                 postfixExpression,
                 blankAfterPostfixExpression,
                 postfixDecrementSign});

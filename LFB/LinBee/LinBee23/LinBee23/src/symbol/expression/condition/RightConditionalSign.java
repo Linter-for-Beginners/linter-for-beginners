@@ -3,9 +3,9 @@ package symbol.expression.condition;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class RightConditionalSign extends Terminal {
+public class RightConditionalSign extends Token {
     private static final String[] strings = {":"};
 
     public RightConditionalSign(Integer row, Integer column, String string) {

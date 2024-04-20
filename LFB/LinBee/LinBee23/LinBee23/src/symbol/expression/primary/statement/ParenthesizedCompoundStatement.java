@@ -6,7 +6,7 @@ import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.expression.primary.PrimaryExpression;
 import symbol.foundation.code.Code;
 import symbol.statement.compound.CompoundStatement;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.warning.Strangeness;
@@ -23,7 +23,7 @@ public class ParenthesizedCompoundStatement extends PrimaryExpression {
                                           CompoundStatement compoundStatement,
                                           Blank blankAfterCompoundStatement,
                                           RightParenthesis rightParenthesis) {
-        super(compoundStatement.type, new Symbol[] {
+        super(compoundStatement.type, new Node[] {
                 leftParenthesis,
                 blankBeforeCompoundStatement,
                 compoundStatement,

@@ -1,11 +1,11 @@
 package symbol.base.punctuator.brace;
 
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 
-public class RightBrace extends Terminal {
+public class RightBrace extends Token {
     public static String[] strings = {"}"};
 
     public RightBrace(Integer row, Integer column, String string) {

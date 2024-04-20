@@ -1,15 +1,15 @@
 package symbol.statement.compound;
 
 import symbol.base.blank.Blank;
-import symbol.foundation.Nonterminal;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
+import symbol.foundation.node.Phrase;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 
 import java.util.ArrayList;
 
-public class BlockItemList extends Nonterminal {
+public class BlockItemList extends Phrase {
     public final BlockItem[] blockItem;
     public final Blank[] blankAfterBlockItem;
 
@@ -22,15 +22,15 @@ public class BlockItemList extends Nonterminal {
         this.blankAfterBlockItem = blankAfterBlockItem;
     }
 
-    public static Symbol[] symbols(BlockItem[] blockItem,
-                                   Blank[] blankAfterBlockItem) {
-        ArrayList<Symbol> symbols = new ArrayList<>();
+    public static Node[] symbols(BlockItem[] blockItem,
+                                 Blank[] blankAfterBlockItem) {
+        ArrayList<Node> nodes = new ArrayList<>();
         int number = blockItem.length;
         for (int i = 0; i < number; i++) {
-            symbols.add(blockItem[i]);
-            symbols.add(blankAfterBlockItem[i]);
+            nodes.add(blockItem[i]);
+            nodes.add(blankAfterBlockItem[i]);
         }
-        return symbols.toArray(new Symbol[0]);
+        return nodes.toArray(new Node[0]);
     }
 
     public static BlockItemList parse(Code code, Table table) throws InvalidityException {

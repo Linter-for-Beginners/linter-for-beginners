@@ -1,7 +1,7 @@
 package symbol.expression.assignment;
 
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.expression.condition.ConditionalExpression;
 import symbol.expression.comma.CommaExpression;
 import symbol.foundation.type.SymbolTypeName;
@@ -10,8 +10,8 @@ import symbol.foundation.code.Code;
 
 public abstract class AssignmentExpression extends CommaExpression {
 
-    public AssignmentExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public AssignmentExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static AssignmentExpression parse(Code code, Table table) throws InvalidityException {

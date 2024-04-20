@@ -1,8 +1,8 @@
 package symbol.expression.condition;
 
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.logical.or.LogicalOrExpression;
 import symbol.expression.assignment.AssignmentExpression;
@@ -11,8 +11,8 @@ import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class ConditionalExpression extends AssignmentExpression {
-    public ConditionalExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public ConditionalExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static ConditionalExpression parse(Code code, Table table) throws InvalidityException {

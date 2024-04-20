@@ -1,12 +1,12 @@
 package symbol.base.string;
 
+import symbol.foundation.node.Token;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 
-public class StringLiteral extends Terminal {
+public class StringLiteral extends Token {
     public StringLiteral(Integer row, Integer column, String string) {
         super(row, column, new SymbolTypeName("char *"), string);
     }

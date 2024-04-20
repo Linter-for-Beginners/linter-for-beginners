@@ -3,9 +3,9 @@ package symbol.expression.multiplicative;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class MultiplicativeSign extends Terminal {
+public class MultiplicativeSign extends Token {
     private static final String[] strings = {"*", "/", "%"};
 
     public MultiplicativeSign(Integer row, Integer column, String string) {

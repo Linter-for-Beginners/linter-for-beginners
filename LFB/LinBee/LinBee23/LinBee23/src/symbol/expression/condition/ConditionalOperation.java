@@ -1,7 +1,7 @@
 package symbol.expression.condition;
 
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.logical.or.LogicalOrExpression;
 import symbol.expression.comma.CommaExpression;
@@ -31,7 +31,7 @@ public class ConditionalOperation extends ConditionalExpression {
                                 RightConditionalSign rightConditionalSign,
                                 Blank blankAfterRightConditionalSign,
                                 ConditionalExpression conditionalExpression) {
-        super(type(SymbolTypeName.evaluationType(commaExpression.type), SymbolTypeName.evaluationType(conditionalExpression.type)), new Symbol[] {
+        super(type(SymbolTypeName.evaluationType(commaExpression.type), SymbolTypeName.evaluationType(conditionalExpression.type)), new Node[] {
                 logicalOrExpression,
                 blankBeforeLeftConditionalSign,
                 leftConditionalSign,

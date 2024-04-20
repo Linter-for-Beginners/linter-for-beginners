@@ -5,7 +5,7 @@ import symbol.base.identifier.Identifier;
 import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.semicolon.Semicolon;
 import symbol.statement.jump.JumpStatement;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
@@ -23,7 +23,7 @@ public class GotoStatement extends JumpStatement {
                          Identifier identifier,
                          Blank blankBeforeSemicolon,
                          Semicolon semicolon) {
-        super(null, new Symbol[]{
+        super(null, new Node[]{
                 keywordGoto,
                 blankAfterKeywordGoto,
                 identifier,

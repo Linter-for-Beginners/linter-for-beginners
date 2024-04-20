@@ -1,8 +1,8 @@
 package symbol.expression.logical.and;
 
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.bitwise.inclusive.BitwiseInclusiveOrExpression;
 import symbol.expression.logical.or.LogicalOrExpression;
@@ -11,8 +11,8 @@ import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class LogicalAndExpression extends LogicalOrExpression {
 
-    public LogicalAndExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public LogicalAndExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static LogicalAndExpression parse(Code code, Table table) throws InvalidityException {

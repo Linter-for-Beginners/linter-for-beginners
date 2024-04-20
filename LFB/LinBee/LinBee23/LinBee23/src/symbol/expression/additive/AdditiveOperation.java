@@ -1,8 +1,8 @@
 package symbol.expression.additive;
 
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.multiplicative.MultiplicativeExpression;
 import symbol.foundation.type.SymbolTypeName;
@@ -23,7 +23,7 @@ public class AdditiveOperation extends AdditiveExpression {
                              AdditiveSign additiveSign,
                              Blank blankAfterAdditiveSign,
                              MultiplicativeExpression multiplicativeExpression) {
-        super(type(SymbolTypeName.evaluationType(additiveExpression.type), SymbolTypeName.evaluationType(multiplicativeExpression.type)), new Symbol[] {
+        super(type(SymbolTypeName.evaluationType(additiveExpression.type), SymbolTypeName.evaluationType(multiplicativeExpression.type)), new Node[] {
                 additiveExpression,
                 blankBeforeAdditiveSign,
                 additiveSign,

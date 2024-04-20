@@ -3,8 +3,8 @@ package symbol.expression.postfix.function;
 import symbol.expression.assignment.AssignmentExpression;
 import symbol.expression.comma.CommaExpression;
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.expression.postfix.PostfixExpression;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
@@ -30,7 +30,7 @@ public class FunctionCall extends PostfixExpression {
                         ArgumentExpressionList argumentExpressionList,
                         Blank blankAfterArgumentExpressionList,
                         RightParenthesis rightParenthesis) {
-        super(new SymbolTypeName(type.toString()), new Symbol[] {
+        super(new SymbolTypeName(type.toString()), new Node[] {
                 postfixExpression,
                 blankAfterPostfixExpression,
                 leftParenthesis,

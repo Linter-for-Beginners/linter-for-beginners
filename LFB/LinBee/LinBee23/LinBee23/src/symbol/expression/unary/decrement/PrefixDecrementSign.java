@@ -3,9 +3,9 @@ package symbol.expression.unary.decrement;
 import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class PrefixDecrementSign extends Terminal {
+public class PrefixDecrementSign extends Token {
     private static final String[] strings = {"--"};
 
     public PrefixDecrementSign(Integer row, Integer column, String string) {

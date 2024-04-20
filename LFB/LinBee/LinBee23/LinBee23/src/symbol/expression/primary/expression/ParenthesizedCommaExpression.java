@@ -5,9 +5,9 @@ import symbol.expression.primary.PrimaryExpression;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
+import symbol.foundation.node.Node;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
-import symbol.foundation.Symbol;
 import symbol.foundation.type.Table;
 
 public class ParenthesizedCommaExpression extends PrimaryExpression {
@@ -22,7 +22,7 @@ public class ParenthesizedCommaExpression extends PrimaryExpression {
                                         CommaExpression commaExpression,
                                         Blank blankAfterCommaExpression,
                                         RightParenthesis rightParenthesis) {
-        super(commaExpression.type, new Symbol[] {
+        super(commaExpression.type, new Node[] {
                 leftParenthesis,
                 blankBeforeCommaExpression,
                 commaExpression,

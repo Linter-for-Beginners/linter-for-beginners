@@ -3,9 +3,9 @@ package symbol.base.punctuator.brace;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class LeftBrace extends Terminal {
+public class LeftBrace extends Token {
     public static String[] strings = {"{"};
 
     public LeftBrace(Integer row, Integer column, String string) {

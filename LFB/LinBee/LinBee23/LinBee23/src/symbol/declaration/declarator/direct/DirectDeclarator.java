@@ -12,16 +12,16 @@ import symbol.declaration.declarator.direct.declarator.ParenthesizedDeclarator;
 import symbol.declaration.declarator.direct.function.FunctionDirectDeclarator;
 import symbol.declaration.declarator.direct.identifier.IdentifierDirectDeclaratorI;
 import symbol.expression.assignment.AssignmentExpression;
-import symbol.foundation.Nonterminal;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
+import symbol.foundation.node.Phrase;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 
-public class DirectDeclarator extends Nonterminal {
-    public DirectDeclarator(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+public class DirectDeclarator extends Phrase {
+    public DirectDeclarator(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static DirectDeclarator parse(Code code, Table table) throws InvalidityException {

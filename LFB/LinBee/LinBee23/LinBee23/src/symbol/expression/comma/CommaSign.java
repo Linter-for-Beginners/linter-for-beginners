@@ -3,9 +3,9 @@ package symbol.expression.comma;
 import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class CommaSign extends Terminal {
+public class CommaSign extends Token {
     private static final String[] strings = {","};
 
     public CommaSign(Integer row, Integer column, String string) {

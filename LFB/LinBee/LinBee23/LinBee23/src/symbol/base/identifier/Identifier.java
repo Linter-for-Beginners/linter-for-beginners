@@ -1,13 +1,13 @@
 package symbol.base.identifier;
 
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Token;
 import symbol.foundation.type.Table;
 import symbol.base.keyword.Keyword;
-import symbol.foundation.*;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 
-public class Identifier extends Terminal {
+public class Identifier extends Token {
     public Identifier(Integer row, Integer column, SymbolTypeName type, String string) {
         super(row, column, type, string);
     }

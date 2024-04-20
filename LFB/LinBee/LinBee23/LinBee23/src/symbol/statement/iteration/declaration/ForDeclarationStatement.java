@@ -7,10 +7,10 @@ import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.base.punctuator.semicolon.Semicolon;
 import symbol.declaration.Declaration;
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.node.Node;
 import symbol.statement.Statement;
 import symbol.statement.compound.CompoundStatement;
 import symbol.statement.iteration.IterationStatement;
-import symbol.foundation.Symbol;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
@@ -48,7 +48,7 @@ public class ForDeclarationStatement extends IterationStatement {
                                    RightParenthesis rightParenthesis,
                                    Blank blankBeforeStatement,
                                    Statement statement) {
-        super(null, new Symbol[]{
+        super(null, new Node[]{
                 keywordFor,
                 blankAfterKeywordFor,
                 leftParenthesis,

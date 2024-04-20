@@ -6,7 +6,7 @@ import symbol.declaration.declaration.DeclarationSpecifierList;
 import symbol.declaration.declaration.InitialDeclaratorList;
 import symbol.foundation.code.Code;
 import symbol.statement.compound.BlockItem;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 
@@ -22,7 +22,7 @@ public class Declaration extends BlockItem {
                        InitialDeclaratorList initialDeclaratorList,
                        Blank blankBeforeSemicolon,
                        Semicolon semicolon) {
-        super(null, new Symbol[] {
+        super(null, new Node[] {
                 declarationSpecifierList,
                 blankAfterDeclarationSpecifierList,
                 initialDeclaratorList,

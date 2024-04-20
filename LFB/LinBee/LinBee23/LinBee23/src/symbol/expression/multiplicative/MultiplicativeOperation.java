@@ -2,9 +2,9 @@ package symbol.expression.multiplicative;
 
 import symbol.expression.comma.CommaExpression;
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
-import symbol.foundation.*;
 import symbol.expression.cast.CastExpression;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
@@ -23,7 +23,7 @@ public class MultiplicativeOperation extends MultiplicativeExpression {
                                    MultiplicativeSign multiplicativeSign,
                                    Blank blankAfterMultiplicativeSign,
                                    CastExpression castExpression) {
-        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(multiplicativeExpression.type), SymbolTypeName.evaluationType(castExpression.type)), new Symbol[] {
+        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(multiplicativeExpression.type), SymbolTypeName.evaluationType(castExpression.type)), new Node[] {
                 multiplicativeExpression,
                 blankBeforeMultiplicativeSign,
                 multiplicativeSign,

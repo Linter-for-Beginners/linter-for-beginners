@@ -7,18 +7,18 @@ import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.expression.comma.CommaExpression;
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.statement.selection.ifed.IfStatement;
 import symbol.statement.selection.ifelse.IfElseStatement;
 import symbol.statement.selection.switched.SwitchStatement;
 import symbol.foundation.type.Table;
 import symbol.statement.Statement;
-import symbol.foundation.*;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class SelectionStatement extends Statement {
-    public SelectionStatement(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public SelectionStatement(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static SelectionStatement parse(Code code, Table table) throws InvalidityException {

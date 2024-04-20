@@ -2,15 +2,15 @@ package symbol.declaration.declaration;
 
 import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
-import symbol.foundation.Nonterminal;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
+import symbol.foundation.node.Phrase;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 
 import java.util.ArrayList;
 
-public class DeclarationSpecifierList extends Nonterminal {
+public class DeclarationSpecifierList extends Phrase {
     private static final String[] strings = {
             "size_t", "ptrdiff_t", "FILE", 
             "char", "double", "float", "int", "long", "short", "signed", "unsigned", "void",
@@ -30,15 +30,15 @@ public class DeclarationSpecifierList extends Nonterminal {
         this.blankAfterKeyword = blankAfterKeyword;
     }
 
-    public static Symbol[] symbols(Keyword[] keyword,
-                                   Blank[] blankAfterKeyword) {
-        ArrayList<Symbol> symbols = new ArrayList<>();
+    public static Node[] symbols(Keyword[] keyword,
+                                 Blank[] blankAfterKeyword) {
+        ArrayList<Node> nodes = new ArrayList<>();
         int number = keyword.length;
         for (int i = 0; i < number; i++) {
-            symbols.add(keyword[i]);
-            symbols.add(blankAfterKeyword[i]);
+            nodes.add(keyword[i]);
+            nodes.add(blankAfterKeyword[i]);
         }
-        return symbols.toArray(new Symbol[0]);
+        return nodes.toArray(new Node[0]);
     }
 
     public static DeclarationSpecifierList parse(Code code, Table table) throws InvalidityException {

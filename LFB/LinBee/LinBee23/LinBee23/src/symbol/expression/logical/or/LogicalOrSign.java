@@ -3,9 +3,9 @@ package symbol.expression.logical.or;
 import symbol.foundation.code.Code;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.type.Table;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 
-public class LogicalOrSign extends Terminal {
+public class LogicalOrSign extends Token {
     private static final String[] strings = {"||"};
 
     public LogicalOrSign(Integer row, Integer column, String string) {

@@ -1,7 +1,7 @@
 package symbol.expression.bitwise.inclusive;
 
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.bitwise.exclusive.BitwiseExclusiveOrExpression;
 import symbol.expression.logical.and.LogicalAndExpression;
@@ -10,8 +10,8 @@ import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 
 public abstract class BitwiseInclusiveOrExpression extends LogicalAndExpression {
-    public BitwiseInclusiveOrExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public BitwiseInclusiveOrExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static BitwiseInclusiveOrExpression parse(Code code, Table table) throws InvalidityException {

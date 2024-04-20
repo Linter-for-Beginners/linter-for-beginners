@@ -1,7 +1,7 @@
 import symbol.base.blank.Blank;
 import symbol.foundation.code.Code;
 import symbol.statement.compound.BlockItemList;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.warning.Warning;
 
@@ -21,15 +21,15 @@ public class LinBee23 {
             if (code.toString().length() > 0) {
                 throw new RuntimeException(code.toString().replaceAll("\\s+", " ").trim());
             }
-            Symbol[] symbols = blockItemList.traversal();
-            HashSet<Symbol> visited = new HashSet<Symbol>();
+            Node[] nodes = blockItemList.traversal();
+            HashSet<Node> visited = new HashSet<Node>();
             System.out.println("");
-            for (Symbol symbol : symbols) {
-                if (visited.contains(symbol)) {
-                    visited.remove(symbol);
+            for (Node node : nodes) {
+                if (visited.contains(node)) {
+                    visited.remove(node);
                 } else {
-                    visited.add(symbol);
-                    for (Warning warning : symbol.warnings) {
+                    visited.add(node);
+                    for (Warning warning : node.warnings) {
                         System.out.println("\t" + warning.toString());
                     }
                 }

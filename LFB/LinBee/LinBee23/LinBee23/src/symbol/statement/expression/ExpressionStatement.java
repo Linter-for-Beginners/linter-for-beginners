@@ -1,11 +1,11 @@
 package symbol.statement.expression;
 
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.expression.comma.CommaExpression;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.semicolon.Semicolon;
 import symbol.statement.Statement;
-import symbol.foundation.*;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.warning.Discouragement;
@@ -18,7 +18,7 @@ public class ExpressionStatement extends Statement {
     public ExpressionStatement(CommaExpression commaExpression,
                                Blank blankBeforeSemicolon,
                                Semicolon semicolon) {
-        super(null, new Symbol[] {
+        super(null, new Node[] {
                 commaExpression,
                 blankBeforeSemicolon,
                 semicolon});

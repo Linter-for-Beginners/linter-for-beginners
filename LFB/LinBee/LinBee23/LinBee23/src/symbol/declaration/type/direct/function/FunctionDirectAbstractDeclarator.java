@@ -5,7 +5,7 @@ import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.declaration.parameter.ParameterDeclarationList;
 import symbol.declaration.type.direct.DirectAbstractDeclarator;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
@@ -27,7 +27,7 @@ public class FunctionDirectAbstractDeclarator extends DirectAbstractDeclarator {
             ParameterDeclarationList parameterDeclarationList,
             Blank blankAfterParameterList,
             RightParenthesis rightParenthesis) {
-        super(null, new Symbol[] {
+        super(null, new Node[] {
                 directAbstractDeclarator,
                 blankAfterDirectAbstractDeclarator,
                 leftParenthesis,

@@ -11,11 +11,11 @@ import symbol.declaration.declarator.Declarator;
 import symbol.declaration.declarator.direct.function.FunctionDirectDeclarator;
 import symbol.declaration.parameter.ParameterDeclaration;
 import symbol.declaration.parameter.SimpleDeclaration;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.statement.compound.BlockItem;
 import symbol.statement.compound.CompoundStatement;
-import symbol.foundation.Symbol;
-import symbol.foundation.Terminal;
+import symbol.foundation.node.Token;
 import symbol.foundation.type.Table;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
@@ -68,7 +68,7 @@ public class FunctionDefinition extends BlockItem {
         }
     }
 
-    private static Symbol[] symbols(
+    private static Node[] symbols(
             DeclarationSpecifierList declarationSpecifierList,
             Blank blankAfterDeclarationSpecifierList,
             Declarator declarator,
@@ -77,19 +77,19 @@ public class FunctionDefinition extends BlockItem {
             Blank[] blankAfterDeclaration,
             Blank blankBeforeCompoundStatement,
             CompoundStatement compoundStatement) {
-        ArrayList<Symbol> symbols = new ArrayList<>();
-        symbols.add(declarationSpecifierList);
-        symbols.add(blankAfterDeclarationSpecifierList);
-        symbols.add(declarator);
-        symbols.add(blankAfterDeclarator);
+        ArrayList<Node> nodes = new ArrayList<>();
+        nodes.add(declarationSpecifierList);
+        nodes.add(blankAfterDeclarationSpecifierList);
+        nodes.add(declarator);
+        nodes.add(blankAfterDeclarator);
         int number = declaration.length;
         for (int i = 0; i < number; i++) {
-            symbols.add(declaration[i]);
-            symbols.add(blankAfterDeclaration[i]);
+            nodes.add(declaration[i]);
+            nodes.add(blankAfterDeclaration[i]);
         }
-        symbols.add(blankBeforeCompoundStatement);
-        symbols.add(compoundStatement);
-        return symbols.toArray(new Symbol[0]);
+        nodes.add(blankBeforeCompoundStatement);
+        nodes.add(compoundStatement);
+        return nodes.toArray(new Node[0]);
     }
 
     public static FunctionDefinition parse(Code code, Table table) throws InvalidityException {
@@ -139,39 +139,39 @@ public class FunctionDefinition extends BlockItem {
     }
 
     private static String declare(String specifier, Declarator declarator, Table table) {
-        Symbol[] symbols = declarator.traversal();
-        HashSet<Symbol> visited = new HashSet<>();
-        ArrayList<Terminal> terminals = new ArrayList<>();
-        terminals.add(null);
-        for (Symbol symbol : symbols) {
-            if (visited.contains(symbol)) {
-                visited.remove(symbol);
+        Node[] nodes = declarator.traversal();
+        HashSet<Node> visited = new HashSet<>();
+        ArrayList<Token> tokens = new ArrayList<>();
+        tokens.add(null);
+        for (Node node : nodes) {
+            if (visited.contains(node)) {
+                visited.remove(node);
             } else {
-                visited.add(symbol);
-                if (symbol instanceof Terminal terminal) {
-                    if ((terminals.get(terminals.size() - 1) instanceof LeftParenthesis) && (terminal instanceof Blank)) {
+                visited.add(node);
+                if (node instanceof Token token) {
+                    if ((tokens.get(tokens.size() - 1) instanceof LeftParenthesis) && (token instanceof Blank)) {
                         continue;
                     }
-                    if ((terminals.get(terminals.size() - 1) instanceof RightParenthesis) && (terminal instanceof Blank)) {
+                    if ((tokens.get(tokens.size() - 1) instanceof RightParenthesis) && (token instanceof Blank)) {
                         continue;
                     }
-                    if ((terminals.get(terminals.size() - 1) instanceof Identifier) && (terminal instanceof Blank)) {
+                    if ((tokens.get(tokens.size() - 1) instanceof Identifier) && (token instanceof Blank)) {
                         continue;
                     }
-                    if ((terminals.get(terminals.size() - 1) instanceof CommaPunctuator) && (terminal instanceof Blank)) {
+                    if ((tokens.get(tokens.size() - 1) instanceof CommaPunctuator) && (token instanceof Blank)) {
                         continue;
                     }
-                    terminals.add(terminal);
+                    tokens.add(token);
                 }
             }
         }
-        terminals.add(null);
+        tokens.add(null);
         while (true) {
             boolean disjunction = false;
-            for (Terminal terminal : terminals) {
-                if ((terminal instanceof Identifier) && (terminals.get(terminals.indexOf(terminal) - 1) instanceof LeftParenthesis leftParenthesis) && (terminals.get(terminals.indexOf(terminal) + 1) instanceof RightParenthesis rightParenthesis)) {
-                    terminals.remove(leftParenthesis);
-                    terminals.remove(rightParenthesis);
+            for (Token token : tokens) {
+                if ((token instanceof Identifier) && (tokens.get(tokens.indexOf(token) - 1) instanceof LeftParenthesis leftParenthesis) && (tokens.get(tokens.indexOf(token) + 1) instanceof RightParenthesis rightParenthesis)) {
+                    tokens.remove(leftParenthesis);
+                    tokens.remove(rightParenthesis);
                     disjunction = true;
                     break;
                 }
@@ -183,12 +183,12 @@ public class FunctionDefinition extends BlockItem {
         String string = null;
         while (true) {
             boolean disjunction = false;
-            for (Terminal terminal : terminals) {
-                if (terminal instanceof Identifier identifier) {
+            for (Token token : tokens) {
+                if (token instanceof Identifier identifier) {
                     if (string == null) {
                         string = identifier.toString();
                     } else {
-                        terminals.remove(identifier);
+                        tokens.remove(identifier);
                     }
                     disjunction = true;
                     break;
@@ -200,9 +200,9 @@ public class FunctionDefinition extends BlockItem {
         }
         while (true) {
             boolean disjunction = false;
-            for (Terminal terminal : terminals) {
-                if ((terminal instanceof CommaPunctuator commaPunctuator) && (terminals.get(terminals.indexOf(terminal) - 1) instanceof LeftParenthesis)) {
-                    terminals.remove(commaPunctuator);
+            for (Token token : tokens) {
+                if ((token instanceof CommaPunctuator commaPunctuator) && (tokens.get(tokens.indexOf(token) - 1) instanceof LeftParenthesis)) {
+                    tokens.remove(commaPunctuator);
                     disjunction = true;
                     break;
                 }
@@ -214,11 +214,11 @@ public class FunctionDefinition extends BlockItem {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(specifier);
         stringBuilder.append(" ");
-        for (Terminal terminal : terminals) {
-            if (terminal == null) {
+        for (Token token : tokens) {
+            if (token == null) {
                 continue;
             }
-            stringBuilder.append(terminal.toString());
+            stringBuilder.append(token.toString());
         }
         table.declare(string, new SymbolTypeName(stringBuilder.toString().replaceAll("\\s+", " ").trim()));
         return string;
@@ -227,36 +227,36 @@ public class FunctionDefinition extends BlockItem {
     private static String declare(SimpleDeclaration simpleDeclaration, Table table) {
         String specifier = simpleDeclaration.declarationSpecifierList.toString();
         Declarator declarator = simpleDeclaration.declarator;
-        Symbol[] symbols = declarator.traversal();
-        HashSet<Symbol> visited = new HashSet<>();
-        ArrayList<Terminal> terminals = new ArrayList<>();
-        terminals.add(null);
-        for (Symbol symbol : symbols) {
-            if (visited.contains(symbol)) {
-                visited.remove(symbol);
+        Node[] nodes = declarator.traversal();
+        HashSet<Node> visited = new HashSet<>();
+        ArrayList<Token> tokens = new ArrayList<>();
+        tokens.add(null);
+        for (Node node : nodes) {
+            if (visited.contains(node)) {
+                visited.remove(node);
             } else {
-                visited.add(symbol);
-                if (symbol instanceof Terminal terminal) {
-                    if ((terminals.get(terminals.size() - 1) instanceof LeftParenthesis) && (terminal instanceof Blank)) {
+                visited.add(node);
+                if (node instanceof Token token) {
+                    if ((tokens.get(tokens.size() - 1) instanceof LeftParenthesis) && (token instanceof Blank)) {
                         continue;
                     }
-                    if ((terminals.get(terminals.size() - 1) instanceof RightParenthesis) && (terminal instanceof Blank)) {
+                    if ((tokens.get(tokens.size() - 1) instanceof RightParenthesis) && (token instanceof Blank)) {
                         continue;
                     }
-                    if ((terminals.get(terminals.size() - 1) instanceof Identifier) && (terminal instanceof Blank)) {
+                    if ((tokens.get(tokens.size() - 1) instanceof Identifier) && (token instanceof Blank)) {
                         continue;
                     }
-                    terminals.add(terminal);
+                    tokens.add(token);
                 }
             }
         }
-        terminals.add(null);
+        tokens.add(null);
         while (true) {
             boolean disjunction = false;
-            for (Terminal terminal : terminals) {
-                if ((terminal instanceof Identifier) && (terminals.get(terminals.indexOf(terminal) - 1) instanceof LeftParenthesis leftParenthesis) && (terminals.get(terminals.indexOf(terminal) + 1) instanceof RightParenthesis rightParenthesis)) {
-                    terminals.remove(leftParenthesis);
-                    terminals.remove(rightParenthesis);
+            for (Token token : tokens) {
+                if ((token instanceof Identifier) && (tokens.get(tokens.indexOf(token) - 1) instanceof LeftParenthesis leftParenthesis) && (tokens.get(tokens.indexOf(token) + 1) instanceof RightParenthesis rightParenthesis)) {
+                    tokens.remove(leftParenthesis);
+                    tokens.remove(rightParenthesis);
                     disjunction = true;
                     break;
                 }
@@ -269,16 +269,16 @@ public class FunctionDefinition extends BlockItem {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(specifier);
         stringBuilder.append(" ");
-        for (Terminal terminal : terminals) {
-            if (terminal == null) {
+        for (Token token : tokens) {
+            if (token == null) {
                 continue;
             }
-            if (terminal instanceof Identifier identifier) {
+            if (token instanceof Identifier identifier) {
                 if (string == null) {
                     string = identifier.toString();
                 }
             } else {
-                stringBuilder.append(terminal.toString());
+                stringBuilder.append(token.toString());
             }
         }
         table.declare(string, SymbolTypeName.evaluationType(new SymbolTypeName(stringBuilder.toString().replaceAll("\\s+", " ").trim())));

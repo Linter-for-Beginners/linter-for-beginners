@@ -1,8 +1,8 @@
 package symbol.expression.additive;
 
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.multiplicative.MultiplicativeExpression;
 import symbol.expression.shift.ShiftExpression;
@@ -10,8 +10,8 @@ import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class AdditiveExpression extends ShiftExpression {
-    public AdditiveExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+    public AdditiveExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static AdditiveExpression parse(Code code, Table table) throws InvalidityException {

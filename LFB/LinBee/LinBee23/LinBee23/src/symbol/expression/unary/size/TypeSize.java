@@ -6,7 +6,7 @@ import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.declaration.type.TypeName;
 import symbol.expression.unary.UnaryExpression;
-import symbol.foundation.Symbol;
+import symbol.foundation.node.Node;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.Table;
 import symbol.foundation.type.SymbolTypeName;
@@ -28,7 +28,7 @@ public class TypeSize extends UnaryExpression {
                     TypeName typeName,
                     Blank blankAfterTypeName,
                     RightParenthesis rightParenthesis) {
-        super(new SymbolTypeName("size_t"), new Symbol[] {
+        super(new SymbolTypeName("size_t"), new Node[] {
                 keywordSizeof,
                 blankAfterKeywordSizeof,
                 leftParenthesis,

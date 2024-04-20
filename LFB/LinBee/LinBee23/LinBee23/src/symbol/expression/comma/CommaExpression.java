@@ -13,16 +13,17 @@ import symbol.expression.unary.decrement.PrefixDecrementOperation;
 import symbol.expression.unary.increment.PrefixIncrementOperation;
 import symbol.expression.unary.negation.LogicalNegationOperation;
 import symbol.foundation.code.Code;
+import symbol.foundation.node.Node;
+import symbol.foundation.node.Phrase;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.assignment.AssignmentExpression;
 import symbol.foundation.type.SymbolTypeName;
 import symbol.foundation.invalidity.InvalidityException;
 
-public abstract class CommaExpression extends Nonterminal {
-    public CommaExpression(SymbolTypeName type, Symbol[] symbols) {
-        super(type, symbols);
+public abstract class CommaExpression extends Phrase {
+    public CommaExpression(SymbolTypeName type, Node[] nodes) {
+        super(type, nodes);
     }
 
     public static CommaExpression parse(Code code, Table table) throws InvalidityException {

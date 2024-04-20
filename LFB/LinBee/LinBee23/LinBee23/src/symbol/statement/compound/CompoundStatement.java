@@ -4,9 +4,9 @@ package symbol.statement.compound;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.brace.LeftBrace;
 import symbol.base.punctuator.brace.RightBrace;
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
 import symbol.statement.Statement;
-import symbol.foundation.*;
 import symbol.foundation.invalidity.InvalidityException;
 import symbol.foundation.code.Code;
 import symbol.foundation.type.SymbolTypeName;
@@ -23,7 +23,7 @@ public class CompoundStatement extends Statement {
                              BlockItemList blockItemList,
                              Blank blankAfterBlockItemList,
                              RightBrace rightBrace) {
-        super(new SymbolTypeName(), new Symbol[] {
+        super(new SymbolTypeName(), new Node[] {
                 leftBrace,
                 blankBeforeBlockItemList,
                 blockItemList,

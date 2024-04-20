@@ -1,7 +1,7 @@
 package symbol.expression.postfix.array;
 
+import symbol.foundation.node.Node;
 import symbol.foundation.type.Table;
-import symbol.foundation.*;
 import symbol.expression.comma.CommaExpression;
 import symbol.expression.postfix.PostfixExpression;
 import symbol.base.blank.Blank;
@@ -29,7 +29,7 @@ public class ArraySubscripting extends PostfixExpression {
                              CommaExpression commaExpression,
                              Blank blankAfterCommaExpression,
                              RightBracket rightBracket) {
-        super(type(SymbolTypeName.evaluationType(postfixExpression.type), SymbolTypeName.evaluationType(commaExpression.type)), new Symbol[] {
+        super(type(SymbolTypeName.evaluationType(postfixExpression.type), SymbolTypeName.evaluationType(commaExpression.type)), new Node[] {
                 postfixExpression,
                 blankAfterPostfixExpression,
                 leftBracket,
