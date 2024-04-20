@@ -2,16 +2,15 @@ package symbol.expression.bitwise.inclusive;
 
 import symbol.expression.cast.CastExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.bitwise.exclusive.BitwiseExclusiveOrExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Danger;
 
 public class BitwiseInclusiveOrOperation extends BitwiseInclusiveOrExpression {
     public final BitwiseInclusiveOrExpression bitwiseInclusiveOrExpression;
@@ -25,7 +24,7 @@ public class BitwiseInclusiveOrOperation extends BitwiseInclusiveOrExpression {
                                        BitwiseInclusiveOrSign bitwiseInclusiveOrSign,
                                        Blank blankAfterBitwiseInclusiveOrSign,
                                        BitwiseExclusiveOrExpression bitwiseExclusiveOrExpression) {
-        super(SymbolTypeName.promotion(bitwiseInclusiveOrExpression.type.evaluation(), bitwiseExclusiveOrExpression.type.evaluation()), new Symbol[] {
+        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(bitwiseInclusiveOrExpression.type), SymbolTypeName.evaluationType(bitwiseExclusiveOrExpression.type)), new Symbol[] {
                 bitwiseInclusiveOrExpression,
                 blankBeforeBitwiseInclusiveOrSign,
                 bitwiseInclusiveOrSign,
@@ -54,21 +53,21 @@ public class BitwiseInclusiveOrOperation extends BitwiseInclusiveOrExpression {
         if (CommaExpression.effective(bitwiseExclusiveOrExpression)) {
             warnings.add(new Danger(this, bitwiseExclusiveOrExpression, "Bitwise inclusive OR operation with side effects is dangerous for beginners."));
         }
-        if (!type.equals(bitwiseInclusiveOrExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(bitwiseInclusiveOrExpression.type))) {
             warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression, "Bitwise inclusive OR operation of expressions whose types are incompatible is discouraged for beginners."));
         }
-        if (!type.equals(bitwiseExclusiveOrExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(bitwiseExclusiveOrExpression.type))) {
             warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression, "Bitwise inclusive OR operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 
-    public static BitwiseInclusiveOrOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        BitwiseInclusiveOrExpression bitwiseInclusiveOrExpression = BitwiseInclusiveOrExpression.parse(sentence, table);
+    public static BitwiseInclusiveOrOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        BitwiseInclusiveOrExpression bitwiseInclusiveOrExpression = BitwiseInclusiveOrExpression.parse(code, table);
         if (bitwiseInclusiveOrExpression instanceof BitwiseInclusiveOrOperation) {
             return (BitwiseInclusiveOrOperation) bitwiseInclusiveOrExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

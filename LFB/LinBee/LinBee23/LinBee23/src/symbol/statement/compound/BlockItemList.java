@@ -1,11 +1,11 @@
 package symbol.statement.compound;
 
 import symbol.base.blank.Blank;
-import symbol.symbol.Nonterminal;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Nonterminal;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 import java.util.ArrayList;
 
@@ -33,17 +33,17 @@ public class BlockItemList extends Nonterminal {
         return symbols.toArray(new Symbol[0]);
     }
 
-    public static BlockItemList parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static BlockItemList parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         ArrayList<BlockItem> blockItem = new ArrayList<>();
         ArrayList<Blank> blankAfterBlockItem = new ArrayList<>();
-        while (!sentence.startsWith("}")) {
+        while (!code.startsWith("}")) {
             try {
-                blockItem.add(BlockItem.parse(sentence, table));
-                clone = sentence.clone();
-                blankAfterBlockItem.add(Blank.parse(sentence, table));
+                blockItem.add(BlockItem.parse(code, table));
+                clone = code.clone();
+                blankAfterBlockItem.add(Blank.parse(code, table));
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

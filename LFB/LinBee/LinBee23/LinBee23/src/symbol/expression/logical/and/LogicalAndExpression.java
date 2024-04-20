@@ -1,13 +1,13 @@
 package symbol.expression.logical.and;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.bitwise.inclusive.BitwiseInclusiveOrExpression;
 import symbol.expression.logical.or.LogicalOrExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class LogicalAndExpression extends LogicalOrExpression {
 
@@ -15,15 +15,15 @@ public abstract class LogicalAndExpression extends LogicalOrExpression {
         super(type, symbols);
     }
 
-    public static LogicalAndExpression parse(Sentence sentence, Table table) throws InvalidityException {
-        LogicalAndExpression logicalAndExpression = BitwiseInclusiveOrExpression.parse(sentence, table);
+    public static LogicalAndExpression parse(Code code, Table table) throws InvalidityException {
+        LogicalAndExpression logicalAndExpression = BitwiseInclusiveOrExpression.parse(code, table);
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankBeforeLogicalAndSign = Blank.parse(sentence, table);
-                LogicalAndSign logicalOrSign = LogicalAndSign.parse(sentence, table);
-                Blank blankAfterLogicalAndSign = Blank.parse(sentence, table);
-                BitwiseInclusiveOrExpression bitwiseInclusiveOrExpression = BitwiseInclusiveOrExpression.parse(sentence, table);
+                Blank blankBeforeLogicalAndSign = Blank.parse(code, table);
+                LogicalAndSign logicalOrSign = LogicalAndSign.parse(code, table);
+                Blank blankAfterLogicalAndSign = Blank.parse(code, table);
+                BitwiseInclusiveOrExpression bitwiseInclusiveOrExpression = BitwiseInclusiveOrExpression.parse(code, table);
                 logicalAndExpression = new LogicalAndOperation(
                         logicalAndExpression,
                         blankBeforeLogicalAndSign,
@@ -31,7 +31,7 @@ public abstract class LogicalAndExpression extends LogicalOrExpression {
                         blankAfterLogicalAndSign,
                         bitwiseInclusiveOrExpression);
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

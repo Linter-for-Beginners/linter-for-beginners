@@ -1,12 +1,12 @@
 package symbol.declaration.parameter;
 
 import symbol.declaration.type.TypeName;
-import symbol.symbol.Nonterminal;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Nonterminal;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class ParameterDeclaration extends Nonterminal {
 
@@ -14,17 +14,17 @@ public abstract class ParameterDeclaration extends Nonterminal {
         super(type, symbols);
     }
 
-    public static ParameterDeclaration parse(Sentence sentence, Table table) throws InvalidityException {
+    public static ParameterDeclaration parse(Code code, Table table) throws InvalidityException {
         try {
-            return SimpleDeclaration.parse(sentence, table);
+            return SimpleDeclaration.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         try {
-            return TypeName.parse(sentence, table);
+            return TypeName.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         try {
-            return IdentifierParameterDeclaration.parse(sentence, table);
+            return IdentifierParameterDeclaration.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         throw new InvalidityException();

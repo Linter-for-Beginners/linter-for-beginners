@@ -1,28 +1,28 @@
 package symbol.expression.relation;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.equality.EqualityExpression;
 import symbol.expression.shift.ShiftExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 public abstract class RelationalExpression extends EqualityExpression {
     public RelationalExpression(SymbolTypeName type, Symbol[] symbols) {
         super(type, symbols);
     }
 
-    public static RelationalExpression parse(Sentence sentence, Table table) throws InvalidityException {
-        RelationalExpression relationalExpression = ShiftExpression.parse(sentence, table);
+    public static RelationalExpression parse(Code code, Table table) throws InvalidityException {
+        RelationalExpression relationalExpression = ShiftExpression.parse(code, table);
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankBeforeRelationalSign = Blank.parse(sentence, table);
-                RelationalSign relationalSign = RelationalSign.parse(sentence, table);
-                Blank blankAfterRelationalSign = Blank.parse(sentence, table);
-                ShiftExpression shiftExpression = ShiftExpression.parse(sentence, table);
+                Blank blankBeforeRelationalSign = Blank.parse(code, table);
+                RelationalSign relationalSign = RelationalSign.parse(code, table);
+                Blank blankAfterRelationalSign = Blank.parse(code, table);
+                ShiftExpression shiftExpression = ShiftExpression.parse(code, table);
                 relationalExpression = new RelationalOperation(
                         relationalExpression,
                         blankBeforeRelationalSign,
@@ -30,7 +30,7 @@ public abstract class RelationalExpression extends EqualityExpression {
                         blankAfterRelationalSign,
                         shiftExpression);
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

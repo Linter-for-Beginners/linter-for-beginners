@@ -3,11 +3,11 @@ package symbol.declaration.type;
 import symbol.base.blank.Blank;
 import symbol.declaration.declarator.pointer.PointerList;
 import symbol.declaration.type.direct.DirectAbstractDeclarator;
-import symbol.symbol.Nonterminal;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Nonterminal;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 public class AbstractDeclarator extends Nonterminal {
     public final PointerList pointerList;
@@ -27,36 +27,36 @@ public class AbstractDeclarator extends Nonterminal {
         this.directAbstractDeclarator = directAbstractDeclarator;
     }
 
-    public static AbstractDeclarator parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static AbstractDeclarator parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            PointerList pointerList = PointerList.parse(sentence, table);
-            clone = sentence.clone();
+            PointerList pointerList = PointerList.parse(code, table);
+            clone = code.clone();
             try {
-                Blank blankAfterPointerList = Blank.parse(sentence, table);
-                DirectAbstractDeclarator directAbstractDeclarator = DirectAbstractDeclarator.parse(sentence, table);
+                Blank blankAfterPointerList = Blank.parse(code, table);
+                DirectAbstractDeclarator directAbstractDeclarator = DirectAbstractDeclarator.parse(code, table);
                 return new AbstractDeclarator(
                         pointerList,
                         blankAfterPointerList,
                         directAbstractDeclarator);
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 return new AbstractDeclarator(
                         pointerList,
                         null,
                         null);
             }
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
         }
         try {
-            DirectAbstractDeclarator directAbstractDeclarator = DirectAbstractDeclarator.parse(sentence, table);
+            DirectAbstractDeclarator directAbstractDeclarator = DirectAbstractDeclarator.parse(code, table);
             return new AbstractDeclarator(
                     null,
                     null,
                     directAbstractDeclarator);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
         }
         throw new InvalidityException();
     }

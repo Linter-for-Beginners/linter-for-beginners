@@ -3,12 +3,13 @@ package symbol.statement.jump.returned;
 import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.semicolon.Semicolon;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.SymbolTypeName;
 import symbol.statement.jump.JumpStatement;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Danger;
 
 public class ReturnNoneStatement extends JumpStatement {
     public final Keyword keywordReturn;
@@ -27,22 +28,22 @@ public class ReturnNoneStatement extends JumpStatement {
         this.semicolon = semicolon;
     }
 
-    public static ReturnNoneStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static ReturnNoneStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordReturn = Keyword.parse("return", sentence, table);
-            Blank blankBeforeSemicolon = Blank.parse(sentence, table);
-            Semicolon semicolon = Semicolon.parse(sentence, table);
+            Keyword keywordReturn = Keyword.parse("return", code, table);
+            Blank blankBeforeSemicolon = Blank.parse(code, table);
+            Semicolon semicolon = Semicolon.parse(code, table);
             ReturnNoneStatement returnNoneStatement = new ReturnNoneStatement(
                     keywordReturn,
                     blankBeforeSemicolon,
                     semicolon);
-            if (!table.type(table.string).returnType().isVoid()) {
+            if (!SymbolTypeName.returnType(table.type(table.string)).isVoid()) {
                 returnNoneStatement.warnings.add(new Danger(returnNoneStatement, returnNoneStatement, "Lack of expressions in a return statement is dangerous for beginners."));
             }
             return returnNoneStatement;
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

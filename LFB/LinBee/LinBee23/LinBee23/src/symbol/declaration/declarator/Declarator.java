@@ -1,16 +1,13 @@
 package symbol.declaration.declarator;
 
 import symbol.base.blank.Blank;
-import symbol.base.identifier.Identifier;
 import symbol.declaration.declaration.InitialDeclarator;
 import symbol.declaration.declarator.direct.DirectDeclarator;
 import symbol.declaration.declarator.pointer.PointerList;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-
-import java.util.ArrayList;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class Declarator extends InitialDeclarator {
     public final PointerList pointerList;
@@ -30,18 +27,18 @@ public class Declarator extends InitialDeclarator {
         this.directDeclarator = directDeclarator;
     }
 
-    public static Declarator parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static Declarator parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            PointerList pointerList = PointerList.parse(sentence, table);
-            Blank blankAfterPointerList = Blank.parse(sentence, table);
-            DirectDeclarator directDeclarator = DirectDeclarator.parse(sentence, table);
+            PointerList pointerList = PointerList.parse(code, table);
+            Blank blankAfterPointerList = Blank.parse(code, table);
+            DirectDeclarator directDeclarator = DirectDeclarator.parse(code, table);
             return new Declarator(
                     pointerList,
                     blankAfterPointerList,
                     directDeclarator);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

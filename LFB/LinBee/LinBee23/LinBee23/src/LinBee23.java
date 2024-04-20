@@ -1,10 +1,9 @@
 import symbol.base.blank.Blank;
+import symbol.foundation.code.Code;
 import symbol.statement.compound.BlockItemList;
-import symbol.symbol.Symbol;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.type.Table;
-import symbol.symbol.warning.Warning;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.warning.Warning;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,15 +13,15 @@ public class LinBee23 {
 
     public static void main(String[] args) {
         try {
-            Sentence sentence = preprocess(new String(Files.readAllBytes(Paths.get(args.length > 0 ? args[0] : "source.c"))));
+            Code code = preprocess(new String(Files.readAllBytes(Paths.get(args.length > 0 ? args[0] : "source.c"))));
             Table table = new Table();
-            Blank.parse(sentence, table);
-            BlockItemList blockItemList = BlockItemList.parse(sentence, table);
-            Blank.parse(sentence, table);
-            if (sentence.toString().length() > 0) {
-                throw new RuntimeException(sentence.toString().replaceAll("\\s+", " ").trim());
+            Blank.parse(code, table);
+            BlockItemList blockItemList = BlockItemList.parse(code, table);
+            Blank.parse(code, table);
+            if (code.toString().length() > 0) {
+                throw new RuntimeException(code.toString().replaceAll("\\s+", " ").trim());
             }
-            ArrayList<Symbol> symbols = blockItemList.traversal(new ArrayList<Symbol>());
+            Symbol[] symbols = blockItemList.traversal();
             HashSet<Symbol> visited = new HashSet<Symbol>();
             System.out.println("");
             for (Symbol symbol : symbols) {
@@ -41,7 +40,7 @@ public class LinBee23 {
         }
     }
 
-    public static Sentence preprocess(String string) {
+    public static Code preprocess(String string) {
         string = "\n" + string;
         string = string.replaceAll("\\\\\\s*?\n", "");
         string = string.replaceAll("\r\n", "\n");
@@ -170,6 +169,6 @@ public class LinBee23 {
                 }
             }
         }
-        return new Sentence(stringBuilder.toString());
+        return new Code(stringBuilder.toString());
     }
 }

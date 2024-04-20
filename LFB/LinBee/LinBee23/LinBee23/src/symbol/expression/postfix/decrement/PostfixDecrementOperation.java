@@ -1,14 +1,14 @@
 package symbol.expression.postfix.decrement;
 
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.code.Code;
+import symbol.foundation.invalidity.InvalidityException;
 import symbol.expression.postfix.PostfixExpression;
 import symbol.base.blank.Blank;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.warning.Danger;
 
 public class PostfixDecrementOperation extends PostfixExpression {
     public final PostfixExpression postfixExpression;
@@ -18,7 +18,7 @@ public class PostfixDecrementOperation extends PostfixExpression {
     public PostfixDecrementOperation(PostfixExpression postfixExpression,
                                      Blank blankAfterPostfixExpression,
                                      PostfixDecrementSign postfixDecrementSign) {
-        super(SymbolTypeName.parse(postfixExpression.type.toString()), new Symbol[] {
+        super(new SymbolTypeName(postfixExpression.type.toString()), new Symbol[] {
                 postfixExpression,
                 blankAfterPostfixExpression,
                 postfixDecrementSign});
@@ -30,13 +30,13 @@ public class PostfixDecrementOperation extends PostfixExpression {
         }
     }
 
-    public static PostfixDecrementOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        PostfixExpression postfixExpression = PostfixExpression.parse(sentence, table);
+    public static PostfixDecrementOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        PostfixExpression postfixExpression = PostfixExpression.parse(code, table);
         if (postfixExpression instanceof PostfixDecrementOperation) {
             return (PostfixDecrementOperation) postfixExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

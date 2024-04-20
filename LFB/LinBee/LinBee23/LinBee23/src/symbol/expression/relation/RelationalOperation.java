@@ -2,16 +2,15 @@ package symbol.expression.relation;
 
 import symbol.expression.additive.AdditiveExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
-import symbol.symbol.*;
+import symbol.foundation.*;
 import symbol.expression.shift.ShiftExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Danger;
 
 public class RelationalOperation extends RelationalExpression {
     public final RelationalExpression relationalExpression;
@@ -25,7 +24,7 @@ public class RelationalOperation extends RelationalExpression {
                                RelationalSign relationalSign,
                                Blank blankAfterRelationalSign,
                                ShiftExpression shiftExpression) {
-        super(SymbolTypeName.parse("int"), new Symbol[] {
+        super(new SymbolTypeName("int"), new Symbol[] {
                 relationalExpression,
                 blankBeforeRelationalSign,
                 relationalSign,
@@ -54,18 +53,18 @@ public class RelationalOperation extends RelationalExpression {
         if (CommaExpression.effective(shiftExpression)) {
             warnings.add(new Danger(this, shiftExpression, "Relational operation with side effects is dangerous for beginners."));
         }
-        if (!relationalExpression.type.evaluation().equals(shiftExpression.type.evaluation())) {
+        if (!SymbolTypeName.evaluationType(relationalExpression.type).equals(SymbolTypeName.evaluationType(shiftExpression.type))) {
             warnings.add(new Discouragement(this, shiftExpression, "Relational operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 
-    public static RelationalOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        RelationalExpression relationalExpression = RelationalExpression.parse(sentence, table);
+    public static RelationalOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        RelationalExpression relationalExpression = RelationalExpression.parse(code, table);
         if (relationalExpression instanceof RelationalOperation) {
             return (RelationalOperation) relationalExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

@@ -1,12 +1,13 @@
 package symbol.expression.comma;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.assignment.AssignmentExpression;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strangeness;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Strangeness;
 
 public class CommaOperation extends CommaExpression {
     public final CommaExpression commaExpression;
@@ -20,7 +21,7 @@ public class CommaOperation extends CommaExpression {
                           CommaSign commaSign,
                           Blank blankAfterCommaSign,
                           AssignmentExpression assignmentExpression) {
-        super(assignmentExpression.type.evaluation(), new Symbol[] {
+        super(SymbolTypeName.evaluationType(assignmentExpression.type), new Symbol[] {
                 commaExpression,
                 blankBeforeCommaSign,
                 commaSign,
@@ -34,13 +35,13 @@ public class CommaOperation extends CommaExpression {
         warnings.add(new Strangeness(this, commaSign, "Comma operation is strange for beginners."));
     }
 
-    public static CommaOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        CommaExpression commaExpression = CommaExpression.parse(sentence, table);
+    public static CommaOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        CommaExpression commaExpression = CommaExpression.parse(code, table);
         if (commaExpression instanceof CommaOperation) {
             return (CommaOperation) commaExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

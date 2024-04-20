@@ -1,9 +1,9 @@
 package symbol.base.punctuator.brace;
 
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.type.Table;
-import symbol.symbol.Terminal;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.Terminal;
 
 public class LeftBrace extends Terminal {
     public static String[] strings = {"{"};
@@ -12,12 +12,12 @@ public class LeftBrace extends Terminal {
         super(row, column, null, string);
     }
 
-    public static LeftBrace parse(Sentence sentence, Table table) throws InvalidityException {
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
+    public static LeftBrace parse(Code code, Table table) throws InvalidityException {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
         for (String string : strings) {
-            if (sentence.startsWith(string)) {
-                sentence.remove(string.length());
+            if (code.startsWith(string)) {
+                code.remove(string);
                 return new LeftBrace(row, column, string);
             }
         }

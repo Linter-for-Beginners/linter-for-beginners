@@ -7,13 +7,13 @@ import symbol.declaration.declaration.DeclarationSpecifierList;
 import symbol.declaration.type.direct.DirectAbstractDeclarator;
 import symbol.expression.assignment.AssignmentExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Strangeness;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.warning.Danger;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Strangeness;
 
 public class ArrayDirectAbstractDeclarator extends DirectAbstractDeclarator {
     public final DirectAbstractDeclarator directAbstractDeclarator;
@@ -68,13 +68,13 @@ public class ArrayDirectAbstractDeclarator extends DirectAbstractDeclarator {
         }
     }
 
-    public static ArrayDirectAbstractDeclarator parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        DirectAbstractDeclarator directAbstractDeclarator = DirectAbstractDeclarator.parse(sentence, table);
+    public static ArrayDirectAbstractDeclarator parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        DirectAbstractDeclarator directAbstractDeclarator = DirectAbstractDeclarator.parse(code, table);
         if (directAbstractDeclarator instanceof ArrayDirectAbstractDeclarator) {
             return (ArrayDirectAbstractDeclarator) directAbstractDeclarator;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

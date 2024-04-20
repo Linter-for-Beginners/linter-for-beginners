@@ -3,11 +3,11 @@ package symbol.declaration.declarator.pointer;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.asterisk.AsteriskPunctuator;
 import symbol.declaration.declaration.DeclarationSpecifierList;
-import symbol.symbol.Nonterminal;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Nonterminal;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 import java.util.ArrayList;
 
@@ -48,26 +48,26 @@ public class PointerList extends Nonterminal {
         return symbols.toArray(new Symbol[0]);
     }
 
-    public static PointerList parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static PointerList parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         ArrayList<AsteriskPunctuator> asteriskPunctuator = new ArrayList<>();
         ArrayList<Blank> blankAfterAsteriskPunctuator = new ArrayList<>();
         ArrayList<DeclarationSpecifierList> declarationSpecifierList = new ArrayList<>();
         ArrayList<Blank> blankAfterDeclarationSpecifierList = new ArrayList<>();
         while (true) {
             try {
-                asteriskPunctuator.add(AsteriskPunctuator.parse(sentence, table));
-                clone = sentence.clone();
-                blankAfterAsteriskPunctuator.add(Blank.parse(sentence, table));
+                asteriskPunctuator.add(AsteriskPunctuator.parse(code, table));
+                clone = code.clone();
+                blankAfterAsteriskPunctuator.add(Blank.parse(code, table));
                 try {
-                    declarationSpecifierList.add(DeclarationSpecifierList.parse(sentence, table));
-                    clone = sentence.clone();
+                    declarationSpecifierList.add(DeclarationSpecifierList.parse(code, table));
+                    clone = code.clone();
                 } catch (InvalidityException invalidityException) {
                     declarationSpecifierList.add(null);
                 }
-                blankAfterDeclarationSpecifierList.add(Blank.parse(sentence, table));
+                blankAfterDeclarationSpecifierList.add(Blank.parse(code, table));
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

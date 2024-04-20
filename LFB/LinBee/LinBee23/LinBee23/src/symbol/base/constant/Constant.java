@@ -1,13 +1,13 @@
 package symbol.base.constant;
 
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 import symbol.base.constant.character.CharacterConstant;
 import symbol.base.constant.floating.FloatingConstant;
 import symbol.base.constant.integer.IntegerConstant;
-import symbol.symbol.*;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.*;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class Constant extends Terminal {
 
@@ -15,17 +15,17 @@ public abstract class Constant extends Terminal {
         super(row, column, type, string);
     }
 
-    public static Constant parse(Sentence sentence, Table table) throws InvalidityException {
+    public static Constant parse(Code code, Table table) throws InvalidityException {
         try {
-            return CharacterConstant.parse(sentence, table);
+            return CharacterConstant.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         try {
-            return FloatingConstant.parse(sentence, table);
+            return FloatingConstant.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         try {
-            return IntegerConstant.parse(sentence, table);
+            return IntegerConstant.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         throw new InvalidityException();

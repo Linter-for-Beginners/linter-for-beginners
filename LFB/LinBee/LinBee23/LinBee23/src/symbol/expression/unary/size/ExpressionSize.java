@@ -4,12 +4,12 @@ import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
 import symbol.expression.comma.CommaExpression;
 import symbol.expression.unary.UnaryExpression;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Danger;
 
 public class ExpressionSize extends UnaryExpression {
     public final Keyword keywordSizeof;
@@ -19,7 +19,7 @@ public class ExpressionSize extends UnaryExpression {
     public ExpressionSize(Keyword keywordSizeof,
                           Blank blankAfterKeywordSizeof,
                           UnaryExpression unaryExpression) {
-        super(SymbolTypeName.parse("size_t"), new Symbol[] {
+        super(new SymbolTypeName("size_t"), new Symbol[] {
                 keywordSizeof,
                 blankAfterKeywordSizeof,
                 unaryExpression});
@@ -31,18 +31,18 @@ public class ExpressionSize extends UnaryExpression {
         }
     }
 
-    public static ExpressionSize parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static ExpressionSize parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordSizeof = Keyword.parse("sizeof", sentence, table);
-            Blank blankAfterKeywordSizeof = Blank.parse(sentence, table);
-            UnaryExpression unaryExpression = UnaryExpression.parse(sentence, table);
+            Keyword keywordSizeof = Keyword.parse("sizeof", code, table);
+            Blank blankAfterKeywordSizeof = Blank.parse(code, table);
+            UnaryExpression unaryExpression = UnaryExpression.parse(code, table);
             return new ExpressionSize(
                     keywordSizeof,
                     blankAfterKeywordSizeof,
                     unaryExpression);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

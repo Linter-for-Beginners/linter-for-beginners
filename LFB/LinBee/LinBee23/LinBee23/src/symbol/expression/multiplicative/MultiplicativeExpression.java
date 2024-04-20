@@ -1,28 +1,28 @@
 package symbol.expression.multiplicative;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.additive.AdditiveExpression;
 import symbol.expression.cast.CastExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class MultiplicativeExpression extends AdditiveExpression {
     public MultiplicativeExpression(SymbolTypeName type, Symbol[] symbols) {
         super(type, symbols);
     }
 
-    public static MultiplicativeExpression parse(Sentence sentence, Table table) throws InvalidityException {
-        MultiplicativeExpression multiplicativeExpression = CastExpression.parse(sentence, table);
+    public static MultiplicativeExpression parse(Code code, Table table) throws InvalidityException {
+        MultiplicativeExpression multiplicativeExpression = CastExpression.parse(code, table);
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankBeforeMultiplicativeSign = Blank.parse(sentence, table);
-                MultiplicativeSign multiplicativeSign = MultiplicativeSign.parse(sentence, table);
-                Blank blankAfterMultiplicativeSign = Blank.parse(sentence, table);
-                CastExpression castExpression = CastExpression.parse(sentence, table);
+                Blank blankBeforeMultiplicativeSign = Blank.parse(code, table);
+                MultiplicativeSign multiplicativeSign = MultiplicativeSign.parse(code, table);
+                Blank blankAfterMultiplicativeSign = Blank.parse(code, table);
+                CastExpression castExpression = CastExpression.parse(code, table);
                 multiplicativeExpression = new MultiplicativeOperation(
                         multiplicativeExpression,
                         blankBeforeMultiplicativeSign,
@@ -30,7 +30,7 @@ public abstract class MultiplicativeExpression extends AdditiveExpression {
                         blankAfterMultiplicativeSign,
                         castExpression);
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

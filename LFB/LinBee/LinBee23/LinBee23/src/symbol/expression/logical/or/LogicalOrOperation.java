@@ -1,16 +1,15 @@
 package symbol.expression.logical.or;
 
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
-import symbol.symbol.*;
+import symbol.foundation.*;
 import symbol.expression.logical.and.LogicalAndExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Danger;
 
 public class LogicalOrOperation extends LogicalOrExpression {
     public final LogicalOrExpression logicalOrExpression;
@@ -24,7 +23,7 @@ public class LogicalOrOperation extends LogicalOrExpression {
                               LogicalOrSign logicalOrSign,
                               Blank blankAfterLogicalOrSign,
                               LogicalAndExpression logicalAndExpression) {
-        super(SymbolTypeName.promotion(logicalOrExpression.type.evaluation(), logicalAndExpression.type.evaluation()), new Symbol[] {
+        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(logicalOrExpression.type), SymbolTypeName.evaluationType(logicalAndExpression.type)), new Symbol[] {
                 logicalOrExpression,
                 blankBeforeLogicalOrSign,
                 logicalOrSign,
@@ -47,21 +46,21 @@ public class LogicalOrOperation extends LogicalOrExpression {
         if (CommaExpression.effective(logicalAndExpression)) {
             warnings.add(new Danger(this, logicalAndExpression, "Logical inclusive OR operation with side effects is dangerous for beginners."));
         }
-        if (!type.equals(logicalOrExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(logicalOrExpression.type))) {
             warnings.add(new Discouragement(this, logicalOrExpression, "Logical inclusive OR operation of expressions whose types are incompatible is discouraged for beginners."));
         }
-        if (!type.equals(logicalAndExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(logicalAndExpression.type))) {
             warnings.add(new Discouragement(this, logicalAndExpression, "Logical inclusive OR operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 
-    public static LogicalOrOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        LogicalOrExpression logicalOrExpression = LogicalOrExpression.parse(sentence, table);
+    public static LogicalOrOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        LogicalOrExpression logicalOrExpression = LogicalOrExpression.parse(code, table);
         if (logicalOrExpression instanceof LogicalOrOperation) {
             return (LogicalOrOperation) logicalOrExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

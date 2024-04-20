@@ -4,12 +4,13 @@ import symbol.expression.cast.CastExpression;
 import symbol.expression.comma.CommaExpression;
 import symbol.expression.unary.UnaryExpression;
 import symbol.base.blank.Blank;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Discouragement;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.type.Table;
+import symbol.foundation.warning.Danger;
+import symbol.foundation.warning.Discouragement;
 
 public class UnaryPlusOperation extends UnaryExpression {
     public final UnaryPlusSign unaryPlusSign;
@@ -19,7 +20,7 @@ public class UnaryPlusOperation extends UnaryExpression {
     public UnaryPlusOperation(UnaryPlusSign unaryPlusSign,
                               Blank blankAfterUnaryPlusSign,
                               CastExpression castExpression) {
-        super(castExpression.type.evaluation(), new Symbol[] {
+        super(SymbolTypeName.evaluationType(castExpression.type), new Symbol[] {
                 unaryPlusSign,
                 blankAfterUnaryPlusSign,
                 castExpression});
@@ -34,18 +35,18 @@ public class UnaryPlusOperation extends UnaryExpression {
         }
     }
 
-    public static UnaryPlusOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static UnaryPlusOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            UnaryPlusSign unaryPlusSign = UnaryPlusSign.parse(sentence, table);
-            Blank blankAfterUnaryPlusSign = Blank.parse(sentence, table);
-            CastExpression castExpression = CastExpression.parse(sentence, table);
+            UnaryPlusSign unaryPlusSign = UnaryPlusSign.parse(code, table);
+            Blank blankAfterUnaryPlusSign = Blank.parse(code, table);
+            CastExpression castExpression = CastExpression.parse(code, table);
             return new UnaryPlusOperation(
                     unaryPlusSign,
                     blankAfterUnaryPlusSign,
                     castExpression);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

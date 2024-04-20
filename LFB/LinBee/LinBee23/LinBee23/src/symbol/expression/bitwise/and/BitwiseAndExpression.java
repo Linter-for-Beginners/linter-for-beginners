@@ -1,28 +1,28 @@
 package symbol.expression.bitwise.and;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.bitwise.exclusive.BitwiseExclusiveOrExpression;
 import symbol.expression.equality.EqualityExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 public abstract class BitwiseAndExpression extends BitwiseExclusiveOrExpression {
     public BitwiseAndExpression(SymbolTypeName type, Symbol[] symbols) {
         super(type, symbols);
     }
 
-    public static BitwiseAndExpression parse(Sentence sentence, Table table) throws InvalidityException {
-        BitwiseAndExpression bitwiseAndExpression = EqualityExpression.parse(sentence, table);
+    public static BitwiseAndExpression parse(Code code, Table table) throws InvalidityException {
+        BitwiseAndExpression bitwiseAndExpression = EqualityExpression.parse(code, table);
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankBeforeBitwiseAndSign = Blank.parse(sentence, table);
-                BitwiseAndSign bitwiseAndSign = BitwiseAndSign.parse(sentence, table);
-                Blank blankAfterBitwiseAndSign = Blank.parse(sentence, table);
-                EqualityExpression equalityExpression = EqualityExpression.parse(sentence, table);
+                Blank blankBeforeBitwiseAndSign = Blank.parse(code, table);
+                BitwiseAndSign bitwiseAndSign = BitwiseAndSign.parse(code, table);
+                Blank blankAfterBitwiseAndSign = Blank.parse(code, table);
+                EqualityExpression equalityExpression = EqualityExpression.parse(code, table);
                 bitwiseAndExpression = new BitwiseAndOperation(
                         bitwiseAndExpression,
                         blankBeforeBitwiseAndSign,
@@ -30,7 +30,7 @@ public abstract class BitwiseAndExpression extends BitwiseExclusiveOrExpression 
                         blankAfterBitwiseAndSign,
                         equalityExpression);
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

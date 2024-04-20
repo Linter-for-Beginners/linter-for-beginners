@@ -7,13 +7,13 @@ import symbol.declaration.declaration.DeclarationSpecifierList;
 import symbol.declaration.declarator.direct.DirectDeclarator;
 import symbol.expression.assignment.AssignmentExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Strangeness;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Danger;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Strangeness;
 
 public class ArrayDirectDeclarator extends DirectDeclarator {
     public final DirectDeclarator directDeclarator;
@@ -67,13 +67,13 @@ public class ArrayDirectDeclarator extends DirectDeclarator {
         }
     }
 
-    public static ArrayDirectDeclarator parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        DirectDeclarator directDeclarator = DirectDeclarator.parse(sentence, table);
+    public static ArrayDirectDeclarator parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        DirectDeclarator directDeclarator = DirectDeclarator.parse(code, table);
         if (directDeclarator instanceof ArrayDirectDeclarator) {
             return (ArrayDirectDeclarator) directDeclarator;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

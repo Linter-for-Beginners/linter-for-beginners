@@ -2,16 +2,15 @@ package symbol.expression.equality;
 
 import symbol.expression.additive.AdditiveExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
+import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
-import symbol.symbol.*;
+import symbol.foundation.*;
 import symbol.expression.relation.RelationalExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Danger;
 
 public class EqualityOperation extends EqualityExpression {
     public final EqualityExpression equalityExpression;
@@ -25,7 +24,7 @@ public class EqualityOperation extends EqualityExpression {
                              EqualitySign equalitySign,
                              Blank blankAfterEqualitySign,
                              RelationalExpression relationalExpression) {
-        super(SymbolTypeName.parse("int"), new Symbol[] {
+        super(new SymbolTypeName("int"), new Symbol[] {
                 equalityExpression,
                 blankBeforeEqualitySign,
                 equalitySign,
@@ -54,18 +53,18 @@ public class EqualityOperation extends EqualityExpression {
         if (CommaExpression.effective(relationalExpression)) {
             warnings.add(new Danger(this, relationalExpression, "Equality operation with side effects is dangerous for beginners."));
         }
-        if (!equalityExpression.type.evaluation().equals(relationalExpression.type.evaluation())) {
+        if (!SymbolTypeName.evaluationType(equalityExpression.type).equals(SymbolTypeName.evaluationType(relationalExpression.type))) {
             warnings.add(new Discouragement(this, relationalExpression, "Equality operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 
-    public static EqualityOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        EqualityExpression equalityExpression = EqualityExpression.parse(sentence, table);
+    public static EqualityOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        EqualityExpression equalityExpression = EqualityExpression.parse(code, table);
         if (equalityExpression instanceof EqualityOperation) {
             return (EqualityOperation) equalityExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

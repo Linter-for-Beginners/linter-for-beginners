@@ -3,13 +3,13 @@ package symbol.declaration.initialization;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.comma.CommaPunctuator;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.Nonterminal;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.Nonterminal;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.warning.Danger;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class InitializerList extends Nonterminal {
                            Blank[] blankBeforeCommaPunctuator,
                            CommaPunctuator[] commaPunctuator,
                            Blank[] blankAfterCommaPunctuator) {
-        super(SymbolTypeName.unknown(), symbols(
+        super(new SymbolTypeName(), symbols(
                 initializer,
                 blankBeforeCommaPunctuator,
                 commaPunctuator,
@@ -57,22 +57,22 @@ public class InitializerList extends Nonterminal {
         return symbols.toArray(new Symbol[0]);
     }
 
-    public static InitializerList parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static InitializerList parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         ArrayList<Initializer> initializer = new ArrayList<>();
         ArrayList<Blank> blankBeforeCommaPunctuator = new ArrayList<>();
         ArrayList<CommaPunctuator> commaPunctuator = new ArrayList<>();
         ArrayList<Blank> blankAfterCommaPunctuator = new ArrayList<>();
         while (true) {
             try {
-                initializer.add(Initializer.parse(sentence, table));
-                clone = sentence.clone();
-                blankBeforeCommaPunctuator.add(Blank.parse(sentence, table));
-                commaPunctuator.add(CommaPunctuator.parse(sentence, table));
-                clone = sentence.clone();
-                blankAfterCommaPunctuator.add(Blank.parse(sentence, table));
+                initializer.add(Initializer.parse(code, table));
+                clone = code.clone();
+                blankBeforeCommaPunctuator.add(Blank.parse(code, table));
+                commaPunctuator.add(CommaPunctuator.parse(code, table));
+                clone = code.clone();
+                blankAfterCommaPunctuator.add(Blank.parse(code, table));
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

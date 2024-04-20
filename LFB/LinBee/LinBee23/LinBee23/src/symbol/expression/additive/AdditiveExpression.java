@@ -1,28 +1,28 @@
 package symbol.expression.additive;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.multiplicative.MultiplicativeExpression;
 import symbol.expression.shift.ShiftExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class AdditiveExpression extends ShiftExpression {
     public AdditiveExpression(SymbolTypeName type, Symbol[] symbols) {
         super(type, symbols);
     }
 
-    public static AdditiveExpression parse(Sentence sentence, Table table) throws InvalidityException {
-        AdditiveExpression additiveExpression = (AdditiveExpression) MultiplicativeExpression.parse(sentence, table);
+    public static AdditiveExpression parse(Code code, Table table) throws InvalidityException {
+        AdditiveExpression additiveExpression = (AdditiveExpression) MultiplicativeExpression.parse(code, table);
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankBeforeAdditiveSign = Blank.parse(sentence, table);
-                AdditiveSign additiveSign = AdditiveSign.parse(sentence, table);
-                Blank blankAfterAdditiveSign = Blank.parse(sentence, table);
-                MultiplicativeExpression multiplicativeExpression = MultiplicativeExpression.parse(sentence, table);
+                Blank blankBeforeAdditiveSign = Blank.parse(code, table);
+                AdditiveSign additiveSign = AdditiveSign.parse(code, table);
+                Blank blankAfterAdditiveSign = Blank.parse(code, table);
+                MultiplicativeExpression multiplicativeExpression = MultiplicativeExpression.parse(code, table);
                 additiveExpression = new AdditiveOperation(
                         additiveExpression,
                         blankBeforeAdditiveSign,
@@ -30,7 +30,7 @@ public abstract class AdditiveExpression extends ShiftExpression {
                         blankAfterAdditiveSign,
                         multiplicativeExpression);
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

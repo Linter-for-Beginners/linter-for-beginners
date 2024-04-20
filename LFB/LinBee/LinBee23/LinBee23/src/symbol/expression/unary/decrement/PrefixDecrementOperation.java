@@ -1,14 +1,14 @@
 package symbol.expression.unary.decrement;
 
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.code.Code;
+import symbol.foundation.invalidity.InvalidityException;
 import symbol.expression.unary.UnaryExpression;
 import symbol.base.blank.Blank;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.warning.Danger;
 
 public class PrefixDecrementOperation extends UnaryExpression {
     public final PrefixDecrementSign prefixDecrementSign;
@@ -18,7 +18,7 @@ public class PrefixDecrementOperation extends UnaryExpression {
     public PrefixDecrementOperation(PrefixDecrementSign prefixDecrementSign,
                                     Blank blankAfterPrefixDecrementSign,
                                     UnaryExpression unaryExpression) {
-        super(SymbolTypeName.parse(unaryExpression.type.toString()), new Symbol[] {
+        super(new SymbolTypeName(unaryExpression.type.toString()), new Symbol[] {
                 prefixDecrementSign,
                 blankAfterPrefixDecrementSign,
                 unaryExpression});
@@ -30,18 +30,18 @@ public class PrefixDecrementOperation extends UnaryExpression {
         }
     }
 
-    public static PrefixDecrementOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static PrefixDecrementOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            PrefixDecrementSign prefixDecrementSign = PrefixDecrementSign.parse(sentence, table);
-            Blank blankAfterPrefixDecrementSign = Blank.parse(sentence, table);
-            UnaryExpression unaryExpression = UnaryExpression.parse(sentence, table);
+            PrefixDecrementSign prefixDecrementSign = PrefixDecrementSign.parse(code, table);
+            Blank blankAfterPrefixDecrementSign = Blank.parse(code, table);
+            UnaryExpression unaryExpression = UnaryExpression.parse(code, table);
             return new PrefixDecrementOperation(
                     prefixDecrementSign,
                     blankAfterPrefixDecrementSign,
                     unaryExpression);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

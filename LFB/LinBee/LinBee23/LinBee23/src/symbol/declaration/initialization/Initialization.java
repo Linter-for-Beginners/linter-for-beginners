@@ -5,11 +5,11 @@ import symbol.base.punctuator.initialization.EqualPunctuator;
 import symbol.declaration.declaration.InitialDeclarator;
 import symbol.declaration.declarator.Declarator;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Danger;
 
 public class Initialization extends InitialDeclarator {
     public final Declarator declarator;
@@ -42,14 +42,14 @@ public class Initialization extends InitialDeclarator {
         }
     }
 
-    public static Initialization parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static Initialization parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Declarator declarator = Declarator.parse(sentence, table);
-            Blank blankBeforeEqualPunctuator = Blank.parse(sentence, table);
-            EqualPunctuator equalPunctuator = EqualPunctuator.parse(sentence, table);
-            Blank blankAfterEqualPunctuator = Blank.parse(sentence, table);
-            Initializer initializer = Initializer.parse(sentence, table);
+            Declarator declarator = Declarator.parse(code, table);
+            Blank blankBeforeEqualPunctuator = Blank.parse(code, table);
+            EqualPunctuator equalPunctuator = EqualPunctuator.parse(code, table);
+            Blank blankAfterEqualPunctuator = Blank.parse(code, table);
+            Initializer initializer = Initializer.parse(code, table);
             return new Initialization(
                     declarator,
                     blankBeforeEqualPunctuator,
@@ -57,7 +57,7 @@ public class Initialization extends InitialDeclarator {
                     blankAfterEqualPunctuator,
                     initializer);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

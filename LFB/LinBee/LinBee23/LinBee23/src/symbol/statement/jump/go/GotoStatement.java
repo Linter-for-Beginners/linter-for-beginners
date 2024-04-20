@@ -5,11 +5,11 @@ import symbol.base.identifier.Identifier;
 import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.semicolon.Semicolon;
 import symbol.statement.jump.JumpStatement;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strangeness;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.warning.Strangeness;
 
 public class GotoStatement extends JumpStatement {
     public final Keyword keywordGoto;
@@ -37,14 +37,14 @@ public class GotoStatement extends JumpStatement {
         warnings.add(new Strangeness(this, keywordGoto, "Jump statement containing a label is strange for beginners."));
     }
 
-    public static GotoStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static GotoStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordGoto = Keyword.parse("goto", sentence, table);
-            Blank blankAfterKeywordGoto = Blank.parse(sentence, table);
-            Identifier identifier = Identifier.parse(sentence, table);
-            Blank blankBeforeSemicolon = Blank.parse(sentence, table);
-            Semicolon semicolon = Semicolon.parse(sentence, table);
+            Keyword keywordGoto = Keyword.parse("goto", code, table);
+            Blank blankAfterKeywordGoto = Blank.parse(code, table);
+            Identifier identifier = Identifier.parse(code, table);
+            Blank blankBeforeSemicolon = Blank.parse(code, table);
+            Semicolon semicolon = Semicolon.parse(code, table);
             return new GotoStatement(
                     keywordGoto,
                     blankAfterKeywordGoto,
@@ -52,7 +52,7 @@ public class GotoStatement extends JumpStatement {
                     blankBeforeSemicolon,
                     semicolon);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

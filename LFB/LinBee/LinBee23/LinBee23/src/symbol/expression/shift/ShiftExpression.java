@@ -1,28 +1,28 @@
 package symbol.expression.shift;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.additive.AdditiveExpression;
 import symbol.expression.relation.RelationalExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class ShiftExpression extends RelationalExpression {
     public ShiftExpression(SymbolTypeName type, Symbol[] symbols) {
         super(type, symbols);
     }
 
-    public static ShiftExpression parse(Sentence sentence, Table table) throws InvalidityException {
-        ShiftExpression shiftExpression = AdditiveExpression.parse(sentence, table);
+    public static ShiftExpression parse(Code code, Table table) throws InvalidityException {
+        ShiftExpression shiftExpression = AdditiveExpression.parse(code, table);
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankBeforeShiftSign = Blank.parse(sentence, table);
-                ShiftSign shiftSign = ShiftSign.parse(sentence, table);
-                Blank blankAfterShiftSign = Blank.parse(sentence, table);
-                AdditiveExpression additiveExpression = AdditiveExpression.parse(sentence, table);
+                Blank blankBeforeShiftSign = Blank.parse(code, table);
+                ShiftSign shiftSign = ShiftSign.parse(code, table);
+                Blank blankAfterShiftSign = Blank.parse(code, table);
+                AdditiveExpression additiveExpression = AdditiveExpression.parse(code, table);
                 shiftExpression = new ShiftOperation(
                         shiftExpression,
                         blankBeforeShiftSign,
@@ -30,7 +30,7 @@ public abstract class ShiftExpression extends RelationalExpression {
                         blankAfterShiftSign,
                         additiveExpression);
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

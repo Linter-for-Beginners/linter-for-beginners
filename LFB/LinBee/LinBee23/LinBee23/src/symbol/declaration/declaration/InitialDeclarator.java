@@ -8,14 +8,14 @@ import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.declaration.declarator.Declarator;
 import symbol.declaration.initialization.Initialization;
 import symbol.declaration.initialization.Initializer;
-import symbol.symbol.Nonterminal;
-import symbol.symbol.Symbol;
-import symbol.symbol.Terminal;
-import symbol.symbol.type.Table;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.Nonterminal;
+import symbol.foundation.Symbol;
+import symbol.foundation.Terminal;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Danger;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,16 +26,16 @@ public abstract class InitialDeclarator extends Nonterminal {
         super(type, symbols);
     }
 
-    public static InitialDeclarator parse(Sentence sentence, Table table, String specifier) throws InvalidityException {
-        Declarator declarator = Declarator.parse(sentence, table);
-        Sentence clone = sentence.clone();
+    public static InitialDeclarator parse(Code code, Table table, String specifier) throws InvalidityException {
+        Declarator declarator = Declarator.parse(code, table);
+        Code clone = code.clone();
         InitialDeclarator initialDeclarator = declarator;
         String string = declare(specifier, declarator, table);
         try {
-            Blank blankBeforeEqualPunctuator = Blank.parse(sentence, table);
-            EqualPunctuator equalPunctuator = EqualPunctuator.parse(sentence, table);
-            Blank blankAfterEqualPunctuator = Blank.parse(sentence, table);
-            Initializer initializer = Initializer.parse(sentence, table);
+            Blank blankBeforeEqualPunctuator = Blank.parse(code, table);
+            EqualPunctuator equalPunctuator = EqualPunctuator.parse(code, table);
+            Blank blankAfterEqualPunctuator = Blank.parse(code, table);
+            Initializer initializer = Initializer.parse(code, table);
             initialDeclarator = new Initialization(
                     declarator,
                     blankBeforeEqualPunctuator,
@@ -43,10 +43,10 @@ public abstract class InitialDeclarator extends Nonterminal {
                     blankAfterEqualPunctuator,
                     initializer);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
         }
         if (initialDeclarator instanceof Initialization initialization) {
-            if (!table.type(string).equals(initialization.initializer.type.evaluation())) {
+            if (!table.type(string).equals(SymbolTypeName.evaluationType(initialization.initializer.type))) {
                 initialization.warnings.add(new Danger(initialization, initialization.initializer, "Initialization containing an expression whose type is incompatible is dangerous for beginners."));
             }
         }
@@ -54,7 +54,7 @@ public abstract class InitialDeclarator extends Nonterminal {
     }
 
     private static String declare(String specifier, Declarator declarator, Table table) {
-        ArrayList<Symbol> symbols = declarator.traversal(new ArrayList<>());
+        Symbol[] symbols = declarator.traversal();
         HashSet<Symbol> visited = new HashSet<>();
         ArrayList<Terminal> terminals = new ArrayList<>();
         terminals.add(null);
@@ -108,7 +108,7 @@ public abstract class InitialDeclarator extends Nonterminal {
                 stringBuilder.append(terminal.toString());
             }
         }
-        table.declare(string, SymbolTypeName.parse(stringBuilder.toString().replaceAll("\\s+", " ").trim()));
+        table.declare(string, new SymbolTypeName(stringBuilder.toString().replaceAll("\\s+", " ").trim()));
         return string;
     }
 }

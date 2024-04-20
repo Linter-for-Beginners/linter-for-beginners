@@ -5,10 +5,10 @@ import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.declaration.declarator.Declarator;
 import symbol.declaration.declarator.direct.DirectDeclarator;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class ParenthesizedDeclarator extends DirectDeclarator {
     public final LeftParenthesis leftParenthesis;
@@ -35,14 +35,14 @@ public class ParenthesizedDeclarator extends DirectDeclarator {
         this.rightParenthesis = rightParenthesis;
     }
 
-    public static ParenthesizedDeclarator parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static ParenthesizedDeclarator parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-            Blank blankBeforeDeclarator = Blank.parse(sentence, table);
-            Declarator declarator = Declarator.parse(sentence, table);
-            Blank blankAfterDeclarator = Blank.parse(sentence, table);
-            RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
+            LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+            Blank blankBeforeDeclarator = Blank.parse(code, table);
+            Declarator declarator = Declarator.parse(code, table);
+            Blank blankAfterDeclarator = Blank.parse(code, table);
+            RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
             return new ParenthesizedDeclarator(
                     leftParenthesis,
                     blankBeforeDeclarator,
@@ -50,7 +50,7 @@ public class ParenthesizedDeclarator extends DirectDeclarator {
                     blankAfterDeclarator,
                     rightParenthesis);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

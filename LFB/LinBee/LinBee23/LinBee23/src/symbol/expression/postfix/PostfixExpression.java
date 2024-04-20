@@ -1,10 +1,10 @@
 package symbol.expression.postfix;
 
-import symbol.base.string.StringLiteral;
 import symbol.expression.primary.string.StringLiteralPrimaryExpression;
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 import symbol.expression.postfix.compound.CompoundLiteral;
-import symbol.symbol.*;
+import symbol.foundation.*;
 import symbol.expression.comma.CommaExpression;
 import symbol.expression.postfix.array.ArraySubscripting;
 import symbol.expression.postfix.decrement.PostfixDecrementOperation;
@@ -20,38 +20,35 @@ import symbol.base.punctuator.bracket.LeftBracket;
 import symbol.base.punctuator.bracket.RightBracket;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.type.unknown.SymbolUnknownTypeName;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Discouragement;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Danger;
+import symbol.foundation.warning.Discouragement;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public abstract class PostfixExpression extends UnaryExpression {
     public PostfixExpression(SymbolTypeName type, Symbol[] symbols) {
         super(type, symbols);
     }
 
-    public static PostfixExpression parse(Sentence sentence, Table table) throws InvalidityException {
+    public static PostfixExpression parse(Code code, Table table) throws InvalidityException {
         try {
-            return CompoundLiteral.parse(sentence, table);
+            return CompoundLiteral.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
-        PostfixExpression postfixExpression = PrimaryExpression.parse(sentence, table);
+        PostfixExpression postfixExpression = PrimaryExpression.parse(code, table);
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankAfterPostfixExpression = Blank.parse(sentence, table);
-                Sentence temporary = sentence.clone();
+                Blank blankAfterPostfixExpression = Blank.parse(code, table);
+                Code temporary = code.clone();
                 try {
-                    LeftBracket leftBracket = LeftBracket.parse(sentence, table);
-                    Blank blankBeforeCommaExpression = Blank.parse(sentence, table);
-                    CommaExpression commaExpression = CommaExpression.parse(sentence, table);
-                    Blank blankAfterCommaExpression = Blank.parse(sentence, table);
-                    RightBracket rightBracket = RightBracket.parse(sentence, table);
+                    LeftBracket leftBracket = LeftBracket.parse(code, table);
+                    Blank blankBeforeCommaExpression = Blank.parse(code, table);
+                    CommaExpression commaExpression = CommaExpression.parse(code, table);
+                    Blank blankAfterCommaExpression = Blank.parse(code, table);
+                    RightBracket rightBracket = RightBracket.parse(code, table);
                     postfixExpression = new ArraySubscripting(
                             postfixExpression,
                             blankAfterPostfixExpression,
@@ -62,17 +59,17 @@ public abstract class PostfixExpression extends UnaryExpression {
                             rightBracket);
                     continue;
                 } catch (InvalidityException invalidityException) {
-                    sentence.set(temporary);
+                    code.set(temporary);
                 }
                 try {
-                    LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-                    Blank blankBeforeArgumentExpressionList = Blank.parse(sentence, table);
-                    ArgumentExpressionList argumentExpressionList = ArgumentExpressionList.parse(sentence, table);
-                    Blank blankAfterArgumentExpressionList = Blank.parse(sentence, table);
-                    RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
+                    LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+                    Blank blankBeforeArgumentExpressionList = Blank.parse(code, table);
+                    ArgumentExpressionList argumentExpressionList = ArgumentExpressionList.parse(code, table);
+                    Blank blankAfterArgumentExpressionList = Blank.parse(code, table);
+                    RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
                     CommaExpression innermostPostfixExpression = CommaExpression.innermost(postfixExpression);
-                    SymbolTypeName[] parameterType = postfixExpression.type.parameterType();
-                    SymbolTypeName returnType = postfixExpression.type.returnType();
+                    SymbolTypeName[] parameterType = SymbolTypeName.parameterType(postfixExpression.type);
+                    SymbolTypeName returnType = SymbolTypeName.returnType(postfixExpression.type);
                     postfixExpression = new FunctionCall(returnType,
                             postfixExpression,
                             blankAfterPostfixExpression,
@@ -111,7 +108,7 @@ public abstract class PostfixExpression extends UnaryExpression {
                     if (number != null) {
                         ArrayList<SymbolTypeName> types = new ArrayList<>();
                         for (SymbolTypeName type : parameterType) {
-                            if (!(type instanceof SymbolUnknownTypeName)) {
+                            if (!type.isUnknown()) {
                                 types.add(type);
                             }
                         }
@@ -129,153 +126,153 @@ public abstract class PostfixExpression extends UnaryExpression {
                                 while (format.contains("%")) {
                                     format = format.substring(format.indexOf("%") + "%".length());
                                     if (format.startsWith("z")) {
-                                        types.add(SymbolTypeName.parse("size_t"));
+                                        types.add(new SymbolTypeName("size_t"));
                                         continue;
                                     }
                                     if (format.startsWith("t")) {
-                                        types.add(SymbolTypeName.parse("ptrdiff_t"));
+                                        types.add(new SymbolTypeName("ptrdiff_t"));
                                         continue;
                                     }
                                     if (format.startsWith("hhd")) {
-                                        types.add(SymbolTypeName.parse("signed char"));
+                                        types.add(new SymbolTypeName("signed char"));
                                         continue;
                                     }
                                     if (format.startsWith("hhu")) {
-                                        types.add(SymbolTypeName.parse("unsigned char"));
+                                        types.add(new SymbolTypeName("unsigned char"));
                                         continue;
                                     }
                                     if (format.startsWith("hd")) {
-                                        types.add(SymbolTypeName.parse("short int"));
+                                        types.add(new SymbolTypeName("short int"));
                                         continue;
                                     }
                                     if (format.startsWith("hu")) {
-                                        types.add(SymbolTypeName.parse("unsigned short int"));
+                                        types.add(new SymbolTypeName("unsigned short int"));
                                         continue;
                                     }
                                     if (format.startsWith("d")) {
-                                        types.add(SymbolTypeName.parse("int"));
+                                        types.add(new SymbolTypeName("int"));
                                         continue;
                                     }
                                     if (format.startsWith("u")) {
-                                        types.add(SymbolTypeName.parse("unsigned int"));
+                                        types.add(new SymbolTypeName("unsigned int"));
                                         continue;
                                     }
                                     if (format.startsWith("ld")) {
-                                        types.add(SymbolTypeName.parse("long int"));
+                                        types.add(new SymbolTypeName("long int"));
                                         continue;
                                     }
                                     if (format.startsWith("lu")) {
-                                        types.add(SymbolTypeName.parse("unsigned long int"));
+                                        types.add(new SymbolTypeName("unsigned long int"));
                                         continue;
                                     }
                                     if (format.startsWith("lld")) {
-                                        types.add(SymbolTypeName.parse("long long int"));
+                                        types.add(new SymbolTypeName("long long int"));
                                         continue;
                                     }
                                     if (format.startsWith("llu")) {
-                                        types.add(SymbolTypeName.parse("unsigned long long int"));
+                                        types.add(new SymbolTypeName("unsigned long long int"));
                                         continue;
                                     }
                                     if (format.startsWith("f")) {
-                                        types.add(SymbolTypeName.parse("double"));
+                                        types.add(new SymbolTypeName("double"));
                                         continue;
                                     }
                                     if (format.startsWith("lf")) {
-                                        types.add(SymbolTypeName.parse("double"));
+                                        types.add(new SymbolTypeName("double"));
                                         continue;
                                     }
                                     if (format.startsWith("Lf")) {
-                                        types.add(SymbolTypeName.parse("long double"));
+                                        types.add(new SymbolTypeName("long double"));
                                         continue;
                                     }
                                     if (format.startsWith("s")) {
-                                        types.add(SymbolTypeName.parse("char *"));
+                                        types.add(new SymbolTypeName("char *"));
                                         continue;
                                     }
                                     if (format.startsWith("c")) {
-                                        types.add(SymbolTypeName.parse("int"));
+                                        types.add(new SymbolTypeName("int"));
                                         continue;
                                     }
-                                    types.add(SymbolTypeName.unknown());
+                                    types.add(new SymbolTypeName());
                                 }
                             }
                             if (innermostPostfixExpression.toString().contains("scanf")) {
                                 while (format.contains("%")) {
                                     format = format.substring(format.indexOf("%") + "%".length());
                                     if (format.startsWith("z")) {
-                                        types.add(SymbolTypeName.parse("size_t *"));
+                                        types.add(new SymbolTypeName("size_t *"));
                                         continue;
                                     }
                                     if (format.startsWith("t")) {
-                                        types.add(SymbolTypeName.parse("ptrdiff_t *"));
+                                        types.add(new SymbolTypeName("ptrdiff_t *"));
                                         continue;
                                     }
                                     if (format.startsWith("hhd")) {
-                                        types.add(SymbolTypeName.parse("signed char *"));
+                                        types.add(new SymbolTypeName("signed char *"));
                                         continue;
                                     }
                                     if (format.startsWith("hhu")) {
-                                        types.add(SymbolTypeName.parse("unsigned char *"));
+                                        types.add(new SymbolTypeName("unsigned char *"));
                                         continue;
                                     }
                                     if (format.startsWith("hd")) {
-                                        types.add(SymbolTypeName.parse("short int *"));
+                                        types.add(new SymbolTypeName("short int *"));
                                         continue;
                                     }
                                     if (format.startsWith("hu")) {
-                                        types.add(SymbolTypeName.parse("unsigned short int *"));
+                                        types.add(new SymbolTypeName("unsigned short int *"));
                                         continue;
                                     }
                                     if (format.startsWith("d")) {
-                                        types.add(SymbolTypeName.parse("int *"));
+                                        types.add(new SymbolTypeName("int *"));
                                         continue;
                                     }
                                     if (format.startsWith("u")) {
-                                        types.add(SymbolTypeName.parse("unsigned int *"));
+                                        types.add(new SymbolTypeName("unsigned int *"));
                                         continue;
                                     }
                                     if (format.startsWith("ld")) {
-                                        types.add(SymbolTypeName.parse("long int *"));
+                                        types.add(new SymbolTypeName("long int *"));
                                         continue;
                                     }
                                     if (format.startsWith("lu")) {
-                                        types.add(SymbolTypeName.parse("unsigned long int *"));
+                                        types.add(new SymbolTypeName("unsigned long int *"));
                                         continue;
                                     }
                                     if (format.startsWith("lld")) {
-                                        types.add(SymbolTypeName.parse("long long int *"));
+                                        types.add(new SymbolTypeName("long long int *"));
                                         continue;
                                     }
                                     if (format.startsWith("llu")) {
-                                        types.add(SymbolTypeName.parse("unsigned long long int *"));
+                                        types.add(new SymbolTypeName("unsigned long long int *"));
                                         continue;
                                     }
                                     if (format.startsWith("f")) {
-                                        types.add(SymbolTypeName.parse("float *"));
+                                        types.add(new SymbolTypeName("float *"));
                                         continue;
                                     }
                                     if (format.startsWith("lf")) {
-                                        types.add(SymbolTypeName.parse("double *"));
+                                        types.add(new SymbolTypeName("double *"));
                                         continue;
                                     }
                                     if (format.startsWith("Lf")) {
-                                        types.add(SymbolTypeName.parse("long double *"));
+                                        types.add(new SymbolTypeName("long double *"));
                                         continue;
                                     }
                                     if (format.startsWith("s")) {
-                                        types.add(SymbolTypeName.parse("char *"));
+                                        types.add(new SymbolTypeName("char *"));
                                         continue;
                                     }
                                     if (format.startsWith("c")) {
-                                        types.add(SymbolTypeName.parse("char *"));
+                                        types.add(new SymbolTypeName("char *"));
                                         continue;
                                     }
-                                    types.add(SymbolTypeName.unknown());
+                                    types.add(new SymbolTypeName());
                                 }
                             }
                         } else {
                             while (types.size() < argumentType.length) {
-                                types.add(SymbolTypeName.unknown());
+                                types.add(new SymbolTypeName());
                             }
                         }
                         parameterType = types.toArray(new SymbolTypeName[0]);
@@ -300,31 +297,31 @@ public abstract class PostfixExpression extends UnaryExpression {
                     }
                     continue;
                 } catch (InvalidityException invalidityException) {
-                    sentence.set(temporary);
+                    code.set(temporary);
                 }
                 try {
-                    PostfixIncrementSign postfixIncrementSign = PostfixIncrementSign.parse(sentence, table);
+                    PostfixIncrementSign postfixIncrementSign = PostfixIncrementSign.parse(code, table);
                     postfixExpression = new PostfixIncrementOperation(
                             postfixExpression,
                             blankAfterPostfixExpression,
                             postfixIncrementSign);
                     continue;
                 } catch (InvalidityException invalidityException) {
-                    sentence.set(temporary);
+                    code.set(temporary);
                 }
                 try {
-                    PostfixDecrementSign postfixDecrementSign = PostfixDecrementSign.parse(sentence, table);
+                    PostfixDecrementSign postfixDecrementSign = PostfixDecrementSign.parse(code, table);
                     postfixExpression = new PostfixDecrementOperation(
                             postfixExpression,
                             blankAfterPostfixExpression,
                             postfixDecrementSign);
                     continue;
                 } catch (InvalidityException invalidityException) {
-                    sentence.set(temporary);
+                    code.set(temporary);
                 }
                 throw new InvalidityException();
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

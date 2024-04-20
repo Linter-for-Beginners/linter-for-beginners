@@ -1,17 +1,15 @@
 package symbol.expression.assignment;
 
 import symbol.expression.comma.CommaExpression;
-import symbol.expression.postfix.function.FunctionCall;
-import symbol.symbol.Symbol;
+import symbol.foundation.Symbol;
 import symbol.base.blank.Blank;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.code.Code;
+import symbol.foundation.invalidity.InvalidityException;
 import symbol.expression.unary.UnaryExpression;
-import symbol.symbol.type.Table;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.warning.Danger;
+import symbol.foundation.warning.Discouragement;
 
 public class AssignmentOperation extends AssignmentExpression {
     public final UnaryExpression unaryExpression;
@@ -25,7 +23,7 @@ public class AssignmentOperation extends AssignmentExpression {
                                AssignmentSign assignmentSign,
                                Blank blankAfterAssignmentSign,
                                AssignmentExpression assignmentExpression) {
-        super(SymbolTypeName.parse(unaryExpression.type.toString()), new Symbol[] {
+        super(new SymbolTypeName(unaryExpression.type.toString()), new Symbol[] {
                 unaryExpression,
                 blankBeforeAssignmentSign,
                 assignmentSign,
@@ -42,21 +40,21 @@ public class AssignmentOperation extends AssignmentExpression {
         if (CommaExpression.effective(assignmentExpression)) {
             warnings.add(new Danger(this, assignmentExpression, "Assignment operation with other side effects is dangerous for beginners."));
         }
-        if (!type.equals(assignmentExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(assignmentExpression.type))) {
             if (!assignmentSign.toString().equals("<<=") && !assignmentSign.toString().equals(">>=")) {
                 warnings.add(new Discouragement(this, assignmentExpression, "Assignment operation of expressions whose types are incompatible is discouraged for beginners."));
             }
         }
     }
 
-    public static AssignmentOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static AssignmentOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            UnaryExpression unaryExpression = UnaryExpression.parse(sentence, table);
-            Blank blankBeforeAssignmentSign = Blank.parse(sentence, table);
-            AssignmentSign assignmentSign = AssignmentSign.parse(sentence, table);
-            Blank blankAfterAssignmentSign = Blank.parse(sentence, table);
-            AssignmentExpression assignmentExpression = AssignmentExpression.parse(sentence, table);
+            UnaryExpression unaryExpression = UnaryExpression.parse(code, table);
+            Blank blankBeforeAssignmentSign = Blank.parse(code, table);
+            AssignmentSign assignmentSign = AssignmentSign.parse(code, table);
+            Blank blankAfterAssignmentSign = Blank.parse(code, table);
+            AssignmentExpression assignmentExpression = AssignmentExpression.parse(code, table);
             return new AssignmentOperation(
                     unaryExpression,
                     blankBeforeAssignmentSign,
@@ -64,7 +62,7 @@ public class AssignmentOperation extends AssignmentExpression {
                     blankAfterAssignmentSign,
                     assignmentExpression);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

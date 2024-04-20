@@ -11,12 +11,12 @@ import symbol.declaration.type.direct.array.ArrayDirectAbstractDeclarator;
 import symbol.declaration.type.direct.declarator.ParenthesizedAbstractDeclarator;
 import symbol.declaration.type.direct.function.FunctionDirectAbstractDeclarator;
 import symbol.expression.assignment.AssignmentExpression;
-import symbol.symbol.Nonterminal;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Nonterminal;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class DirectAbstractDeclarator extends Nonterminal {
 
@@ -24,33 +24,33 @@ public abstract class DirectAbstractDeclarator extends Nonterminal {
         super(type, symbols);
     }
 
-    public static DirectAbstractDeclarator parse(Sentence sentence, Table table) throws InvalidityException {
+    public static DirectAbstractDeclarator parse(Code code, Table table) throws InvalidityException {
         DirectAbstractDeclarator directAbstractDeclarator = null;
         try {
-            directAbstractDeclarator = (DirectAbstractDeclarator) ParenthesizedAbstractDeclarator.parse(sentence, table);
+            directAbstractDeclarator = (DirectAbstractDeclarator) ParenthesizedAbstractDeclarator.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankAfterAbstractDirectDeclarator = Blank.parse(sentence, table);
-                Sentence temporary = sentence.clone();
+                Blank blankAfterAbstractDirectDeclarator = Blank.parse(code, table);
+                Code temporary = code.clone();
                 try {
-                    LeftBracket leftBracket = LeftBracket.parse(sentence, table);
-                    Blank blankBeforeDeclarationSpecifierList = Blank.parse(sentence, table);
+                    LeftBracket leftBracket = LeftBracket.parse(code, table);
+                    Blank blankBeforeDeclarationSpecifierList = Blank.parse(code, table);
                     DeclarationSpecifierList declarationSpecifierList = null;
                     try {
-                        declarationSpecifierList = DeclarationSpecifierList.parse(sentence, table);
+                        declarationSpecifierList = DeclarationSpecifierList.parse(code, table);
                     } catch (InvalidityException invalidityException) {
                     }
-                    Blank blankAfterDeclarationSpecifierList = Blank.parse(sentence, table);
+                    Blank blankAfterDeclarationSpecifierList = Blank.parse(code, table);
                     AssignmentExpression assignmentExpression = null;
                     try {
-                        assignmentExpression = AssignmentExpression.parse(sentence, table);
+                        assignmentExpression = AssignmentExpression.parse(code, table);
                     } catch (InvalidityException invalidityException) {
                     }
-                    Blank blankAfterAssignmentExpression = Blank.parse(sentence, table);
-                    RightBracket rightBracket = RightBracket.parse(sentence, table);
+                    Blank blankAfterAssignmentExpression = Blank.parse(code, table);
+                    RightBracket rightBracket = RightBracket.parse(code, table);
                     directAbstractDeclarator = new ArrayDirectAbstractDeclarator(
                             directAbstractDeclarator,
                             blankAfterAbstractDirectDeclarator,
@@ -63,14 +63,14 @@ public abstract class DirectAbstractDeclarator extends Nonterminal {
                             rightBracket);
                     continue;
                 } catch (InvalidityException invalidityException) {
-                    sentence.set(temporary);
+                    code.set(temporary);
                 }
                 try {
-                    LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-                    Blank blankBeforeParameterList = Blank.parse(sentence, table);
-                    ParameterDeclarationList parameterDeclarationList = ParameterDeclarationList.parse(sentence, table);
-                    Blank blankAfterParameterList = Blank.parse(sentence, table);
-                    RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
+                    LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+                    Blank blankBeforeParameterList = Blank.parse(code, table);
+                    ParameterDeclarationList parameterDeclarationList = ParameterDeclarationList.parse(code, table);
+                    Blank blankAfterParameterList = Blank.parse(code, table);
+                    RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
                     directAbstractDeclarator = new FunctionDirectAbstractDeclarator(
                             directAbstractDeclarator,
                             blankAfterAbstractDirectDeclarator,
@@ -81,11 +81,11 @@ public abstract class DirectAbstractDeclarator extends Nonterminal {
                             rightParenthesis);
                     continue;
                 } catch (InvalidityException invalidityException) {
-                    sentence.set(temporary);
+                    code.set(temporary);
                 }
                 throw new InvalidityException();
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

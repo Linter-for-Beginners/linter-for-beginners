@@ -11,15 +11,15 @@ import symbol.declaration.declarator.Declarator;
 import symbol.declaration.declarator.direct.function.FunctionDirectDeclarator;
 import symbol.declaration.parameter.ParameterDeclaration;
 import symbol.declaration.parameter.SimpleDeclaration;
+import symbol.foundation.code.Code;
 import symbol.statement.compound.BlockItem;
 import symbol.statement.compound.CompoundStatement;
-import symbol.symbol.Symbol;
-import symbol.symbol.Terminal;
-import symbol.symbol.type.Table;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strangeness;
+import symbol.foundation.Symbol;
+import symbol.foundation.Terminal;
+import symbol.foundation.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Strangeness;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -92,12 +92,12 @@ public class FunctionDefinition extends BlockItem {
         return symbols.toArray(new Symbol[0]);
     }
 
-    public static FunctionDefinition parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static FunctionDefinition parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            DeclarationSpecifierList declarationSpecifierList = DeclarationSpecifierList.parse(sentence, table);
-            Blank blankAfterDeclarationSpecifierList = Blank.parse(sentence, table);
-            Declarator declarator = Declarator.parse(sentence, table);
+            DeclarationSpecifierList declarationSpecifierList = DeclarationSpecifierList.parse(code, table);
+            Blank blankAfterDeclarationSpecifierList = Blank.parse(code, table);
+            Declarator declarator = Declarator.parse(code, table);
             String string = declare(declarationSpecifierList.toString(), declarator, table);
             table = new Table(string, table);
             FunctionDirectDeclarator functionDirectDeclarator = (FunctionDirectDeclarator) declarator.directDeclarator;
@@ -107,19 +107,19 @@ public class FunctionDefinition extends BlockItem {
                     declare(simpleDeclaration, table);
                 }
             }
-            Blank blankAfterDeclarator = Blank.parse(sentence, table);
+            Blank blankAfterDeclarator = Blank.parse(code, table);
             ArrayList<Declaration> declaration = new ArrayList<>();
             ArrayList<Blank> blankAfterDeclaration = new ArrayList<>();
             while (true) {
                 try {
-                    declaration.add(Declaration.parse(sentence, table));
-                    blankAfterDeclaration.add(Blank.parse(sentence, table));
+                    declaration.add(Declaration.parse(code, table));
+                    blankAfterDeclaration.add(Blank.parse(code, table));
                 } catch (InvalidityException invalidityException) {
                     break;
                 }
             }
-            Blank blankBeforeCompoundStatement = Blank.parse(sentence, table);
-            CompoundStatement compoundStatement = CompoundStatement.parse(sentence, table);
+            Blank blankBeforeCompoundStatement = Blank.parse(code, table);
+            CompoundStatement compoundStatement = CompoundStatement.parse(code, table);
             while (blankAfterDeclaration.size() < declaration.size()) {
                 blankAfterDeclaration.add(null);
             }
@@ -133,13 +133,13 @@ public class FunctionDefinition extends BlockItem {
                     blankBeforeCompoundStatement,
                     compoundStatement);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }
 
     private static String declare(String specifier, Declarator declarator, Table table) {
-        ArrayList<Symbol> symbols = declarator.traversal(new ArrayList<>());
+        Symbol[] symbols = declarator.traversal();
         HashSet<Symbol> visited = new HashSet<>();
         ArrayList<Terminal> terminals = new ArrayList<>();
         terminals.add(null);
@@ -220,14 +220,14 @@ public class FunctionDefinition extends BlockItem {
             }
             stringBuilder.append(terminal.toString());
         }
-        table.declare(string, SymbolTypeName.parse(stringBuilder.toString().replaceAll("\\s+", " ").trim()));
+        table.declare(string, new SymbolTypeName(stringBuilder.toString().replaceAll("\\s+", " ").trim()));
         return string;
     }
 
     private static String declare(SimpleDeclaration simpleDeclaration, Table table) {
         String specifier = simpleDeclaration.declarationSpecifierList.toString();
         Declarator declarator = simpleDeclaration.declarator;
-        ArrayList<Symbol> symbols = declarator.traversal(new ArrayList<>());
+        Symbol[] symbols = declarator.traversal();
         HashSet<Symbol> visited = new HashSet<>();
         ArrayList<Terminal> terminals = new ArrayList<>();
         terminals.add(null);
@@ -281,7 +281,7 @@ public class FunctionDefinition extends BlockItem {
                 stringBuilder.append(terminal.toString());
             }
         }
-        table.declare(string, SymbolTypeName.parse(stringBuilder.toString().replaceAll("\\s+", " ").trim()).evaluation());
+        table.declare(string, SymbolTypeName.evaluationType(new SymbolTypeName(stringBuilder.toString().replaceAll("\\s+", " ").trim())));
         return string;
     }
 }

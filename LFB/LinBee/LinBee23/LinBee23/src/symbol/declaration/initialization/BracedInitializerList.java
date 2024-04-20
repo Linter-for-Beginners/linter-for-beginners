@@ -4,11 +4,11 @@ package symbol.declaration.initialization;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.brace.LeftBrace;
 import symbol.base.punctuator.brace.RightBrace;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class BracedInitializerList extends Initializer {
     public final LeftBrace leftBrace;
@@ -22,7 +22,7 @@ public class BracedInitializerList extends Initializer {
                                  InitializerList initializerList,
                                  Blank blankAfterInitializerList,
                                  RightBrace rightBrace) {
-        super(SymbolTypeName.unknown(), new Symbol[] {
+        super(new SymbolTypeName(), new Symbol[] {
                 leftBrace,
                 blankBeforeInitializerList,
                 initializerList,
@@ -35,14 +35,14 @@ public class BracedInitializerList extends Initializer {
         this.rightBrace = rightBrace;
     }
 
-    public static BracedInitializerList parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static BracedInitializerList parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            LeftBrace leftBrace = LeftBrace.parse(sentence, table);
-            Blank blankBeforeInitializerList = Blank.parse(sentence, table);
-            InitializerList initializerList = InitializerList.parse(sentence, table);
-            Blank blankAfterInitializerList = Blank.parse(sentence, table);
-            RightBrace rightBrace = RightBrace.parse(sentence, table);
+            LeftBrace leftBrace = LeftBrace.parse(code, table);
+            Blank blankBeforeInitializerList = Blank.parse(code, table);
+            InitializerList initializerList = InitializerList.parse(code, table);
+            Blank blankAfterInitializerList = Blank.parse(code, table);
+            RightBrace rightBrace = RightBrace.parse(code, table);
             return new BracedInitializerList(
                     leftBrace,
                     blankBeforeInitializerList,
@@ -50,7 +50,7 @@ public class BracedInitializerList extends Initializer {
                     blankAfterInitializerList,
                     rightBrace);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

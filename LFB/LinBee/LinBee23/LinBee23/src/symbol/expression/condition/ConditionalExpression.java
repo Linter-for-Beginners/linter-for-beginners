@@ -1,32 +1,32 @@
 package symbol.expression.condition;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.logical.or.LogicalOrExpression;
 import symbol.expression.assignment.AssignmentExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class ConditionalExpression extends AssignmentExpression {
     public ConditionalExpression(SymbolTypeName type, Symbol[] symbols) {
         super(type, symbols);
     }
 
-    public static ConditionalExpression parse(Sentence sentence, Table table) throws InvalidityException {
-        LogicalOrExpression logicalOrExpression = LogicalOrExpression.parse(sentence, table);
-        Sentence clone = sentence.clone();
+    public static ConditionalExpression parse(Code code, Table table) throws InvalidityException {
+        LogicalOrExpression logicalOrExpression = LogicalOrExpression.parse(code, table);
+        Code clone = code.clone();
         try {
-            Blank blankBeforeLeftConditionalSign = Blank.parse(sentence, table);
-            LeftConditionalSign leftConditionalSign = LeftConditionalSign.parse(sentence, table);
-            Blank blankAfterLeftConditionalSign = Blank.parse(sentence, table);
-            CommaExpression commaExpression = CommaExpression.parse(sentence, table);
-            Blank blankBeforeRightConditionalSign = Blank.parse(sentence, table);
-            RightConditionalSign rightConditionalSign = RightConditionalSign.parse(sentence, table);
-            Blank blankAfterRightConditionalSign = Blank.parse(sentence, table);
-            ConditionalExpression conditionalExpression = ConditionalExpression.parse(sentence, table);
+            Blank blankBeforeLeftConditionalSign = Blank.parse(code, table);
+            LeftConditionalSign leftConditionalSign = LeftConditionalSign.parse(code, table);
+            Blank blankAfterLeftConditionalSign = Blank.parse(code, table);
+            CommaExpression commaExpression = CommaExpression.parse(code, table);
+            Blank blankBeforeRightConditionalSign = Blank.parse(code, table);
+            RightConditionalSign rightConditionalSign = RightConditionalSign.parse(code, table);
+            Blank blankAfterRightConditionalSign = Blank.parse(code, table);
+            ConditionalExpression conditionalExpression = ConditionalExpression.parse(code, table);
             return new ConditionalOperation(
                     logicalOrExpression,
                     blankBeforeLeftConditionalSign,
@@ -38,7 +38,7 @@ public abstract class ConditionalExpression extends AssignmentExpression {
                     blankAfterRightConditionalSign,
                     conditionalExpression);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
         }
         return logicalOrExpression;
     }

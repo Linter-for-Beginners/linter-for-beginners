@@ -1,21 +1,21 @@
 package symbol.base.constant.character;
 
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 import symbol.base.constant.Constant;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class CharacterConstant extends Constant {
 
     public CharacterConstant(Integer row, Integer column, String string) {
-        super(row, column, SymbolTypeName.parse("int"), string);
+        super(row, column, new SymbolTypeName("int"), string);
     }
 
-    public static CharacterConstant parse(Sentence sentence, Table table) throws InvalidityException {
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
-        String sentenceString = sentence.toString();
+    public static CharacterConstant parse(Code code, Table table) throws InvalidityException {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
+        String sentenceString = code.toString();
         if (!sentenceString.startsWith("'") && !sentenceString.startsWith("L'")) {
             throw new InvalidityException();
         }
@@ -34,7 +34,7 @@ public class CharacterConstant extends Constant {
         }
         i += "'".length();
         String string = sentenceString.substring(0, i);
-        sentence.remove(string.length());
+        code.remove(string);
         return new CharacterConstant(row, column, string);
     }
 }

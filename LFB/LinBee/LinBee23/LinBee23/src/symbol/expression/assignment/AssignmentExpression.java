@@ -1,12 +1,12 @@
 package symbol.expression.assignment;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.expression.condition.ConditionalExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 public abstract class AssignmentExpression extends CommaExpression {
 
@@ -14,13 +14,13 @@ public abstract class AssignmentExpression extends CommaExpression {
         super(type, symbols);
     }
 
-    public static AssignmentExpression parse(Sentence sentence, Table table) throws InvalidityException {
+    public static AssignmentExpression parse(Code code, Table table) throws InvalidityException {
         try {
-            return AssignmentOperation.parse(sentence, table);
+            return AssignmentOperation.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         try {
-            return ConditionalExpression.parse(sentence, table);
+            return ConditionalExpression.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         throw new InvalidityException();

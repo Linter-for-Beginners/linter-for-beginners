@@ -1,9 +1,9 @@
 package symbol.expression.unary.plus;
 
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.type.Table;
-import symbol.symbol.Terminal;
+import symbol.foundation.code.Code;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.type.Table;
+import symbol.foundation.Terminal;
 
 public class UnaryPlusSign extends Terminal {
     private static final String[] strings = {"+"};
@@ -12,15 +12,15 @@ public class UnaryPlusSign extends Terminal {
         super(row, column, null, string);
     }
 
-    public static UnaryPlusSign parse(Sentence sentence, Table table) throws InvalidityException {
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
+    public static UnaryPlusSign parse(Code code, Table table) throws InvalidityException {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
         for (String string : strings) {
-            if (sentence.startsWith(string)) {
-                if (sentence.toString().length() > string.length() && sentence.toString().startsWith("+", string.length())) {
+            if (code.startsWith(string)) {
+                if (code.toString().length() > string.length() && code.toString().startsWith("+", string.length())) {
                     throw new InvalidityException();
                 }
-                sentence.remove(string.length());
+                code.remove(string);
                 return new UnaryPlusSign(row, column, string);
             }
         }

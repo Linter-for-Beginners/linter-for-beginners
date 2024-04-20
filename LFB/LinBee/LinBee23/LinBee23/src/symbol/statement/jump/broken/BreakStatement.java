@@ -4,10 +4,10 @@ import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.semicolon.Semicolon;
 import symbol.statement.jump.JumpStatement;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 public class BreakStatement extends JumpStatement {
     public final Keyword keywordBreak;
@@ -26,18 +26,18 @@ public class BreakStatement extends JumpStatement {
         this.semicolon = semicolon;
     }
 
-    public static BreakStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static BreakStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordBreak = Keyword.parse("break", sentence, table);
-            Blank blankBeforeSemicolon = Blank.parse(sentence, table);
-            Semicolon semicolon = Semicolon.parse(sentence, table);
+            Keyword keywordBreak = Keyword.parse("break", code, table);
+            Blank blankBeforeSemicolon = Blank.parse(code, table);
+            Semicolon semicolon = Semicolon.parse(code, table);
             return new BreakStatement(
                     keywordBreak,
                     blankBeforeSemicolon,
                     semicolon);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

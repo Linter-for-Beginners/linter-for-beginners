@@ -5,10 +5,10 @@ import symbol.expression.primary.PrimaryExpression;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
 
 public class ParenthesizedCommaExpression extends PrimaryExpression {
     public final LeftParenthesis leftParenthesis;
@@ -35,14 +35,14 @@ public class ParenthesizedCommaExpression extends PrimaryExpression {
         this.rightParenthesis = rightParenthesis;
     }
 
-    public static ParenthesizedCommaExpression parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static ParenthesizedCommaExpression parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-            Blank blankBeforeCommaExpression = Blank.parse(sentence, table);
-            CommaExpression commaExpression = CommaExpression.parse(sentence, table);
-            Blank blankAfterCommaExpression = Blank.parse(sentence, table);
-            RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
+            LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+            Blank blankBeforeCommaExpression = Blank.parse(code, table);
+            CommaExpression commaExpression = CommaExpression.parse(code, table);
+            Blank blankAfterCommaExpression = Blank.parse(code, table);
+            RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
             return new ParenthesizedCommaExpression(
                     leftParenthesis,
                     blankBeforeCommaExpression,
@@ -50,7 +50,7 @@ public class ParenthesizedCommaExpression extends PrimaryExpression {
                     blankAfterCommaExpression,
                     rightParenthesis);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

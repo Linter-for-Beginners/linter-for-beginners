@@ -4,12 +4,13 @@ import symbol.expression.cast.CastExpression;
 import symbol.expression.comma.CommaExpression;
 import symbol.expression.unary.UnaryExpression;
 import symbol.base.blank.Blank;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Discouragement;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.type.Table;
+import symbol.foundation.warning.Danger;
+import symbol.foundation.warning.Discouragement;
 
 public class BitwiseComplementOperation extends UnaryExpression {
     public final BitwiseComplementSign bitwiseComplementSign;
@@ -19,7 +20,7 @@ public class BitwiseComplementOperation extends UnaryExpression {
     public BitwiseComplementOperation(BitwiseComplementSign bitwiseComplementSign,
                                       Blank blankAfterBitwiseComplementSign,
                                       CastExpression castExpression) {
-        super(castExpression.type.evaluation(), new Symbol[] {
+        super(SymbolTypeName.evaluationType(castExpression.type), new Symbol[] {
                 bitwiseComplementSign,
                 blankAfterBitwiseComplementSign,
                 castExpression});
@@ -34,18 +35,18 @@ public class BitwiseComplementOperation extends UnaryExpression {
         }
     }
 
-    public static BitwiseComplementOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static BitwiseComplementOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            BitwiseComplementSign bitwiseComplementSign = BitwiseComplementSign.parse(sentence, table);
-            Blank blankAfterBitwiseComplementSign = Blank.parse(sentence, table);
-            CastExpression castExpression = CastExpression.parse(sentence, table);
+            BitwiseComplementSign bitwiseComplementSign = BitwiseComplementSign.parse(code, table);
+            Blank blankAfterBitwiseComplementSign = Blank.parse(code, table);
+            CastExpression castExpression = CastExpression.parse(code, table);
             return new BitwiseComplementOperation(
                     bitwiseComplementSign,
                     blankAfterBitwiseComplementSign,
                     castExpression);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

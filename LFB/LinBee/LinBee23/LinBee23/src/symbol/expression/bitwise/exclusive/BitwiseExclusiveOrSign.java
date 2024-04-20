@@ -1,9 +1,9 @@
 package symbol.expression.bitwise.exclusive;
 
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.type.Table;
-import symbol.symbol.Terminal;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.Terminal;
 
 public class BitwiseExclusiveOrSign extends Terminal {
     private static final String[] strings = {"^"};
@@ -12,12 +12,12 @@ public class BitwiseExclusiveOrSign extends Terminal {
         super(row, column, null, string);
     }
 
-    public static BitwiseExclusiveOrSign parse(Sentence sentence, Table table) throws InvalidityException {
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
+    public static BitwiseExclusiveOrSign parse(Code code, Table table) throws InvalidityException {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
         for (String string : strings) {
-            if (sentence.startsWith(string)) {
-                sentence.remove(string.length());
+            if (code.startsWith(string)) {
+                code.remove(string);
                 return new BitwiseExclusiveOrSign(row, column, string);
             }
         }

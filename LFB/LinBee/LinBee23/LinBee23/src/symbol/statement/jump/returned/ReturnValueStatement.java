@@ -4,14 +4,14 @@ import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.semicolon.Semicolon;
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.SymbolTypeName;
 import symbol.statement.jump.JumpStatement;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Discouragement;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Danger;
+import symbol.foundation.warning.Discouragement;
 
 public class ReturnValueStatement extends JumpStatement {
     public final Keyword keywordReturn;
@@ -38,30 +38,30 @@ public class ReturnValueStatement extends JumpStatement {
         this.semicolon = semicolon;
     }
 
-    public static ReturnValueStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static ReturnValueStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordReturn = Keyword.parse("return", sentence, table);
-            Blank blankAfterKeywordReturn = Blank.parse(sentence, table);
-            CommaExpression commaExpression = CommaExpression.parse(sentence, table);
-            Blank blankBeforeSemicolon = Blank.parse(sentence, table);
-            Semicolon semicolon = Semicolon.parse(sentence, table);
+            Keyword keywordReturn = Keyword.parse("return", code, table);
+            Blank blankAfterKeywordReturn = Blank.parse(code, table);
+            CommaExpression commaExpression = CommaExpression.parse(code, table);
+            Blank blankBeforeSemicolon = Blank.parse(code, table);
+            Semicolon semicolon = Semicolon.parse(code, table);
             ReturnValueStatement returnValueStatement = new ReturnValueStatement(
                     keywordReturn,
                     blankAfterKeywordReturn,
                     commaExpression,
                     blankBeforeSemicolon,
                     semicolon);
-            if (table.type(table.string).returnType().isVoid()) {
+            if (SymbolTypeName.returnType(table.type(table.string)).isVoid()) {
                 returnValueStatement.warnings.add(new Danger(returnValueStatement, commaExpression, "Excess of expressions in a return statement is dangerous for beginners."));
             } else {
-                if (!table.type(table.string).returnType().equals(commaExpression.type)) {
+                if (!SymbolTypeName.returnType(table.type(table.string)).equals(commaExpression.type)) {
                     returnValueStatement.warnings.add(new Discouragement(returnValueStatement, commaExpression, "Return statement with a expression whose type is incompatible is discouraged for beginners."));
                 }
             }
             return returnValueStatement;
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

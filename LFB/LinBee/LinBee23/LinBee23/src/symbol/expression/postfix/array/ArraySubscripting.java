@@ -1,19 +1,17 @@
 package symbol.expression.postfix.array;
 
-import symbol.expression.shift.ShiftExpression;
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.expression.comma.CommaExpression;
 import symbol.expression.postfix.PostfixExpression;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.bracket.LeftBracket;
 import symbol.base.punctuator.bracket.RightBracket;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Danger;
 
 public class ArraySubscripting extends PostfixExpression {
     public final PostfixExpression postfixExpression;
@@ -31,7 +29,7 @@ public class ArraySubscripting extends PostfixExpression {
                              CommaExpression commaExpression,
                              Blank blankAfterCommaExpression,
                              RightBracket rightBracket) {
-        super(type(postfixExpression.type.evaluation(), commaExpression.type.evaluation()), new Symbol[] {
+        super(type(SymbolTypeName.evaluationType(postfixExpression.type), SymbolTypeName.evaluationType(commaExpression.type)), new Symbol[] {
                 postfixExpression,
                 blankAfterPostfixExpression,
                 leftBracket,
@@ -55,31 +53,31 @@ public class ArraySubscripting extends PostfixExpression {
         if (CommaExpression.effective(commaExpression)) {
             warnings.add(new Danger(this, commaExpression, "Array subscripting with side effects is dangerous for beginners."));
         }
-        if (!postfixExpression.type.evaluation().isPointer()) {
+        if (!SymbolTypeName.evaluationType(postfixExpression.type).isPointer()) {
             warnings.add(new Discouragement(this, postfixExpression, "Array subscripting whose base is not a pointer is discouraged for beginners."));
         }
-        if (commaExpression.type.evaluation().isPointer()) {
+        if (SymbolTypeName.evaluationType(commaExpression.type).isPointer()) {
             warnings.add(new Discouragement(this, commaExpression, "Array subscripting whose offset is a pointer is discouraged for beginners."));
         }
     }
 
     private static SymbolTypeName type(SymbolTypeName left, SymbolTypeName right) {
         if (left.isPointer()) {
-            return left.indirection();
+            return SymbolTypeName.indirectionType(left);
         }
         if (right.isPointer()) {
-            return right.indirection();
+            return SymbolTypeName.indirectionType(right);
         }
-        return SymbolTypeName.unknown().evaluation();
+        return new SymbolTypeName();
     }
 
-    public static ArraySubscripting parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        PostfixExpression postfixExpression = PostfixExpression.parse(sentence, table);
+    public static ArraySubscripting parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        PostfixExpression postfixExpression = PostfixExpression.parse(code, table);
         if (postfixExpression instanceof ArraySubscripting) {
             return (ArraySubscripting) postfixExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

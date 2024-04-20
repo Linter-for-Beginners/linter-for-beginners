@@ -5,10 +5,10 @@ import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.declaration.parameter.ParameterDeclarationList;
 import symbol.declaration.type.direct.DirectAbstractDeclarator;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 public class FunctionDirectAbstractDeclarator extends DirectAbstractDeclarator {
     public final DirectAbstractDeclarator directAbstractDeclarator;
@@ -44,13 +44,13 @@ public class FunctionDirectAbstractDeclarator extends DirectAbstractDeclarator {
         this.rightParenthesis = rightParenthesis;
     }
 
-    public static FunctionDirectAbstractDeclarator parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        DirectAbstractDeclarator directAbstractDeclarator = DirectAbstractDeclarator.parse(sentence, table);
+    public static FunctionDirectAbstractDeclarator parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        DirectAbstractDeclarator directAbstractDeclarator = DirectAbstractDeclarator.parse(code, table);
         if (directAbstractDeclarator instanceof FunctionDirectAbstractDeclarator) {
             return (FunctionDirectAbstractDeclarator) directAbstractDeclarator;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

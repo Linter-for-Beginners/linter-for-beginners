@@ -3,18 +3,18 @@ package symbol.expression.postfix.compound;
 import symbol.base.identifier.Identifier;
 import symbol.declaration.initialization.InitializerList;
 import symbol.declaration.type.TypeName;
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 import symbol.expression.postfix.PostfixExpression;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.brace.LeftBrace;
 import symbol.base.punctuator.brace.RightBrace;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
-import symbol.symbol.*;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strangeness;
+import symbol.foundation.*;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Strangeness;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -70,7 +70,7 @@ public class CompoundLiteral extends PostfixExpression {
     }
 
     private static SymbolTypeName type(TypeName typeName) {
-        ArrayList<Symbol> symbols = typeName.traversal(new ArrayList<>());
+        Symbol[] symbols = typeName.traversal();
         HashSet<Symbol> visited = new HashSet<>();
         ArrayList<Terminal> terminals = new ArrayList<>();
         terminals.add(null);
@@ -122,23 +122,23 @@ public class CompoundLiteral extends PostfixExpression {
                 stringBuilder.append(terminal.toString());
             }
         }
-        return SymbolTypeName.parse(stringBuilder.toString().replaceAll("\\s+", " ").trim());
+        return new SymbolTypeName(stringBuilder.toString().replaceAll("\\s+", " ").trim());
     }
 
-    public static CompoundLiteral parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static CompoundLiteral parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-            Blank blankBeforeTypeName = Blank.parse(sentence, table);
-            TypeName typeName = TypeName.parse(sentence, table);
-            Blank blankAfterTypeName = Blank.parse(sentence, table);
-            RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
-            Blank blankBeforeBracedInitializerList = Blank.parse(sentence, table);
-            LeftBrace leftBrace = LeftBrace.parse(sentence, table);
-            Blank blankBeforeInitializerList = Blank.parse(sentence, table);
-            InitializerList initializerList = InitializerList.parse(sentence, table);
-            Blank blankAfterInitializerList = Blank.parse(sentence, table);
-            RightBrace rightBrace = RightBrace.parse(sentence, table);
+            LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+            Blank blankBeforeTypeName = Blank.parse(code, table);
+            TypeName typeName = TypeName.parse(code, table);
+            Blank blankAfterTypeName = Blank.parse(code, table);
+            RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
+            Blank blankBeforeBracedInitializerList = Blank.parse(code, table);
+            LeftBrace leftBrace = LeftBrace.parse(code, table);
+            Blank blankBeforeInitializerList = Blank.parse(code, table);
+            InitializerList initializerList = InitializerList.parse(code, table);
+            Blank blankAfterInitializerList = Blank.parse(code, table);
+            RightBrace rightBrace = RightBrace.parse(code, table);
             return new CompoundLiteral(
                     leftParenthesis,
                     blankBeforeTypeName,
@@ -152,7 +152,7 @@ public class CompoundLiteral extends PostfixExpression {
                     blankAfterInitializerList,
                     rightBrace);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

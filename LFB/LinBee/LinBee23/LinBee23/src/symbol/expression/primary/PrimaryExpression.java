@@ -1,41 +1,41 @@
 package symbol.expression.primary;
 
 import symbol.expression.primary.statement.ParenthesizedCompoundStatement;
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 import symbol.expression.primary.constant.ConstantPrimaryExpression;
 import symbol.expression.primary.identifier.IdentifierPrimaryExpression;
 import symbol.expression.primary.expression.ParenthesizedCommaExpression;
 import symbol.expression.primary.string.StringLiteralPrimaryExpression;
-import symbol.symbol.*;
+import symbol.foundation.*;
 import symbol.expression.postfix.PostfixExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class PrimaryExpression extends PostfixExpression {
     public PrimaryExpression(SymbolTypeName type, Symbol[] symbols) {
         super(type, symbols);
     }
 
-    public static PrimaryExpression parse(Sentence sentence, Table table) throws InvalidityException {
+    public static PrimaryExpression parse(Code code, Table table) throws InvalidityException {
         try {
-            return ParenthesizedCommaExpression.parse(sentence, table);
+            return ParenthesizedCommaExpression.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         try {
-            return ParenthesizedCompoundStatement.parse(sentence, table);
+            return ParenthesizedCompoundStatement.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         try {
-            return ConstantPrimaryExpression.parse(sentence, table);
+            return ConstantPrimaryExpression.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         try {
-            return StringLiteralPrimaryExpression.parse(sentence, table);
+            return StringLiteralPrimaryExpression.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         try {
-            return IdentifierPrimaryExpression.parse(sentence, table);
+            return IdentifierPrimaryExpression.parse(code, table);
         } catch (InvalidityException invalidityException) {
         }
         throw new InvalidityException();

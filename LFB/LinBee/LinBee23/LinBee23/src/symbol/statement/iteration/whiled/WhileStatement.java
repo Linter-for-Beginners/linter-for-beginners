@@ -5,14 +5,14 @@ import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.code.Code;
 import symbol.statement.Statement;
 import symbol.statement.compound.CompoundStatement;
 import symbol.statement.iteration.IterationStatement;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Discouragement;
 
 public class WhileStatement extends IterationStatement {
     public final Keyword keywordWhile;
@@ -61,18 +61,18 @@ public class WhileStatement extends IterationStatement {
         }
     }
 
-    public static WhileStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static WhileStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordWhile = Keyword.parse("while", sentence, table);
-            Blank blankAfterKeywordWhile = Blank.parse(sentence, table);
-            LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-            Blank blankBeforeCommaExpression = Blank.parse(sentence, table);
-            CommaExpression commaExpression = CommaExpression.parse(sentence, table);
-            Blank blankAfterCommaExpression = Blank.parse(sentence, table);
-            RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
-            Blank blankBeforeStatement = Blank.parse(sentence, table);
-            Statement statement = Statement.parse(sentence, table);
+            Keyword keywordWhile = Keyword.parse("while", code, table);
+            Blank blankAfterKeywordWhile = Blank.parse(code, table);
+            LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+            Blank blankBeforeCommaExpression = Blank.parse(code, table);
+            CommaExpression commaExpression = CommaExpression.parse(code, table);
+            Blank blankAfterCommaExpression = Blank.parse(code, table);
+            RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
+            Blank blankBeforeStatement = Blank.parse(code, table);
+            Statement statement = Statement.parse(code, table);
             return new WhileStatement(
                     keywordWhile,
                     blankAfterKeywordWhile,
@@ -84,7 +84,7 @@ public class WhileStatement extends IterationStatement {
                     blankBeforeStatement,
                     statement);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

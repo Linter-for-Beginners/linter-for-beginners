@@ -2,16 +2,15 @@ package symbol.expression.bitwise.and;
 
 import symbol.expression.cast.CastExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.equality.EqualityExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Danger;
 
 public class BitwiseAndOperation extends BitwiseAndExpression {
     public final BitwiseAndExpression bitwiseAndExpression;
@@ -25,7 +24,7 @@ public class BitwiseAndOperation extends BitwiseAndExpression {
                                BitwiseAndSign bitwiseAndSign,
                                Blank blankAfterBitwiseAndSign,
                                EqualityExpression equalityExpression) {
-        super(SymbolTypeName.promotion(bitwiseAndExpression.type.evaluation(), equalityExpression.type.evaluation()), new Symbol[] {
+        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(bitwiseAndExpression.type), SymbolTypeName.evaluationType(equalityExpression.type)), new Symbol[] {
                 bitwiseAndExpression,
                 blankBeforeBitwiseAndSign,
                 bitwiseAndSign,
@@ -54,21 +53,21 @@ public class BitwiseAndOperation extends BitwiseAndExpression {
         if (CommaExpression.effective(equalityExpression)) {
             warnings.add(new Danger(this, equalityExpression, "Bitwise AND operation with side effects is dangerous for beginners."));
         }
-        if (!type.equals(bitwiseAndExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(bitwiseAndExpression.type))) {
             warnings.add(new Discouragement(this, bitwiseAndExpression, "Bitwise AND operation of expressions whose types are incompatible is discouraged for beginners."));
         }
-        if (!type.equals(equalityExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(equalityExpression.type))) {
             warnings.add(new Discouragement(this, equalityExpression, "Bitwise AND operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 
-    public static BitwiseAndOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        BitwiseAndExpression bitwiseAndExpression = BitwiseAndExpression.parse(sentence, table);
+    public static BitwiseAndOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        BitwiseAndExpression bitwiseAndExpression = BitwiseAndExpression.parse(code, table);
         if (bitwiseAndExpression instanceof BitwiseAndOperation) {
             return (BitwiseAndOperation) bitwiseAndExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

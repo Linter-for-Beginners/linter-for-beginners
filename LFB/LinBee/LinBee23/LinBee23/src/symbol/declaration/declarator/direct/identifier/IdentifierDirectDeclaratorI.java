@@ -2,10 +2,10 @@ package symbol.declaration.declarator.direct.identifier;
 
 import symbol.base.identifier.Identifier;
 import symbol.declaration.declarator.direct.DirectDeclarator;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 public class IdentifierDirectDeclaratorI extends DirectDeclarator {
     public final Identifier identifier;
@@ -15,7 +15,7 @@ public class IdentifierDirectDeclaratorI extends DirectDeclarator {
         this.identifier = identifier;
     }
 
-    public static IdentifierDirectDeclaratorI parse(Sentence sentence, Table table) throws InvalidityException {
-        return new IdentifierDirectDeclaratorI(Identifier.parse(sentence, table));
+    public static IdentifierDirectDeclaratorI parse(Code code, Table table) throws InvalidityException {
+        return new IdentifierDirectDeclaratorI(Identifier.parse(code, table));
     }
 }

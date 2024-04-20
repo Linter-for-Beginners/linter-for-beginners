@@ -12,28 +12,28 @@ import symbol.expression.relation.RelationalOperation;
 import symbol.expression.unary.decrement.PrefixDecrementOperation;
 import symbol.expression.unary.increment.PrefixIncrementOperation;
 import symbol.expression.unary.negation.LogicalNegationOperation;
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.assignment.AssignmentExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class CommaExpression extends Nonterminal {
     public CommaExpression(SymbolTypeName type, Symbol[] symbols) {
         super(type, symbols);
     }
 
-    public static CommaExpression parse(Sentence sentence, Table table) throws InvalidityException {
-        CommaExpression commaExpression = AssignmentExpression.parse(sentence, table);
+    public static CommaExpression parse(Code code, Table table) throws InvalidityException {
+        CommaExpression commaExpression = AssignmentExpression.parse(code, table);
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankBeforeCommaSign = Blank.parse(sentence, table);
-                CommaSign commaSign = CommaSign.parse(sentence, table);
-                Blank blankAfterCommaSign = Blank.parse(sentence, table);
-                AssignmentExpression assignmentExpression = AssignmentExpression.parse(sentence, table);
+                Blank blankBeforeCommaSign = Blank.parse(code, table);
+                CommaSign commaSign = CommaSign.parse(code, table);
+                Blank blankAfterCommaSign = Blank.parse(code, table);
+                AssignmentExpression assignmentExpression = AssignmentExpression.parse(code, table);
                 commaExpression = new CommaOperation(
                         commaExpression,
                         blankBeforeCommaSign,
@@ -41,7 +41,7 @@ public abstract class CommaExpression extends Nonterminal {
                         blankAfterCommaSign,
                         assignmentExpression);
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }
