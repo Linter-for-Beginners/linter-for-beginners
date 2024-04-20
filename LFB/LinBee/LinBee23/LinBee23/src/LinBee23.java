@@ -1,9 +1,9 @@
-import symbol.base.blank.Blank;
-import symbol.foundation.code.Code;
-import symbol.statement.compound.BlockItemList;
-import symbol.foundation.node.Node;
-import symbol.foundation.type.Table;
-import symbol.foundation.warning.Warning;
+import cache.blank.Blank;
+import basis.code.Code;
+import statement.compound.BlockItemList;
+import basis.node.Node;
+import basis.type.Table;
+import basis.warning.Warning;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
