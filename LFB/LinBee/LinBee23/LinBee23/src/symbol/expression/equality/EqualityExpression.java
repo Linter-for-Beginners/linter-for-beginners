@@ -1,28 +1,28 @@
 package symbol.expression.equality;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.bitwise.and.BitwiseAndExpression;
 import symbol.expression.relation.RelationalExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 public abstract class EqualityExpression extends BitwiseAndExpression {
     public EqualityExpression(SymbolTypeName type, Symbol[] symbols) {
         super(type, symbols);
     }
 
-    public static EqualityExpression parse(Sentence sentence, Table table) throws InvalidityException {
-        EqualityExpression equalityExpression = RelationalExpression.parse(sentence, table);
+    public static EqualityExpression parse(Code code, Table table) throws InvalidityException {
+        EqualityExpression equalityExpression = RelationalExpression.parse(code, table);
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankBeforeEqualitySign = Blank.parse(sentence, table);
-                EqualitySign equalitySign = EqualitySign.parse(sentence, table);
-                Blank blankAfterEqualitySign = Blank.parse(sentence, table);
-                RelationalExpression relationalExpression = RelationalExpression.parse(sentence, table);
+                Blank blankBeforeEqualitySign = Blank.parse(code, table);
+                EqualitySign equalitySign = EqualitySign.parse(code, table);
+                Blank blankAfterEqualitySign = Blank.parse(code, table);
+                RelationalExpression relationalExpression = RelationalExpression.parse(code, table);
                 equalityExpression = new EqualityOperation(
                         equalityExpression,
                         blankBeforeEqualitySign,
@@ -30,7 +30,7 @@ public abstract class EqualityExpression extends BitwiseAndExpression {
                         blankAfterEqualitySign,
                         relationalExpression);
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

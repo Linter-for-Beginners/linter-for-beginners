@@ -1,20 +1,20 @@
 package symbol.base.string;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 public class StringLiteral extends Terminal {
     public StringLiteral(Integer row, Integer column, String string) {
-        super(row, column, SymbolTypeName.parse("char *"), string);
+        super(row, column, new SymbolTypeName("char *"), string);
     }
 
-    public static StringLiteral parse(Sentence sentence, Table table) throws InvalidityException {
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
-        String sentenceString = sentence.toString();
+    public static StringLiteral parse(Code code, Table table) throws InvalidityException {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
+        String sentenceString = code.toString();
         if (!sentenceString.startsWith("\"") && !sentenceString.startsWith("L\"")) {
             throw new InvalidityException();
         }
@@ -37,7 +37,7 @@ public class StringLiteral extends Terminal {
         } else {
             i += "\"".length();
             String string = sentenceString.substring(0, i);
-            sentence.remove(string.length());
+            code.remove(string);
             return new StringLiteral(row, column, string);
         }
     }

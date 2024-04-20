@@ -6,11 +6,11 @@ import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.declaration.type.TypeName;
 import symbol.expression.unary.UnaryExpression;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class TypeSize extends UnaryExpression {
     public final Keyword keywordSizeof;
@@ -28,7 +28,7 @@ public class TypeSize extends UnaryExpression {
                     TypeName typeName,
                     Blank blankAfterTypeName,
                     RightParenthesis rightParenthesis) {
-        super(SymbolTypeName.parse("size_t"), new Symbol[] {
+        super(new SymbolTypeName("size_t"), new Symbol[] {
                 keywordSizeof,
                 blankAfterKeywordSizeof,
                 leftParenthesis,
@@ -45,16 +45,16 @@ public class TypeSize extends UnaryExpression {
         this.rightParenthesis = rightParenthesis;
     }
 
-    public static TypeSize parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static TypeSize parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordSizeof = Keyword.parse("sizeof", sentence, table);
-            Blank blankAfterKeywordSizeof = Blank.parse(sentence, table);
-            LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-            Blank blankBeforeTypeName = Blank.parse(sentence, table);
-            TypeName typeName = TypeName.parse(sentence, table);
-            Blank blankAfterTypeName = Blank.parse(sentence, table);
-            RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
+            Keyword keywordSizeof = Keyword.parse("sizeof", code, table);
+            Blank blankAfterKeywordSizeof = Blank.parse(code, table);
+            LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+            Blank blankBeforeTypeName = Blank.parse(code, table);
+            TypeName typeName = TypeName.parse(code, table);
+            Blank blankAfterTypeName = Blank.parse(code, table);
+            RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
             return new TypeSize(
                     keywordSizeof,
                     blankAfterKeywordSizeof,
@@ -64,7 +64,7 @@ public class TypeSize extends UnaryExpression {
                     blankAfterTypeName,
                     rightParenthesis);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

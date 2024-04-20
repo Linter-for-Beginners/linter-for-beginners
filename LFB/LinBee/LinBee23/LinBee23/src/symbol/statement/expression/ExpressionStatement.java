@@ -1,14 +1,14 @@
 package symbol.statement.expression;
 
-import symbol.symbol.type.Table;
+import symbol.foundation.type.Table;
 import symbol.expression.comma.CommaExpression;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.semicolon.Semicolon;
 import symbol.statement.Statement;
-import symbol.symbol.*;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
+import symbol.foundation.*;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.warning.Discouragement;
 
 public class ExpressionStatement extends Statement {
     public final CommaExpression commaExpression;
@@ -30,18 +30,18 @@ public class ExpressionStatement extends Statement {
         }
     }
 
-    public static ExpressionStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static ExpressionStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            CommaExpression commaExpression = CommaExpression.parse(sentence, table);
-            Blank blankBeforeSemicolon = Blank.parse(sentence, table);
-            Semicolon semicolon = Semicolon.parse(sentence, table);
+            CommaExpression commaExpression = CommaExpression.parse(code, table);
+            Blank blankBeforeSemicolon = Blank.parse(code, table);
+            Semicolon semicolon = Semicolon.parse(code, table);
             return new ExpressionStatement(
                     commaExpression,
                     blankBeforeSemicolon,
                     semicolon);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

@@ -4,11 +4,11 @@ import symbol.base.blank.Blank;
 import symbol.base.punctuator.semicolon.Semicolon;
 import symbol.declaration.declaration.DeclarationSpecifierList;
 import symbol.declaration.declaration.InitialDeclaratorList;
+import symbol.foundation.code.Code;
 import symbol.statement.compound.BlockItem;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class Declaration extends BlockItem {
     public final DeclarationSpecifierList declarationSpecifierList;
@@ -35,14 +35,14 @@ public class Declaration extends BlockItem {
         this.semicolon = semicolon;
     }
 
-    public static Declaration parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static Declaration parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            DeclarationSpecifierList declarationSpecifierList = DeclarationSpecifierList.parse(sentence, table);
-            Blank blankAfterDeclarationSpecifierList = Blank.parse(sentence, table);
-            InitialDeclaratorList initialDeclaratorList = InitialDeclaratorList.parse(sentence, table, declarationSpecifierList.toString());
-            Blank blankBeforeSemicolon = Blank.parse(sentence, table);
-            Semicolon semicolon = Semicolon.parse(sentence, table);
+            DeclarationSpecifierList declarationSpecifierList = DeclarationSpecifierList.parse(code, table);
+            Blank blankAfterDeclarationSpecifierList = Blank.parse(code, table);
+            InitialDeclaratorList initialDeclaratorList = InitialDeclaratorList.parse(code, table, declarationSpecifierList.toString());
+            Blank blankBeforeSemicolon = Blank.parse(code, table);
+            Semicolon semicolon = Semicolon.parse(code, table);
             return new Declaration(
                     declarationSpecifierList,
                     blankAfterDeclarationSpecifierList,
@@ -50,7 +50,7 @@ public class Declaration extends BlockItem {
                     blankBeforeSemicolon,
                     semicolon);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

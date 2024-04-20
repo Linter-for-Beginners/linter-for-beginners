@@ -1,28 +1,28 @@
 package symbol.base.identifier;
 
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 import symbol.base.keyword.Keyword;
-import symbol.symbol.*;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.*;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class Identifier extends Terminal {
     public Identifier(Integer row, Integer column, SymbolTypeName type, String string) {
         super(row, column, type, string);
     }
 
-    public static Identifier parse(Sentence sentence, Table table) throws InvalidityException {
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
-        String sentenceString = sentence.toString();
+    public static Identifier parse(Code code, Table table) throws InvalidityException {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
+        String sentenceString = code.toString();
         if (sentenceString.length() == 0) {
             throw new InvalidityException();
         }
-        Sentence clone = sentence.clone();
+        Code clone = code.clone();
         try {
-            Keyword.parse(sentence, table);
-            sentence.set(clone);
+            Keyword.parse(code, table);
+            code.set(clone);
         } catch (InvalidityException invalidityException) {
             char c = sentenceString.charAt(0);
             if ('a' <= c && c <= 'z' || 'A' <= c && c <= 'Z' || c == '_') {
@@ -34,7 +34,7 @@ public class Identifier extends Terminal {
                     }
                 }
                 String string = sentenceString.substring(0, i);
-                sentence.remove(string.length());
+                code.remove(string);
                 return new Identifier(row, column, table.type(string), string);
             }
         }

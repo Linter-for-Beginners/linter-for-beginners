@@ -6,14 +6,14 @@ import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.base.punctuator.semicolon.Semicolon;
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.code.Code;
 import symbol.statement.Statement;
 import symbol.statement.compound.CompoundStatement;
 import symbol.statement.iteration.IterationStatement;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Discouragement;
 
 public class ForExpressionStatement extends IterationStatement {
     public final Keyword keywordFor;
@@ -94,38 +94,38 @@ public class ForExpressionStatement extends IterationStatement {
         }
     }
 
-    public static ForExpressionStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static ForExpressionStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordFor = Keyword.parse("for", sentence, table);
-            Blank blankAfterKeywordFor = Blank.parse(sentence, table);
-            LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-            Blank blankBeforeInitialCommaExpression = Blank.parse(sentence, table);
+            Keyword keywordFor = Keyword.parse("for", code, table);
+            Blank blankAfterKeywordFor = Blank.parse(code, table);
+            LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+            Blank blankBeforeInitialCommaExpression = Blank.parse(code, table);
             CommaExpression initialCommaExpression = null;
             try {
-                initialCommaExpression = CommaExpression.parse(sentence, table);
+                initialCommaExpression = CommaExpression.parse(code, table);
             } catch (InvalidityException invalidityException) {
             }
-            Blank blankBeforeInitialSemicolon = Blank.parse(sentence, table);
-            Semicolon initialSemicolon = Semicolon.parse(sentence, table);
-            Blank blankBeforeControllingCommaExpression = Blank.parse(sentence, table);
+            Blank blankBeforeInitialSemicolon = Blank.parse(code, table);
+            Semicolon initialSemicolon = Semicolon.parse(code, table);
+            Blank blankBeforeControllingCommaExpression = Blank.parse(code, table);
             CommaExpression controllingCommaExpression = null;
             try {
-                controllingCommaExpression = CommaExpression.parse(sentence, table);
+                controllingCommaExpression = CommaExpression.parse(code, table);
             } catch (InvalidityException invalidityException) {
             }
-            Blank blankBeforeControllingSemicolon = Blank.parse(sentence, table);
-            Semicolon controllingSemicolon = Semicolon.parse(sentence, table);
-            Blank blankBeforeExtraCommaExpression = Blank.parse(sentence, table);
+            Blank blankBeforeControllingSemicolon = Blank.parse(code, table);
+            Semicolon controllingSemicolon = Semicolon.parse(code, table);
+            Blank blankBeforeExtraCommaExpression = Blank.parse(code, table);
             CommaExpression extraCommaExpression = null;
             try {
-                extraCommaExpression = CommaExpression.parse(sentence, table);
+                extraCommaExpression = CommaExpression.parse(code, table);
             } catch (InvalidityException invalidityException) {
             }
-            Blank blankAfterExtraCommaExpression = Blank.parse(sentence, table);
-            RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
-            Blank blankBeforeStatement = Blank.parse(sentence, table);
-            Statement statement = Statement.parse(sentence, table);
+            Blank blankAfterExtraCommaExpression = Blank.parse(code, table);
+            RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
+            Blank blankBeforeStatement = Blank.parse(code, table);
+            Statement statement = Statement.parse(code, table);
             return new ForExpressionStatement(
                     keywordFor,
                     blankAfterKeywordFor,
@@ -145,7 +145,7 @@ public class ForExpressionStatement extends IterationStatement {
                     blankBeforeStatement,
                     statement);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

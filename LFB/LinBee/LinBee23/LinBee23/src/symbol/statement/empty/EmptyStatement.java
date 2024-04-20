@@ -3,11 +3,11 @@ package symbol.statement.empty;
 
 import symbol.base.punctuator.semicolon.Semicolon;
 import symbol.statement.Statement;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.warning.Strangeness;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.warning.Strangeness;
 
 public class EmptyStatement extends Statement {
     public final Semicolon semicolon;
@@ -19,14 +19,14 @@ public class EmptyStatement extends Statement {
         warnings.add(new Strangeness(this, this, "Empty statement is strange for beginners."));
     }
 
-    public static EmptyStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static EmptyStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Semicolon semicolon = Semicolon.parse(sentence, table);
+            Semicolon semicolon = Semicolon.parse(code, table);
             return new EmptyStatement(
                     semicolon);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

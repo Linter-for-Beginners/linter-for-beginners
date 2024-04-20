@@ -1,10 +1,10 @@
 package symbol.declaration.initialization;
 
 import symbol.expression.assignment.AssignmentExpression;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class AssignmentExpressionInitializer extends Initializer {
     public final AssignmentExpression assignmentExpression;
@@ -14,7 +14,7 @@ public class AssignmentExpressionInitializer extends Initializer {
         this.assignmentExpression = assignmentExpression;
     }
 
-    public static AssignmentExpressionInitializer parse(Sentence sentence, Table table) throws InvalidityException {
-        return new AssignmentExpressionInitializer(AssignmentExpression.parse(sentence, table));
+    public static AssignmentExpressionInitializer parse(Code code, Table table) throws InvalidityException {
+        return new AssignmentExpressionInitializer(AssignmentExpression.parse(code, table));
     }
 }

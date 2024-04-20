@@ -1,14 +1,15 @@
 package symbol.expression.unary.address;
 
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.type.Table;
 import symbol.expression.cast.CastExpression;
 import symbol.expression.unary.UnaryExpression;
 import symbol.base.blank.Blank;
-import symbol.symbol.*;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.*;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Danger;
 
 public class AddressOperation extends UnaryExpression {
     public final AddressSign addressSign;
@@ -18,7 +19,7 @@ public class AddressOperation extends UnaryExpression {
     public AddressOperation(AddressSign addressSign,
                             Blank blankAfterAddressSign,
                             CastExpression castExpression) {
-        super(castExpression.type.address(), new Symbol[] {
+        super(SymbolTypeName.addressType(castExpression.type), new Symbol[] {
                 addressSign,
                 blankAfterAddressSign,
                 castExpression});
@@ -30,18 +31,18 @@ public class AddressOperation extends UnaryExpression {
         }
     }
 
-    public static AddressOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static AddressOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            AddressSign addressSign = AddressSign.parse(sentence, table);
-            Blank blankAfterAddressSign = Blank.parse(sentence, table);
-            CastExpression castExpression = CastExpression.parse(sentence, table);
+            AddressSign addressSign = AddressSign.parse(code, table);
+            Blank blankAfterAddressSign = Blank.parse(code, table);
+            CastExpression castExpression = CastExpression.parse(code, table);
             return new AddressOperation(
                     addressSign,
                     blankAfterAddressSign,
                     castExpression);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

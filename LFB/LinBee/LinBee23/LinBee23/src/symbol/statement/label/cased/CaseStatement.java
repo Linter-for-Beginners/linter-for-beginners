@@ -4,12 +4,12 @@ import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.colon.ColonPunctuator;
 import symbol.expression.condition.ConditionalExpression;
+import symbol.foundation.code.Code;
 import symbol.statement.Statement;
 import symbol.statement.label.LabeledStatement;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
 
 public class CaseStatement extends LabeledStatement {
     public final Keyword keywordCase;
@@ -44,16 +44,16 @@ public class CaseStatement extends LabeledStatement {
         this.statement = statement;
     }
 
-    public static CaseStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static CaseStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordCase = Keyword.parse("case", sentence, table);
-            Blank blankAfterKeywordCase = Blank.parse(sentence, table);
-            ConditionalExpression conditionalExpression = ConditionalExpression.parse(sentence, table);
-            Blank blankBeforeColonPunctuator = Blank.parse(sentence, table);
-            ColonPunctuator colonPunctuator = ColonPunctuator.parse(sentence, table);
-            Blank blankAfterColonPunctuator = Blank.parse(sentence, table);
-            Statement statement = Statement.parse(sentence, table);
+            Keyword keywordCase = Keyword.parse("case", code, table);
+            Blank blankAfterKeywordCase = Blank.parse(code, table);
+            ConditionalExpression conditionalExpression = ConditionalExpression.parse(code, table);
+            Blank blankBeforeColonPunctuator = Blank.parse(code, table);
+            ColonPunctuator colonPunctuator = ColonPunctuator.parse(code, table);
+            Blank blankAfterColonPunctuator = Blank.parse(code, table);
+            Statement statement = Statement.parse(code, table);
             return new CaseStatement(
                     keywordCase,
                     blankAfterKeywordCase,
@@ -63,7 +63,7 @@ public class CaseStatement extends LabeledStatement {
                     blankAfterColonPunctuator,
                     statement);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

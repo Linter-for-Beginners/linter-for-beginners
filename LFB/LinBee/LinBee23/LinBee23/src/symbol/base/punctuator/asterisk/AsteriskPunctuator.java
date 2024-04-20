@@ -1,9 +1,9 @@
 package symbol.base.punctuator.asterisk;
 
-import symbol.symbol.Terminal;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Terminal;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class AsteriskPunctuator extends Terminal {
     public static String[] strings = {"*"};
@@ -12,12 +12,12 @@ public class AsteriskPunctuator extends Terminal {
         super(row, column, null, string);
     }
 
-    public static AsteriskPunctuator parse(Sentence sentence, Table table) throws InvalidityException {
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
+    public static AsteriskPunctuator parse(Code code, Table table) throws InvalidityException {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
         for (String string : strings) {
-            if (sentence.startsWith(string)) {
-                sentence.remove(string.length());
+            if (code.startsWith(string)) {
+                code.remove(string);
                 return new AsteriskPunctuator(row, column, string);
             }
         }

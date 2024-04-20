@@ -1,9 +1,9 @@
 package symbol.expression.multiplicative;
 
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.type.Table;
-import symbol.symbol.Terminal;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.Terminal;
 
 public class MultiplicativeSign extends Terminal {
     private static final String[] strings = {"*", "/", "%"};
@@ -12,12 +12,12 @@ public class MultiplicativeSign extends Terminal {
         super(row, column, null, string);
     }
 
-    public static MultiplicativeSign parse(Sentence sentence, Table table) throws InvalidityException {
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
+    public static MultiplicativeSign parse(Code code, Table table) throws InvalidityException {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
         for (String string : strings) {
-            if (sentence.startsWith(string)) {
-                sentence.remove(string.length());
+            if (code.startsWith(string)) {
+                code.remove(string);
                 return new MultiplicativeSign(row, column, string);
             }
         }

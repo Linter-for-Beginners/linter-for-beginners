@@ -12,54 +12,54 @@ import symbol.declaration.declarator.direct.declarator.ParenthesizedDeclarator;
 import symbol.declaration.declarator.direct.function.FunctionDirectDeclarator;
 import symbol.declaration.declarator.direct.identifier.IdentifierDirectDeclaratorI;
 import symbol.expression.assignment.AssignmentExpression;
-import symbol.symbol.Nonterminal;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Nonterminal;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class DirectDeclarator extends Nonterminal {
     public DirectDeclarator(SymbolTypeName type, Symbol[] symbols) {
         super(type, symbols);
     }
 
-    public static DirectDeclarator parse(Sentence sentence, Table table) throws InvalidityException {
+    public static DirectDeclarator parse(Code code, Table table) throws InvalidityException {
         DirectDeclarator directDeclarator = null;
         while (true) {
             try {
-                directDeclarator = (DirectDeclarator) ParenthesizedDeclarator.parse(sentence, table);
+                directDeclarator = (DirectDeclarator) ParenthesizedDeclarator.parse(code, table);
                 break;
             } catch (InvalidityException invalidityException) {
             }
             try {
-                directDeclarator = (DirectDeclarator) IdentifierDirectDeclaratorI.parse(sentence, table);
+                directDeclarator = (DirectDeclarator) IdentifierDirectDeclaratorI.parse(code, table);
                 break;
             } catch (InvalidityException invalidityException) {
             }
             throw new InvalidityException();
         }
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankAfterDirectDeclarator = Blank.parse(sentence, table);
-                Sentence temporary = sentence.clone();
+                Blank blankAfterDirectDeclarator = Blank.parse(code, table);
+                Code temporary = code.clone();
                 try {
-                    LeftBracket leftBracket = LeftBracket.parse(sentence, table);
-                    Blank blankBeforeDeclarationSpecifierList = Blank.parse(sentence, table);
+                    LeftBracket leftBracket = LeftBracket.parse(code, table);
+                    Blank blankBeforeDeclarationSpecifierList = Blank.parse(code, table);
                     DeclarationSpecifierList declarationSpecifierList = null;
                     try {
-                        declarationSpecifierList = DeclarationSpecifierList.parse(sentence, table);
+                        declarationSpecifierList = DeclarationSpecifierList.parse(code, table);
                     } catch (InvalidityException invalidityException) {
                     }
-                    Blank blankAfterDeclarationSpecifierList = Blank.parse(sentence, table);
+                    Blank blankAfterDeclarationSpecifierList = Blank.parse(code, table);
                     AssignmentExpression assignmentExpression = null;
                     try {
-                        assignmentExpression = AssignmentExpression.parse(sentence, table);
+                        assignmentExpression = AssignmentExpression.parse(code, table);
                     } catch (InvalidityException invalidityException) {
                     }
-                    Blank blankAfterAssignmentExpression = Blank.parse(sentence, table);
-                    RightBracket rightBracket = RightBracket.parse(sentence, table);
+                    Blank blankAfterAssignmentExpression = Blank.parse(code, table);
+                    RightBracket rightBracket = RightBracket.parse(code, table);
                     directDeclarator = new ArrayDirectDeclarator(
                             directDeclarator,
                             blankAfterDirectDeclarator,
@@ -72,14 +72,14 @@ public class DirectDeclarator extends Nonterminal {
                             rightBracket);
                     continue;
                 } catch (InvalidityException invalidityException) {
-                    sentence.set(temporary);
+                    code.set(temporary);
                 }
                 try {
-                    LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-                    Blank blankBeforeParameterList = Blank.parse(sentence, table);
-                    ParameterDeclarationList parameterDeclarationList = ParameterDeclarationList.parse(sentence, table);
-                    Blank blankAfterParameterList = Blank.parse(sentence, table);
-                    RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
+                    LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+                    Blank blankBeforeParameterList = Blank.parse(code, table);
+                    ParameterDeclarationList parameterDeclarationList = ParameterDeclarationList.parse(code, table);
+                    Blank blankAfterParameterList = Blank.parse(code, table);
+                    RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
                     directDeclarator = new FunctionDirectDeclarator(
                             directDeclarator,
                             blankAfterDirectDeclarator,
@@ -90,11 +90,11 @@ public class DirectDeclarator extends Nonterminal {
                             rightParenthesis);
                     continue;
                 } catch (InvalidityException invalidityException) {
-                    sentence.set(temporary);
+                    code.set(temporary);
                 }
                 throw new InvalidityException();
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

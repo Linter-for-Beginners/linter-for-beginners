@@ -2,14 +2,15 @@ package symbol.expression.shift;
 
 import symbol.expression.cast.CastExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
-import symbol.symbol.*;
+import symbol.foundation.*;
 import symbol.expression.additive.AdditiveExpression;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Danger;
 
 public class ShiftOperation extends ShiftExpression {
     public final ShiftExpression shiftExpression;
@@ -23,7 +24,7 @@ public class ShiftOperation extends ShiftExpression {
                           ShiftSign shiftSign,
                           Blank blankAfterShiftSign,
                           AdditiveExpression additiveExpression) {
-        super(shiftExpression.type.evaluation(), new Symbol[] {
+        super(SymbolTypeName.evaluationType(shiftExpression.type), new Symbol[] {
                 shiftExpression,
                 blankBeforeShiftSign,
                 shiftSign,
@@ -54,13 +55,13 @@ public class ShiftOperation extends ShiftExpression {
         }
     }
 
-    public static ShiftOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        ShiftExpression shiftExpression = ShiftExpression.parse(sentence, table);
+    public static ShiftOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        ShiftExpression shiftExpression = ShiftExpression.parse(code, table);
         if (shiftExpression instanceof ShiftOperation) {
             return (ShiftOperation) shiftExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

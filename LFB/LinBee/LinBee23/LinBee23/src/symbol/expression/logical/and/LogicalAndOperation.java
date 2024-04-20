@@ -1,16 +1,15 @@
 package symbol.expression.logical.and;
 
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
+import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
-import symbol.symbol.*;
+import symbol.foundation.*;
 import symbol.expression.bitwise.inclusive.BitwiseInclusiveOrExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Danger;
 
 public class LogicalAndOperation extends LogicalAndExpression {
     public final LogicalAndExpression logicalAndExpression;
@@ -24,7 +23,7 @@ public class LogicalAndOperation extends LogicalAndExpression {
                                LogicalAndSign logicalAndSign,
                                Blank blankAfterLogicalAndSign,
                                BitwiseInclusiveOrExpression bitwiseInclusiveOrExpression) {
-        super(SymbolTypeName.promotion(logicalAndExpression.type.evaluation(), bitwiseInclusiveOrExpression.type.evaluation()), new Symbol[] {
+        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(logicalAndExpression.type), SymbolTypeName.evaluationType(bitwiseInclusiveOrExpression.type)), new Symbol[] {
                 logicalAndExpression,
                 blankBeforeLogicalAndSign,
                 logicalAndSign,
@@ -47,21 +46,21 @@ public class LogicalAndOperation extends LogicalAndExpression {
         if (CommaExpression.effective(bitwiseInclusiveOrExpression)) {
             warnings.add(new Danger(this, bitwiseInclusiveOrExpression, "Logical AND operation with side effects is dangerous for beginners."));
         }
-        if (!type.equals(logicalAndExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(logicalAndExpression.type))) {
             warnings.add(new Discouragement(this, logicalAndExpression, "Logical AND operation of expressions whose types are incompatible is discouraged for beginners."));
         }
-        if (!type.equals(bitwiseInclusiveOrExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(bitwiseInclusiveOrExpression.type))) {
             warnings.add(new Discouragement(this, bitwiseInclusiveOrExpression, "Logical AND operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 
-    public static LogicalAndOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        LogicalAndExpression logicalAndExpression = LogicalAndExpression.parse(sentence, table);
+    public static LogicalAndOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        LogicalAndExpression logicalAndExpression = LogicalAndExpression.parse(code, table);
         if (logicalAndExpression instanceof LogicalAndOperation) {
             return (LogicalAndOperation) logicalAndExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

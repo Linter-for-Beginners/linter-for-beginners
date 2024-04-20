@@ -5,10 +5,10 @@ import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.declaration.type.AbstractDeclarator;
 import symbol.declaration.type.direct.DirectAbstractDeclarator;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class ParenthesizedAbstractDeclarator extends DirectAbstractDeclarator {
     public final LeftParenthesis leftParenthesis;
@@ -35,14 +35,14 @@ public class ParenthesizedAbstractDeclarator extends DirectAbstractDeclarator {
         this.rightParenthesis = rightParenthesis;
     }
 
-    public static ParenthesizedAbstractDeclarator parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static ParenthesizedAbstractDeclarator parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-            Blank blankBeforeAbstractDeclarator = Blank.parse(sentence, table);
-            AbstractDeclarator abstractDeclarator = AbstractDeclarator.parse(sentence, table);
-            Blank blankAfterAbstractDeclarator = Blank.parse(sentence, table);
-            RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
+            LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+            Blank blankBeforeAbstractDeclarator = Blank.parse(code, table);
+            AbstractDeclarator abstractDeclarator = AbstractDeclarator.parse(code, table);
+            Blank blankAfterAbstractDeclarator = Blank.parse(code, table);
+            RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
             return new ParenthesizedAbstractDeclarator(
                     leftParenthesis,
                     blankBeforeAbstractDeclarator,
@@ -50,7 +50,7 @@ public class ParenthesizedAbstractDeclarator extends DirectAbstractDeclarator {
                     blankAfterAbstractDeclarator,
                     rightParenthesis);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

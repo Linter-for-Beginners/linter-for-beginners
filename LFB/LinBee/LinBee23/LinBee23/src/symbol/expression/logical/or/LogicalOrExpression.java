@@ -1,13 +1,13 @@
 package symbol.expression.logical.or;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.condition.ConditionalExpression;
 import symbol.expression.logical.and.LogicalAndExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 public abstract class LogicalOrExpression extends ConditionalExpression {
 
@@ -15,15 +15,15 @@ public abstract class LogicalOrExpression extends ConditionalExpression {
         super(type, symbols);
     }
 
-    public static LogicalOrExpression parse(Sentence sentence, Table table) throws InvalidityException {
-        LogicalOrExpression logicalOrExpression = LogicalAndExpression.parse(sentence, table);
+    public static LogicalOrExpression parse(Code code, Table table) throws InvalidityException {
+        LogicalOrExpression logicalOrExpression = LogicalAndExpression.parse(code, table);
         while (true) {
-            Sentence clone = sentence.clone();
+            Code clone = code.clone();
             try {
-                Blank blankBeforeLogicalOrSign = Blank.parse(sentence, table);
-                LogicalOrSign logicalOrSign = LogicalOrSign.parse(sentence, table);
-                Blank blankAfterLogicalOrSign = Blank.parse(sentence, table);
-                LogicalAndExpression logicalAndExpression = LogicalAndExpression.parse(sentence, table);
+                Blank blankBeforeLogicalOrSign = Blank.parse(code, table);
+                LogicalOrSign logicalOrSign = LogicalOrSign.parse(code, table);
+                Blank blankAfterLogicalOrSign = Blank.parse(code, table);
+                LogicalAndExpression logicalAndExpression = LogicalAndExpression.parse(code, table);
                 logicalOrExpression = new LogicalOrOperation(
                         logicalOrExpression,
                         blankBeforeLogicalOrSign,
@@ -31,7 +31,7 @@ public abstract class LogicalOrExpression extends ConditionalExpression {
                         blankAfterLogicalOrSign,
                         logicalAndExpression);
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

@@ -1,9 +1,9 @@
 package symbol.base.keyword;
 
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.type.Table;
-import symbol.symbol.Terminal;
+import symbol.foundation.code.Code;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.type.Table;
+import symbol.foundation.Terminal;
 
 import java.util.Arrays;
 
@@ -17,31 +17,31 @@ public class Keyword extends Terminal {
         super(row, column, null, string);
     }
 
-    public static Keyword parse(Sentence sentence, Table table) throws InvalidityException {
+    public static Keyword parse(Code code, Table table) throws InvalidityException {
         for (String string : strings) {
             try {
-                return parse(string, sentence, table);
+                return parse(string, code, table);
             } catch (InvalidityException invalidityException) {
             }
         }
         throw new InvalidityException();
     }
 
-    public static Keyword parse(String string, Sentence sentence, Table table) throws InvalidityException {
+    public static Keyword parse(String string, Code code, Table table) throws InvalidityException {
         if (!Arrays.asList(strings).contains(string)) {
             throw new InvalidityException();
         }
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
-        String sentenceString = sentence.toString();
-        if (sentence.startsWith(string)) {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
+        String sentenceString = code.toString();
+        if (code.startsWith(string)) {
             if (sentenceString.length() > string.length()) {
                 char c = sentenceString.charAt(string.length());
                 if ('a' <= c && c <= 'z' || 'A' <= c && c <= 'Z' || '0' <= c && c <= '9' || c == '_') {
                     throw new InvalidityException();
                 }
             }
-            sentence.remove(string.length());
+            code.remove(string);
             return new Keyword(row, column, string);
         }
         throw new InvalidityException();

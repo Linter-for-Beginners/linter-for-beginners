@@ -2,16 +2,15 @@ package symbol.expression.bitwise.exclusive;
 
 import symbol.expression.cast.CastExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.bitwise.and.BitwiseAndExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Danger;
 
 public class BitwiseExclusiveOrOperation extends BitwiseExclusiveOrExpression {
     public final BitwiseExclusiveOrExpression bitwiseExclusiveOrExpression;
@@ -25,7 +24,7 @@ public class BitwiseExclusiveOrOperation extends BitwiseExclusiveOrExpression {
                                        BitwiseExclusiveOrSign bitwiseExclusiveOrSign,
                                        Blank blankAfterBitwiseExclusiveOrSign,
                                        BitwiseAndExpression bitwiseAndExpression) {
-        super(SymbolTypeName.promotion(bitwiseExclusiveOrExpression.type.evaluation(), bitwiseAndExpression.type.evaluation()), new Symbol[] {
+        super(SymbolTypeName.promotionType(SymbolTypeName.evaluationType(bitwiseExclusiveOrExpression.type), SymbolTypeName.evaluationType(bitwiseAndExpression.type)), new Symbol[] {
                 bitwiseExclusiveOrExpression,
                 blankBeforeBitwiseExclusiveOrSign,
                 bitwiseExclusiveOrSign,
@@ -54,21 +53,21 @@ public class BitwiseExclusiveOrOperation extends BitwiseExclusiveOrExpression {
         if (CommaExpression.effective(bitwiseAndExpression)) {
             warnings.add(new Danger(this, bitwiseAndExpression, "Bitwise exclusive OR operation with side effects is dangerous for beginners."));
         }
-        if (!type.equals(bitwiseExclusiveOrExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(bitwiseExclusiveOrExpression.type))) {
             warnings.add(new Discouragement(this, bitwiseExclusiveOrExpression, "Bitwise exclusive OR operation of expressions whose types are incompatible is discouraged for beginners."));
         }
-        if (!type.equals(bitwiseAndExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(bitwiseAndExpression.type))) {
             warnings.add(new Discouragement(this, bitwiseAndExpression, "Bitwise exclusive OR operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
 
-    public static BitwiseExclusiveOrOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        BitwiseExclusiveOrExpression bitwiseExclusiveOrExpression = BitwiseExclusiveOrExpression.parse(sentence, table);
+    public static BitwiseExclusiveOrOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        BitwiseExclusiveOrExpression bitwiseExclusiveOrExpression = BitwiseExclusiveOrExpression.parse(code, table);
         if (bitwiseExclusiveOrExpression instanceof BitwiseExclusiveOrOperation) {
             return (BitwiseExclusiveOrOperation) bitwiseExclusiveOrExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

@@ -4,12 +4,12 @@ package symbol.statement.compound;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.brace.LeftBrace;
 import symbol.base.punctuator.brace.RightBrace;
-import symbol.symbol.type.Table;
+import symbol.foundation.type.Table;
 import symbol.statement.Statement;
-import symbol.symbol.*;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.type.SymbolTypeName;
+import symbol.foundation.*;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.SymbolTypeName;
 
 public class CompoundStatement extends Statement {
     public final LeftBrace leftBrace;
@@ -23,7 +23,7 @@ public class CompoundStatement extends Statement {
                              BlockItemList blockItemList,
                              Blank blankAfterBlockItemList,
                              RightBrace rightBrace) {
-        super(SymbolTypeName.unknown(), new Symbol[] {
+        super(new SymbolTypeName(), new Symbol[] {
                 leftBrace,
                 blankBeforeBlockItemList,
                 blockItemList,
@@ -36,14 +36,14 @@ public class CompoundStatement extends Statement {
         this.rightBrace = rightBrace;
     }
 
-    public static CompoundStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static CompoundStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            LeftBrace leftBrace = LeftBrace.parse(sentence, table);
-            Blank blankBeforeBlockItemList = Blank.parse(sentence, table);
-            BlockItemList blockItemList = BlockItemList.parse(sentence, table);
-            Blank blankAfterBlockItemList = Blank.parse(sentence, table);
-            RightBrace rightBrace = RightBrace.parse(sentence, table);
+            LeftBrace leftBrace = LeftBrace.parse(code, table);
+            Blank blankBeforeBlockItemList = Blank.parse(code, table);
+            BlockItemList blockItemList = BlockItemList.parse(code, table);
+            Blank blankAfterBlockItemList = Blank.parse(code, table);
+            RightBrace rightBrace = RightBrace.parse(code, table);
             return new CompoundStatement(
                     leftBrace,
                     blankBeforeBlockItemList,
@@ -51,7 +51,7 @@ public class CompoundStatement extends Statement {
                     blankAfterBlockItemList,
                     rightBrace);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

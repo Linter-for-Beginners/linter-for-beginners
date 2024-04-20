@@ -1,16 +1,15 @@
 package symbol.expression.condition;
 
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.logical.or.LogicalOrExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.warning.Danger;
+import symbol.foundation.warning.Discouragement;
 
 public class ConditionalOperation extends ConditionalExpression {
     public final LogicalOrExpression logicalOrExpression;
@@ -32,7 +31,7 @@ public class ConditionalOperation extends ConditionalExpression {
                                 RightConditionalSign rightConditionalSign,
                                 Blank blankAfterRightConditionalSign,
                                 ConditionalExpression conditionalExpression) {
-        super(type(commaExpression.type.evaluation(), conditionalExpression.type.evaluation()), new Symbol[] {
+        super(type(SymbolTypeName.evaluationType(commaExpression.type), SymbolTypeName.evaluationType(conditionalExpression.type)), new Symbol[] {
                 logicalOrExpression,
                 blankBeforeLeftConditionalSign,
                 leftConditionalSign,
@@ -63,10 +62,10 @@ public class ConditionalOperation extends ConditionalExpression {
         if (CommaExpression.effective(conditionalExpression)) {
             warnings.add(new Danger(this, conditionalExpression, "Conditional operation with side effects is dangerous for beginners."));
         }
-        if (!type.equals(commaExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(commaExpression.type))) {
             warnings.add(new Discouragement(this, commaExpression, "Conditional operation of expressions whose types are incompatible is discouraged for beginners."));
         }
-        if (!type.equals(conditionalExpression.type.evaluation())) {
+        if (!type.equals(SymbolTypeName.evaluationType(conditionalExpression.type))) {
             warnings.add(new Discouragement(this, conditionalExpression, "Conditional operation of expressions whose types are incompatible is discouraged for beginners."));
         }
     }
@@ -88,19 +87,19 @@ public class ConditionalOperation extends ConditionalExpression {
             if (left.equals(right)) {
                 return left;
             } else {
-                return SymbolTypeName.parse("void *");
+                return new SymbolTypeName("void *");
             }
         }
-        return SymbolTypeName.promotion(left, right);
+        return SymbolTypeName.promotionType(left, right);
     }
 
-    public static ConditionalOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        ConditionalExpression conditionalExpression = ConditionalExpression.parse(sentence, table);
+    public static ConditionalOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        ConditionalExpression conditionalExpression = ConditionalExpression.parse(code, table);
         if (conditionalExpression instanceof ConditionalOperation) {
             return (ConditionalOperation) conditionalExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

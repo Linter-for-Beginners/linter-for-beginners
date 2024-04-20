@@ -1,10 +1,10 @@
 package symbol.base.constant.integer;
 
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 import symbol.base.constant.Constant;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
 
 import java.math.BigInteger;
 
@@ -14,10 +14,10 @@ public class IntegerConstant extends Constant {
         super(row, column, type, string);
     }
 
-    public static IntegerConstant parse(Sentence sentence, Table table) throws InvalidityException {
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
-        String sentenceString = sentence.toString();
+    public static IntegerConstant parse(Code code, Table table) throws InvalidityException {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
+        String sentenceString = code.toString();
         if (sentenceString.length() == 0) {
             throw new InvalidityException();
         }
@@ -114,7 +114,7 @@ public class IntegerConstant extends Constant {
             type = maximumUnsignedLongLongInt.compareTo(value) >= 0 ? "unsigned long long int" : "unknown";
         }
         String string = sentenceString.substring(0, i);
-        sentence.remove(string.length());
-        return new IntegerConstant(row, column, SymbolTypeName.parse(type), string);
+        code.remove(string);
+        return new IntegerConstant(row, column, new SymbolTypeName(type), string);
     }
 }

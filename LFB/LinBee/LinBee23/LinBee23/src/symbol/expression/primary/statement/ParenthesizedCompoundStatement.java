@@ -4,12 +4,12 @@ import symbol.base.blank.Blank;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.expression.primary.PrimaryExpression;
+import symbol.foundation.code.Code;
 import symbol.statement.compound.CompoundStatement;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Strangeness;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Strangeness;
 
 public class ParenthesizedCompoundStatement extends PrimaryExpression {
     public final LeftParenthesis leftParenthesis;
@@ -37,14 +37,14 @@ public class ParenthesizedCompoundStatement extends PrimaryExpression {
         warnings.add(new Strangeness(this, compoundStatement, "Parenthesized compound statement is strange for beginners."));
     }
 
-    public static ParenthesizedCompoundStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static ParenthesizedCompoundStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-            Blank blankBeforeCompoundStatement = Blank.parse(sentence, table);
-            CompoundStatement compoundStatement = CompoundStatement.parse(sentence, table);
-            Blank blankAfterCompoundStatement = Blank.parse(sentence, table);
-            RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
+            LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+            Blank blankBeforeCompoundStatement = Blank.parse(code, table);
+            CompoundStatement compoundStatement = CompoundStatement.parse(code, table);
+            Blank blankAfterCompoundStatement = Blank.parse(code, table);
+            RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
             return new ParenthesizedCompoundStatement(
                     leftParenthesis,
                     blankBeforeCompoundStatement,
@@ -52,7 +52,7 @@ public class ParenthesizedCompoundStatement extends PrimaryExpression {
                     blankAfterCompoundStatement,
                     rightParenthesis);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

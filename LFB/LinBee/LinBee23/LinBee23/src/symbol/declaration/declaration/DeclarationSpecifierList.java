@@ -2,11 +2,11 @@ package symbol.declaration.declaration;
 
 import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
-import symbol.symbol.Nonterminal;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Nonterminal;
+import symbol.foundation.Symbol;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
 
 import java.util.ArrayList;
 
@@ -41,8 +41,8 @@ public class DeclarationSpecifierList extends Nonterminal {
         return symbols.toArray(new Symbol[0]);
     }
 
-    public static DeclarationSpecifierList parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static DeclarationSpecifierList parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         ArrayList<Keyword> keyword = new ArrayList<>();
         ArrayList<Blank> blankAfterKeyword = new ArrayList<>();
         while (true) {
@@ -50,7 +50,7 @@ public class DeclarationSpecifierList extends Nonterminal {
                 boolean disjunction = false;
                 for (String string : strings) {
                     try {
-                        keyword.add(Keyword.parse(string, sentence, table));
+                        keyword.add(Keyword.parse(string, code, table));
                         disjunction = true;
                         break;
                     } catch (InvalidityException invalidityException) {
@@ -59,10 +59,10 @@ public class DeclarationSpecifierList extends Nonterminal {
                 if (!disjunction) {
                     throw new InvalidityException();
                 }
-                clone = sentence.clone();
-                blankAfterKeyword.add(Blank.parse(sentence, table));
+                clone = code.clone();
+                blankAfterKeyword.add(Blank.parse(code, table));
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }

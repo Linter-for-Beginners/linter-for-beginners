@@ -3,11 +3,11 @@ package symbol.statement.jump.continued;
 import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.semicolon.Semicolon;
+import symbol.foundation.code.Code;
 import symbol.statement.jump.JumpStatement;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
 
 public class ContinueStatement extends JumpStatement {
     public final Keyword keywordContinue;
@@ -26,18 +26,18 @@ public class ContinueStatement extends JumpStatement {
         this.semicolon = semicolon;
     }
 
-    public static ContinueStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static ContinueStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordContinue = Keyword.parse("continue", sentence, table);
-            Blank blankBeforeSemicolon = Blank.parse(sentence, table);
-            Semicolon semicolon = Semicolon.parse(sentence, table);
+            Keyword keywordContinue = Keyword.parse("continue", code, table);
+            Blank blankBeforeSemicolon = Blank.parse(code, table);
+            Semicolon semicolon = Semicolon.parse(code, table);
             return new ContinueStatement(
                     keywordContinue,
                     blankBeforeSemicolon,
                     semicolon);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

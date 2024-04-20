@@ -2,17 +2,17 @@ package symbol.expression.cast;
 
 import symbol.base.identifier.Identifier;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.declaration.type.TypeName;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.warning.Discouragement;
+import symbol.foundation.warning.Danger;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -57,7 +57,7 @@ public class CastOperation extends CastExpression {
     }
 
     private static SymbolTypeName type(TypeName typeName) {
-        ArrayList<Symbol> symbols = typeName.traversal(new ArrayList<>());
+        Symbol[] symbols = typeName.traversal();
         HashSet<Symbol> visited = new HashSet<>();
         ArrayList<Terminal> terminals = new ArrayList<>();
         terminals.add(null);
@@ -109,19 +109,19 @@ public class CastOperation extends CastExpression {
                 stringBuilder.append(terminal.toString());
             }
         }
-        return SymbolTypeName.parse(stringBuilder.toString().replaceAll("\\s+", " ").trim());
+        return new SymbolTypeName(stringBuilder.toString().replaceAll("\\s+", " ").trim());
     }
 
-    public static CastOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static CastOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-            Blank blankBeforeTypeName = Blank.parse(sentence, table);
-            TypeName typeName = TypeName.parse(sentence, table);
-            Blank blankAfterTypeName = Blank.parse(sentence, table);
-            RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
-            Blank blankBeforeCastExpression = Blank.parse(sentence, table);
-            CastExpression castExpression = CastExpression.parse(sentence, table);
+            LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+            Blank blankBeforeTypeName = Blank.parse(code, table);
+            TypeName typeName = TypeName.parse(code, table);
+            Blank blankAfterTypeName = Blank.parse(code, table);
+            RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
+            Blank blankBeforeCastExpression = Blank.parse(code, table);
+            CastExpression castExpression = CastExpression.parse(code, table);
             return new CastOperation(
                     leftParenthesis,
                     blankBeforeTypeName,
@@ -131,7 +131,7 @@ public class CastOperation extends CastExpression {
                     blankBeforeCastExpression,
                     castExpression);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

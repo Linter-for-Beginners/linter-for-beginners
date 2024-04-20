@@ -3,12 +3,12 @@ package symbol.statement.label.defaulted;
 import symbol.base.blank.Blank;
 import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.colon.ColonPunctuator;
+import symbol.foundation.code.Code;
 import symbol.statement.Statement;
 import symbol.statement.label.LabeledStatement;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
 
 public class DefaultStatement extends LabeledStatement {
     public final Keyword keywordDefault;
@@ -35,14 +35,14 @@ public class DefaultStatement extends LabeledStatement {
         this.statement = statement;
     }
 
-    public static DefaultStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static DefaultStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordCase = Keyword.parse("default", sentence, table);
-            Blank blankBeforeColonPunctuator = Blank.parse(sentence, table);
-            ColonPunctuator colonPunctuator = ColonPunctuator.parse(sentence, table);
-            Blank blankAfterColonPunctuator = Blank.parse(sentence, table);
-            Statement statement = Statement.parse(sentence, table);
+            Keyword keywordCase = Keyword.parse("default", code, table);
+            Blank blankBeforeColonPunctuator = Blank.parse(code, table);
+            ColonPunctuator colonPunctuator = ColonPunctuator.parse(code, table);
+            Blank blankAfterColonPunctuator = Blank.parse(code, table);
+            Statement statement = Statement.parse(code, table);
             return new DefaultStatement(
                     keywordCase,
                     blankBeforeColonPunctuator,
@@ -50,7 +50,7 @@ public class DefaultStatement extends LabeledStatement {
                     blankAfterColonPunctuator,
                     statement);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

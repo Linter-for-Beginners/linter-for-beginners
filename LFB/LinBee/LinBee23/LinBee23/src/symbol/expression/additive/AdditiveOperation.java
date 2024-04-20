@@ -1,16 +1,15 @@
 package symbol.expression.additive;
 
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.base.blank.Blank;
 import symbol.expression.multiplicative.MultiplicativeExpression;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Discouragement;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.warning.Danger;
+import symbol.foundation.warning.Discouragement;
 
 public class AdditiveOperation extends AdditiveExpression {
     public final AdditiveExpression additiveExpression;
@@ -24,7 +23,7 @@ public class AdditiveOperation extends AdditiveExpression {
                              AdditiveSign additiveSign,
                              Blank blankAfterAdditiveSign,
                              MultiplicativeExpression multiplicativeExpression) {
-        super(type(additiveExpression.type.evaluation(), multiplicativeExpression.type.evaluation()), new Symbol[] {
+        super(type(SymbolTypeName.evaluationType(additiveExpression.type), SymbolTypeName.evaluationType(multiplicativeExpression.type)), new Symbol[] {
                 additiveExpression,
                 blankBeforeAdditiveSign,
                 additiveSign,
@@ -47,11 +46,11 @@ public class AdditiveOperation extends AdditiveExpression {
         if (CommaExpression.effective(multiplicativeExpression)) {
             warnings.add(new Danger(this, multiplicativeExpression, "Additive operation with side effects is dangerous for beginners."));
         }
-        if (!additiveExpression.type.evaluation().isPointer() && !multiplicativeExpression.type.evaluation().isPointer()) {
-            if (!type.equals(additiveExpression.type.evaluation())) {
+        if (!SymbolTypeName.evaluationType(additiveExpression.type).isPointer() && !SymbolTypeName.evaluationType(multiplicativeExpression.type).isPointer()) {
+            if (!type.equals(SymbolTypeName.evaluationType(additiveExpression.type))) {
                 warnings.add(new Discouragement(this, additiveExpression, "Additive operation of expressions whose types are incompatible is discouraged for beginners."));
             }
-            if (!type.equals(multiplicativeExpression.type.evaluation())) {
+            if (!type.equals(SymbolTypeName.evaluationType(multiplicativeExpression.type))) {
                 warnings.add(new Discouragement(this, multiplicativeExpression, "Additive operation of expressions whose types are incompatible is discouraged for beginners."));
             }
         }
@@ -59,24 +58,24 @@ public class AdditiveOperation extends AdditiveExpression {
 
     private static SymbolTypeName type(SymbolTypeName left, SymbolTypeName right) {
         if (left.isPointer() && !right.isPointer()) {
-            return SymbolTypeName.parse(left.toString());
+            return new SymbolTypeName(left.toString());
         }
         if (!left.isPointer() && right.isPointer()) {
-            return  SymbolTypeName.parse(right.toString());
+            return  new SymbolTypeName(right.toString());
         }
         if (left.isPointer() && right.isPointer()) {
-            return SymbolTypeName.parse("ptrdiff_t");
+            return new SymbolTypeName("ptrdiff_t");
         }
-        return SymbolTypeName.promotion(left, right);
+        return SymbolTypeName.promotionType(left, right);
     }
 
-    public static AdditiveOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        AdditiveExpression additiveExpression = AdditiveExpression.parse(sentence, table);
+    public static AdditiveOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        AdditiveExpression additiveExpression = AdditiveExpression.parse(code, table);
         if (additiveExpression instanceof AdditiveOperation) {
             return (AdditiveOperation) additiveExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

@@ -1,9 +1,9 @@
 package symbol.expression.unary.address;
 
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.type.Table;
-import symbol.symbol.Terminal;
+import symbol.foundation.code.Code;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.type.Table;
+import symbol.foundation.Terminal;
 
 public class AddressSign extends Terminal {
     private static final String[] strings = {"&"};
@@ -12,15 +12,15 @@ public class AddressSign extends Terminal {
         super(row, column, null, string);
     }
 
-    public static AddressSign parse(Sentence sentence, Table table) throws InvalidityException {
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
+    public static AddressSign parse(Code code, Table table) throws InvalidityException {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
         for (String string : strings) {
-            if (sentence.startsWith(string)) {
-                if (sentence.toString().length() > string.length() && sentence.toString().startsWith("&", string.length())) {
+            if (code.startsWith(string)) {
+                if (code.toString().length() > string.length() && code.toString().startsWith("&", string.length())) {
                     throw new InvalidityException();
                 }
-                sentence.remove(string.length());
+                code.remove(string);
                 return new AddressSign(row, column, string);
             }
         }

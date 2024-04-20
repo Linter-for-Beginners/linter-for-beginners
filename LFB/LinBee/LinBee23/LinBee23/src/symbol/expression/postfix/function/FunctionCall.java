@@ -2,16 +2,16 @@ package symbol.expression.postfix.function;
 
 import symbol.expression.assignment.AssignmentExpression;
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
-import symbol.symbol.*;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
+import symbol.foundation.*;
 import symbol.expression.postfix.PostfixExpression;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Danger;
 
 public class FunctionCall extends PostfixExpression {
     public final PostfixExpression postfixExpression;
@@ -30,7 +30,7 @@ public class FunctionCall extends PostfixExpression {
                         ArgumentExpressionList argumentExpressionList,
                         Blank blankAfterArgumentExpressionList,
                         RightParenthesis rightParenthesis) {
-        super(SymbolTypeName.parse(type.toString()), new Symbol[] {
+        super(new SymbolTypeName(type.toString()), new Symbol[] {
                 postfixExpression,
                 blankAfterPostfixExpression,
                 leftParenthesis,
@@ -55,13 +55,13 @@ public class FunctionCall extends PostfixExpression {
         }
     }
 
-    public static FunctionCall parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
-        PostfixExpression postfixExpression = PostfixExpression.parse(sentence, table);
+    public static FunctionCall parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
+        PostfixExpression postfixExpression = PostfixExpression.parse(code, table);
         if (postfixExpression instanceof FunctionCall) {
             return (FunctionCall) postfixExpression;
         } else {
-            sentence.set(clone);
+            code.set(clone);
             throw new InvalidityException();
         }
     }

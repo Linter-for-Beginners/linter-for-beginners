@@ -5,14 +5,14 @@ import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.code.Code;
 import symbol.statement.Statement;
 import symbol.statement.compound.CompoundStatement;
 import symbol.statement.selection.SelectionStatement;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Discouragement;
 
 public class IfElseStatement extends SelectionStatement {
     public final Keyword keywordIf;
@@ -80,22 +80,22 @@ public class IfElseStatement extends SelectionStatement {
         }
     }
 
-    public static IfElseStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static IfElseStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordIf = Keyword.parse("if", sentence, table);
-            Blank blankAfterKeywordIf = Blank.parse(sentence, table);
-            LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-            Blank blankBeforeCommaExpression = Blank.parse(sentence, table);
-            CommaExpression commaExpression = CommaExpression.parse(sentence, table);
-            Blank blankAfterCommaExpression = Blank.parse(sentence, table);
-            RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
-            Blank blankBeforeStatement = Blank.parse(sentence, table);
-            Statement trueStatement = Statement.parse(sentence, table);
-            Blank blankBeforeKeywordElse = Blank.parse(sentence, table);
-            Keyword keywordElse = Keyword.parse("else", sentence, table);
-            Blank blankAfterKeywordElse = Blank.parse(sentence, table);
-            Statement falseStatement = Statement.parse(sentence, table);
+            Keyword keywordIf = Keyword.parse("if", code, table);
+            Blank blankAfterKeywordIf = Blank.parse(code, table);
+            LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+            Blank blankBeforeCommaExpression = Blank.parse(code, table);
+            CommaExpression commaExpression = CommaExpression.parse(code, table);
+            Blank blankAfterCommaExpression = Blank.parse(code, table);
+            RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
+            Blank blankBeforeStatement = Blank.parse(code, table);
+            Statement trueStatement = Statement.parse(code, table);
+            Blank blankBeforeKeywordElse = Blank.parse(code, table);
+            Keyword keywordElse = Keyword.parse("else", code, table);
+            Blank blankAfterKeywordElse = Blank.parse(code, table);
+            Statement falseStatement = Statement.parse(code, table);
             return new IfElseStatement(
                     keywordIf,
                     blankAfterKeywordIf,
@@ -111,7 +111,7 @@ public class IfElseStatement extends SelectionStatement {
                     blankAfterKeywordElse,
                     falseStatement);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

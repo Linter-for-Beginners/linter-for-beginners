@@ -3,10 +3,10 @@ package symbol.declaration.type;
 import symbol.base.blank.Blank;
 import symbol.declaration.declaration.DeclarationSpecifierList;
 import symbol.declaration.parameter.ParameterDeclaration;
-import symbol.symbol.Symbol;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.type.Table;
+import symbol.foundation.Symbol;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 
 public class TypeName extends ParameterDeclaration {
     public final DeclarationSpecifierList declarationSpecifierList;
@@ -26,18 +26,18 @@ public class TypeName extends ParameterDeclaration {
         this.abstractDeclarator = abstractDeclarator;
     }
 
-    public static TypeName parse(Sentence sentence, Table table) throws InvalidityException {
-        DeclarationSpecifierList declarationSpecifierList = DeclarationSpecifierList.parse(sentence, table);
-        Sentence clone = sentence.clone();
+    public static TypeName parse(Code code, Table table) throws InvalidityException {
+        DeclarationSpecifierList declarationSpecifierList = DeclarationSpecifierList.parse(code, table);
+        Code clone = code.clone();
         try {
-            Blank blankAfterDeclarationSpecifierList = Blank.parse(sentence, table);
-            AbstractDeclarator abstractDeclarator = AbstractDeclarator.parse(sentence, table);
+            Blank blankAfterDeclarationSpecifierList = Blank.parse(code, table);
+            AbstractDeclarator abstractDeclarator = AbstractDeclarator.parse(code, table);
             return new TypeName(
                     declarationSpecifierList,
                     blankAfterDeclarationSpecifierList,
                     abstractDeclarator);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             return new TypeName(
                     declarationSpecifierList,
                     null,

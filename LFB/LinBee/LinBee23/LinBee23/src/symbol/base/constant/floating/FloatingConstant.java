@@ -1,10 +1,10 @@
 package symbol.base.constant.floating;
 
-import symbol.symbol.type.Table;
+import symbol.foundation.type.Table;
 import symbol.base.constant.Constant;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.code.Code;
 
 public class FloatingConstant extends Constant {
 
@@ -12,10 +12,10 @@ public class FloatingConstant extends Constant {
         super(row, column, type, string);
     }
 
-    public static FloatingConstant parse(Sentence sentence, Table table) throws InvalidityException {
-        Integer row = sentence.getRow();
-        Integer column = sentence.getColumn();
-        String sentenceString = sentence.toString();
+    public static FloatingConstant parse(Code code, Table table) throws InvalidityException {
+        Integer row = code.getRow();
+        Integer column = code.getColumn();
+        String sentenceString = code.toString();
         if (sentenceString.length() == 0) {
             throw new InvalidityException();
         }
@@ -70,8 +70,8 @@ public class FloatingConstant extends Constant {
         }
         i += suffix.length();
         String string = sentenceString.substring(0, i);
-        sentence.remove(string.length());
+        code.remove(string);
         return new FloatingConstant(row, column,
-                SymbolTypeName.parse(suffix.equals("") ? "double" : suffix.equals("f") ? "float" : "long double"), string);
+                new SymbolTypeName(suffix.equals("") ? "double" : suffix.equals("f") ? "float" : "long double"), string);
     }
 }

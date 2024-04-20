@@ -5,14 +5,14 @@ import symbol.base.keyword.Keyword;
 import symbol.base.punctuator.parenthesis.LeftParenthesis;
 import symbol.base.punctuator.parenthesis.RightParenthesis;
 import symbol.expression.comma.CommaExpression;
+import symbol.foundation.code.Code;
 import symbol.statement.Statement;
 import symbol.statement.compound.CompoundStatement;
 import symbol.statement.iteration.IterationStatement;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Discouragement;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Discouragement;
 
 public class DoWhileStatement extends IterationStatement {
     public final Keyword keywordDo;
@@ -69,20 +69,20 @@ public class DoWhileStatement extends IterationStatement {
         }
     }
 
-    public static DoWhileStatement parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static DoWhileStatement parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            Keyword keywordDo = Keyword.parse("do", sentence, table);
-            Blank blankAfterKeywordDo = Blank.parse(sentence, table);
-            Statement statement = Statement.parse(sentence, table);
-            Blank blankBeforeKeywordWhile = Blank.parse(sentence, table);
-            Keyword keywordWhile = Keyword.parse("while", sentence, table);
-            Blank blankAfterKeywordWhile = Blank.parse(sentence, table);
-            LeftParenthesis leftParenthesis = LeftParenthesis.parse(sentence, table);
-            Blank blankBeforeCommaExpression = Blank.parse(sentence, table);
-            CommaExpression commaExpression = CommaExpression.parse(sentence, table);
-            Blank blankAfterCommaExpression = Blank.parse(sentence, table);
-            RightParenthesis rightParenthesis = RightParenthesis.parse(sentence, table);
+            Keyword keywordDo = Keyword.parse("do", code, table);
+            Blank blankAfterKeywordDo = Blank.parse(code, table);
+            Statement statement = Statement.parse(code, table);
+            Blank blankBeforeKeywordWhile = Blank.parse(code, table);
+            Keyword keywordWhile = Keyword.parse("while", code, table);
+            Blank blankAfterKeywordWhile = Blank.parse(code, table);
+            LeftParenthesis leftParenthesis = LeftParenthesis.parse(code, table);
+            Blank blankBeforeCommaExpression = Blank.parse(code, table);
+            CommaExpression commaExpression = CommaExpression.parse(code, table);
+            Blank blankAfterCommaExpression = Blank.parse(code, table);
+            RightParenthesis rightParenthesis = RightParenthesis.parse(code, table);
             return new DoWhileStatement(
                     keywordDo,
                     blankAfterKeywordDo,
@@ -96,7 +96,7 @@ public class DoWhileStatement extends IterationStatement {
                     blankAfterCommaExpression,
                     rightParenthesis);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

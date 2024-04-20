@@ -1,16 +1,16 @@
 package symbol.expression.unary.negation;
 
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 import symbol.expression.cast.CastExpression;
 import symbol.expression.unary.UnaryExpression;
 import symbol.base.blank.Blank;
-import symbol.symbol.*;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
-import symbol.symbol.warning.Danger;
-import symbol.symbol.warning.Discouragement;
+import symbol.foundation.*;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.invalidity.InvalidityException;
+import symbol.foundation.warning.Danger;
+import symbol.foundation.warning.Discouragement;
 
 public class LogicalNegationOperation extends UnaryExpression {
     public final LogicalNegationSign logicalNegationSign;
@@ -20,7 +20,7 @@ public class LogicalNegationOperation extends UnaryExpression {
     public LogicalNegationOperation(LogicalNegationSign logicalNegationSign,
                                     Blank blankAfterLogicalNegationSign,
                                     CastExpression castExpression) {
-        super(SymbolTypeName.parse("int"), new Symbol[] {
+        super(new SymbolTypeName("int"), new Symbol[] {
                 logicalNegationSign,
                 blankAfterLogicalNegationSign,
                 castExpression});
@@ -35,18 +35,18 @@ public class LogicalNegationOperation extends UnaryExpression {
         }
     }
 
-    public static LogicalNegationOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static LogicalNegationOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            LogicalNegationSign logicalNegationSign = LogicalNegationSign.parse(sentence, table);
-            Blank blankAfterLogicalNegationSign = Blank.parse(sentence, table);
-            CastExpression castExpression = CastExpression.parse(sentence, table);
+            LogicalNegationSign logicalNegationSign = LogicalNegationSign.parse(code, table);
+            Blank blankAfterLogicalNegationSign = Blank.parse(code, table);
+            CastExpression castExpression = CastExpression.parse(code, table);
             return new LogicalNegationOperation(
                     logicalNegationSign,
                     blankAfterLogicalNegationSign,
                     castExpression);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

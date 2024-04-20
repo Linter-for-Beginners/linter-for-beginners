@@ -1,14 +1,14 @@
 package symbol.expression.unary.increment;
 
 import symbol.expression.comma.CommaExpression;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.code.Code;
+import symbol.foundation.invalidity.InvalidityException;
 import symbol.expression.unary.UnaryExpression;
 import symbol.base.blank.Blank;
-import symbol.symbol.Symbol;
-import symbol.symbol.type.Table;
-import symbol.symbol.type.SymbolTypeName;
-import symbol.symbol.warning.Danger;
+import symbol.foundation.Symbol;
+import symbol.foundation.type.Table;
+import symbol.foundation.type.SymbolTypeName;
+import symbol.foundation.warning.Danger;
 
 public class PrefixIncrementOperation extends UnaryExpression {
     public final PrefixIncrementSign prefixIncrementSign;
@@ -18,7 +18,7 @@ public class PrefixIncrementOperation extends UnaryExpression {
     public PrefixIncrementOperation(PrefixIncrementSign prefixIncrementSign,
                                     Blank blankAfterPrefixIncrementSign,
                                     UnaryExpression unaryExpression) {
-        super(SymbolTypeName.parse(unaryExpression.type.toString()), new Symbol[] {
+        super(new SymbolTypeName(unaryExpression.type.toString()), new Symbol[] {
                 prefixIncrementSign,
                 blankAfterPrefixIncrementSign,
                 unaryExpression});
@@ -30,18 +30,18 @@ public class PrefixIncrementOperation extends UnaryExpression {
         }
     }
 
-    public static PrefixIncrementOperation parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static PrefixIncrementOperation parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         try {
-            PrefixIncrementSign prefixIncrementSign = PrefixIncrementSign.parse(sentence, table);
-            Blank blankAfterPrefixIncrementSign = Blank.parse(sentence, table);
-            UnaryExpression unaryExpression = UnaryExpression.parse(sentence, table);
+            PrefixIncrementSign prefixIncrementSign = PrefixIncrementSign.parse(code, table);
+            Blank blankAfterPrefixIncrementSign = Blank.parse(code, table);
+            UnaryExpression unaryExpression = UnaryExpression.parse(code, table);
             return new PrefixIncrementOperation(
                     prefixIncrementSign,
                     blankAfterPrefixIncrementSign,
                     unaryExpression);
         } catch (InvalidityException invalidityException) {
-            sentence.set(clone);
+            code.set(clone);
             throw invalidityException;
         }
     }

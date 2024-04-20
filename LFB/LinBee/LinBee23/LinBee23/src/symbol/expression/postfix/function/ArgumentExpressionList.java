@@ -1,12 +1,12 @@
 package symbol.expression.postfix.function;
 
-import symbol.symbol.type.Table;
+import symbol.foundation.code.Code;
+import symbol.foundation.type.Table;
 import symbol.base.blank.Blank;
 import symbol.base.punctuator.comma.CommaPunctuator;
-import symbol.symbol.*;
+import symbol.foundation.*;
 import symbol.expression.assignment.AssignmentExpression;
-import symbol.symbol.invalidity.InvalidityException;
-import symbol.symbol.sentence.Sentence;
+import symbol.foundation.invalidity.InvalidityException;
 
 import java.util.ArrayList;
 
@@ -47,21 +47,21 @@ public class ArgumentExpressionList extends Nonterminal {
         return symbols.toArray(new Symbol[0]);
     }
 
-    public static ArgumentExpressionList parse(Sentence sentence, Table table) throws InvalidityException {
-        Sentence clone = sentence.clone();
+    public static ArgumentExpressionList parse(Code code, Table table) throws InvalidityException {
+        Code clone = code.clone();
         ArrayList<AssignmentExpression> assignmentExpression = new ArrayList<>();
         ArrayList<Blank> blankBeforeCommaPunctuator = new ArrayList<>();
         ArrayList<CommaPunctuator> commaPunctuator = new ArrayList<>();
         ArrayList<Blank> blankAfterCommaPunctuator = new ArrayList<>();
         while (true) {
             try {
-                assignmentExpression.add(AssignmentExpression.parse(sentence, table));
-                clone = sentence.clone();
-                blankBeforeCommaPunctuator.add(Blank.parse(sentence, table));
-                commaPunctuator.add(CommaPunctuator.parse(sentence, table));
-                blankAfterCommaPunctuator.add(Blank.parse(sentence, table));
+                assignmentExpression.add(AssignmentExpression.parse(code, table));
+                clone = code.clone();
+                blankBeforeCommaPunctuator.add(Blank.parse(code, table));
+                commaPunctuator.add(CommaPunctuator.parse(code, table));
+                blankAfterCommaPunctuator.add(Blank.parse(code, table));
             } catch (InvalidityException invalidityException) {
-                sentence.set(clone);
+                code.set(clone);
                 break;
             }
         }
