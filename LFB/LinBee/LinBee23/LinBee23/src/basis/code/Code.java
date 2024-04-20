@@ -47,7 +47,7 @@ public class Code implements Cloneable {
 
     public void remove(String string) {
         if (!startsWith(string)) {
-            throw new RuntimeException();
+            throw new RuntimeException("bug of LinBee23");
         }
         for (int i = 0; i < string.length(); i++) {
             if (this.string.startsWith("\n", i)) {

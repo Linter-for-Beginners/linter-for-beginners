@@ -13,9 +13,9 @@ public class Blank extends Token {
     public static Blank parse(Code code, Table table) throws InvalidityException {
         Integer row = code.getRow();
         Integer column = code.getColumn();
-        String sentenceString = code.toString();
-        String string = sentenceString.substring(0, sentenceString.length() - sentenceString.replaceAll("^\\s+", "").length());
-        code.remove(string);
-        return new Blank(row, column, string);
+        String codeString = code.toString();
+        String blankString = codeString.substring(0, codeString.length() - codeString.replaceAll("^\\s+", "").length());
+        code.remove(blankString);
+        return new Blank(row, column, blankString);
     }
 }

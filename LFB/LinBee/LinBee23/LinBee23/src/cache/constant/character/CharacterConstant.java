@@ -15,25 +15,25 @@ public class CharacterConstant extends Constant {
     public static CharacterConstant parse(Code code, Table table) throws InvalidityException {
         Integer row = code.getRow();
         Integer column = code.getColumn();
-        String sentenceString = code.toString();
-        if (!sentenceString.startsWith("'") && !sentenceString.startsWith("L'")) {
+        String codeString = code.toString();
+        if (!codeString.startsWith("'") && !codeString.startsWith("L'")) {
             throw new InvalidityException();
         }
         int i;
-        for (i = sentenceString.startsWith("L'") ? "L'".length() : "'".length(); i < sentenceString.length(); i++) {
-            if (sentenceString.startsWith("\\'", i)) {
+        for (i = codeString.startsWith("L'") ? "L'".length() : "'".length(); i < codeString.length(); i++) {
+            if (codeString.startsWith("\\'", i)) {
                 i += "\\'".length() - 1;
             } else {
-                if (sentenceString.startsWith("'", i)) {
+                if (codeString.startsWith("'", i)) {
                     break;
                 }
             }
         }
-        if (i == sentenceString.length()) {
+        if (i == codeString.length()) {
             throw new InvalidityException();
         }
         i += "'".length();
-        String string = sentenceString.substring(0, i);
+        String string = codeString.substring(0, i);
         code.remove(string);
         return new CharacterConstant(row, column, string);
     }

@@ -33,10 +33,10 @@ public class Keyword extends Token {
         }
         Integer row = code.getRow();
         Integer column = code.getColumn();
-        String sentenceString = code.toString();
+        String codeString = code.toString();
         if (code.startsWith(string)) {
-            if (sentenceString.length() > string.length()) {
-                char c = sentenceString.charAt(string.length());
+            if (codeString.length() > string.length()) {
+                char c = codeString.charAt(string.length());
                 if ('a' <= c && c <= 'z' || 'A' <= c && c <= 'Z' || '0' <= c && c <= '9' || c == '_') {
                     throw new InvalidityException();
                 }

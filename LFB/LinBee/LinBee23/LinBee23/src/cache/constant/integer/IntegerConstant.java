@@ -16,11 +16,11 @@ public class IntegerConstant extends Constant {
     public static IntegerConstant parse(Code code, Table table) throws InvalidityException {
         Integer row = code.getRow();
         Integer column = code.getColumn();
-        String sentenceString = code.toString();
-        if (sentenceString.length() == 0) {
+        String codeString = code.toString();
+        if (codeString.length() == 0) {
             throw new InvalidityException();
         }
-        if (sentenceString.charAt(0) < '0' || '9' < sentenceString.charAt(0)) {
+        if (codeString.charAt(0) < '0' || '9' < codeString.charAt(0)) {
             throw new InvalidityException();
         }
         BigInteger maximumInt                 = new BigInteger("2147483647");
@@ -29,11 +29,11 @@ public class IntegerConstant extends Constant {
         BigInteger maximumUnsignedLongInt     = new BigInteger("4294967296");
         BigInteger maximumLongLongInt         = new BigInteger("9223372036854775807");
         BigInteger maximumUnsignedLongLongInt = new BigInteger("18446744073709551616");
-        int radix = sentenceString.startsWith("0b") ? 2 : (sentenceString.startsWith("0x") ? 16 : sentenceString.startsWith("0") ? 8 : 10);
+        int radix = codeString.startsWith("0b") ? 2 : (codeString.startsWith("0x") ? 16 : codeString.startsWith("0") ? 8 : 10);
         BigInteger value = new BigInteger("0");
         int i;
-        for (i = sentenceString.startsWith("0b") ? "0b".length() : (sentenceString.startsWith("0x") ? "0x".length() : 0); i < sentenceString.length(); i++) {
-            char c = sentenceString.charAt(i);
+        for (i = codeString.startsWith("0b") ? "0b".length() : (codeString.startsWith("0x") ? "0x".length() : 0); i < codeString.length(); i++) {
+            char c = codeString.charAt(i);
             if        ('0' <= c && c <= '9') {
                 value = value.multiply(BigInteger.valueOf(radix));
                 value = value.add(BigInteger.valueOf(c - '0'));
@@ -48,15 +48,15 @@ public class IntegerConstant extends Constant {
             }
         }
         String suffix = null;
-        if (sentenceString.startsWith("ull", i) || sentenceString.startsWith("Ull", i) || sentenceString.startsWith("uLL", i) || sentenceString.startsWith("ULL", i)) {
+        if (codeString.startsWith("ull", i) || codeString.startsWith("Ull", i) || codeString.startsWith("uLL", i) || codeString.startsWith("ULL", i)) {
             suffix = "ull";
-        } else if (sentenceString.startsWith("ll", i) || sentenceString.startsWith("LL", i)) {
+        } else if (codeString.startsWith("ll", i) || codeString.startsWith("LL", i)) {
             suffix = "ll";
-        } else if (sentenceString.startsWith("ul", i) || sentenceString.startsWith("Ul", i) || sentenceString.startsWith("uL", i) || sentenceString.startsWith("UL", i)) {
+        } else if (codeString.startsWith("ul", i) || codeString.startsWith("Ul", i) || codeString.startsWith("uL", i) || codeString.startsWith("UL", i)) {
             suffix = "ul";
-        } else if (sentenceString.startsWith("l", i) || sentenceString.startsWith("L", i)) {
+        } else if (codeString.startsWith("l", i) || codeString.startsWith("L", i)) {
             suffix = "l";
-        } else if (sentenceString.startsWith("u", i) || sentenceString.startsWith("U", i)) {
+        } else if (codeString.startsWith("u", i) || codeString.startsWith("U", i)) {
             suffix = "u";
         } else {
             suffix = "";
@@ -112,7 +112,7 @@ public class IntegerConstant extends Constant {
         if (suffix.equals("ull")) {
             type = maximumUnsignedLongLongInt.compareTo(value) >= 0 ? "unsigned long long int" : "unknown";
         }
-        String string = sentenceString.substring(0, i);
+        String string = codeString.substring(0, i);
         code.remove(string);
         return new IntegerConstant(row, column, new SymbolTypeName(type), string);
     }

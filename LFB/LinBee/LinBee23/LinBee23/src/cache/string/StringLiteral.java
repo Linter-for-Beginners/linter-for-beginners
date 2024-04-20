@@ -14,29 +14,29 @@ public class StringLiteral extends Token {
     public static StringLiteral parse(Code code, Table table) throws InvalidityException {
         Integer row = code.getRow();
         Integer column = code.getColumn();
-        String sentenceString = code.toString();
-        if (!sentenceString.startsWith("\"") && !sentenceString.startsWith("L\"")) {
+        String codeString = code.toString();
+        if (!codeString.startsWith("\"") && !codeString.startsWith("L\"")) {
             throw new InvalidityException();
         }
         int i;
-        for (i = sentenceString.startsWith("L\"") ? "L\"".length() : "\"".length(); i < sentenceString.length(); i++) {
-            if (sentenceString.startsWith("\\\"", i)) {
+        for (i = codeString.startsWith("L\"") ? "L\"".length() : "\"".length(); i < codeString.length(); i++) {
+            if (codeString.startsWith("\\\"", i)) {
                 i += "\\\"".length() - 1;
             } else {
-                if (sentenceString.startsWith("\"", i)) {
-                    if (sentenceString.substring(i + "\"".length()).trim().startsWith("\"")) {
-                        i += "\"".length() + sentenceString.substring(i + "\"".length()).indexOf("\"") + "\"".length() - 1;
+                if (codeString.startsWith("\"", i)) {
+                    if (codeString.substring(i + "\"".length()).trim().startsWith("\"")) {
+                        i += "\"".length() + codeString.substring(i + "\"".length()).indexOf("\"") + "\"".length() - 1;
                     } else {
                         break;
                     }
                 }
             }
         }
-        if (i == sentenceString.length()) {
+        if (i == codeString.length()) {
             throw new InvalidityException();
         } else {
             i += "\"".length();
-            String string = sentenceString.substring(0, i);
+            String string = codeString.substring(0, i);
             code.remove(string);
             return new StringLiteral(row, column, string);
         }

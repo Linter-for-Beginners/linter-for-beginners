@@ -14,61 +14,61 @@ public class FloatingConstant extends Constant {
     public static FloatingConstant parse(Code code, Table table) throws InvalidityException {
         Integer row = code.getRow();
         Integer column = code.getColumn();
-        String sentenceString = code.toString();
-        if (sentenceString.length() == 0) {
+        String codeString = code.toString();
+        if (codeString.length() == 0) {
             throw new InvalidityException();
         }
-        if (sentenceString.charAt(0) < '0' || '9' < sentenceString.charAt(0)) {
+        if (codeString.charAt(0) < '0' || '9' < codeString.charAt(0)) {
             throw new InvalidityException();
         }
         int i = 0;
-        while (i < sentenceString.length() && '0' <= sentenceString.charAt(i) && sentenceString.charAt(i) <= '9') {
+        while (i < codeString.length() && '0' <= codeString.charAt(i) && codeString.charAt(i) <= '9') {
             i++;
         }
-        if (i == sentenceString.length()) {
+        if (i == codeString.length()) {
             throw new InvalidityException();
         }
-        if (!sentenceString.startsWith(".", i) && !sentenceString.startsWith("e", i) && !sentenceString.startsWith("E", i)) {
+        if (!codeString.startsWith(".", i) && !codeString.startsWith("e", i) && !codeString.startsWith("E", i)) {
             throw new InvalidityException();
         }
-        if (sentenceString.startsWith(".", i)) {
+        if (codeString.startsWith(".", i)) {
             i += ".".length();
-            if (sentenceString.charAt(i) < '0' || '9' < sentenceString.charAt(i)) {
+            if (codeString.charAt(i) < '0' || '9' < codeString.charAt(i)) {
                 throw new InvalidityException();
             }
-            while (i < sentenceString.length() && '0' <= sentenceString.charAt(i) && sentenceString.charAt(i) <= '9') {
+            while (i < codeString.length() && '0' <= codeString.charAt(i) && codeString.charAt(i) <= '9') {
                 i++;
             }
         }
-        if (sentenceString.startsWith("e", i) || sentenceString.startsWith("E", i)) {
+        if (codeString.startsWith("e", i) || codeString.startsWith("E", i)) {
             i += "e".length();
-            if (i == sentenceString.length()) {
+            if (i == codeString.length()) {
                 throw new InvalidityException();
             }
-            if (sentenceString.startsWith("+", i) || sentenceString.startsWith("-", i)) {
+            if (codeString.startsWith("+", i) || codeString.startsWith("-", i)) {
                 i += "+".length();
             }
-            if (i == sentenceString.length()) {
+            if (i == codeString.length()) {
                 throw new InvalidityException();
             }
-            if (sentenceString.charAt(i) < '0' || '9' < sentenceString.charAt(i)) {
+            if (codeString.charAt(i) < '0' || '9' < codeString.charAt(i)) {
                 throw new InvalidityException();
             }
-            while (i < sentenceString.length() && '0' <= sentenceString.charAt(i) && sentenceString.charAt(i) <= '9') {
+            while (i < codeString.length() && '0' <= codeString.charAt(i) && codeString.charAt(i) <= '9') {
                 i++;
             }
         }
         String suffix = "";
-        if (i < sentenceString.length()) {
-            if (sentenceString.startsWith("f", i) || sentenceString.startsWith("F", i)) {
+        if (i < codeString.length()) {
+            if (codeString.startsWith("f", i) || codeString.startsWith("F", i)) {
                 suffix = "f";
             }
-            if (sentenceString.startsWith("l", i) || sentenceString.startsWith("L", i)) {
+            if (codeString.startsWith("l", i) || codeString.startsWith("L", i)) {
                 suffix = "l";
             }
         }
         i += suffix.length();
-        String string = sentenceString.substring(0, i);
+        String string = codeString.substring(0, i);
         code.remove(string);
         return new FloatingConstant(row, column,
                 new SymbolTypeName(suffix.equals("") ? "double" : suffix.equals("f") ? "float" : "long double"), string);
